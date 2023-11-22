@@ -1,4 +1,6 @@
+import { Theme, presetGpnDefault } from '@consta/uikit/Theme';
 import { createRoot } from 'react-dom/client'
+
 import App from './App.jsx'
 import './styles/main.scss'
 
@@ -12,5 +14,7 @@ import "@fontsource/inter/700.css";
 const root = createRoot(document.getElementById('root'))
 
 root.render(
-  <App />
+  <Theme preset={presetGpnDefault}>
+    <App />
+  </Theme>
 )

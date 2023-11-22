@@ -1,46 +1,110 @@
-import { Link, NavLink } from 'react-router-dom'
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { Text } from "@consta/uikit/Text";
+import { User } from '@consta/uikit/User';
+
+// Icons
+import { IconRing } from "@consta/uikit/IconRing";
+import { IconBento } from "@consta/uikit/IconBento"
+
+// Header
+import {
+  Header,
+  HeaderButton,
+  HeaderLogo,
+  HeaderMenu,
+  HeaderModule,
+  HeaderSearchBar
+} from "@consta/uikit/Header";
+
 import './Navbar.style.scss'
 
-const navlinks = [
-  {
-    id: 1,
-    title: "Главная",
-    to: '/'
-  },
-  {
-    id: 2,
-    title: "Аналитика",
-    to: '/analytics'
-  },
-  {
-    id: 3,
-    title: "Справочники",
-    to: '/references'
+export default function App() {
+  const activeMenuItemInitial = JSON.parse(sessionStorage.getItem('active-menu'))
+  const [activeMenuItem, setActiveMenuItem] = useState(activeMenuItemInitial || 0);
+
+  const [value, setValue] = useState(null);
+  const navigate = useNavigate()
+
+  const goHome = () => {
+    navigate('/')
+    setActiveMenuItem(0)
   }
-]
 
-export default function Navbar() {
+  const menuItems = [
+    {
+      label: "Главная",
+      onClick: () => {
+        navigate('/')
+        setActiveMenuItem(0)
+      },
+      active: activeMenuItem === 0
+    },
+    {
+      label: "Аналитика",
+      onClick: () => {
+        navigate('/analytics')
+        setActiveMenuItem(1)
+      },
+      active: activeMenuItem === 1
+    },
+    {
+      label: "Справочники",
+      onClick: () => {
+        navigate('/references')
+        setActiveMenuItem(2)
+      },
+      active: activeMenuItem === 2
+    }
+  ];
+
+  useEffect(() => {
+    sessionStorage.setItem('active-menu', JSON.stringify(activeMenuItem))
+  }, [activeMenuItem])
+
   return (
-    <header className="header">
-      <div className="header__left-content">
-        <Link to="/" className="header__left-content--logo">
-          СИП. РБ
-        </Link>
-        <div className="header__left-content--search-input">
-          <img src="/assets/svg/search-icon.svg" alt="search" />
-          <input type="text" placeholder='Я ищу' />
-        </div>
-        <nav className="header__left-content--navlinks">
-          {navlinks.map(link => (
-            <NavLink to={link.to} key={link.id}>
-              {link.title}
-            </NavLink>
-          ))}
-        </nav>
-      </div>
-      <div className="header__right-content">
+    <Header
+      className="header"
+      leftSide={
+        <>
+          <HeaderModule>
+            <HeaderLogo onClick={goHome} className="header__logo">
+              <Text as="p" size="l" weight="bold">
+                СИП. РБ
+              </Text>
+            </HeaderLogo>
+          </HeaderModule>
+          <HeaderModule indent="l">
+            <HeaderSearchBar
+              placeholder="я ищу"
+              label="поиск"
+              value={value}
+              onChange={({ value }) => setValue(value)}
+            />
+          </HeaderModule>
+          <HeaderModule indent="l">
+            <HeaderMenu items={menuItems} />
+          </HeaderModule>
+        </>
+      }
 
-      </div>
-    </header>
-  )
+      rightSide={
+        <>
+          <HeaderModule indent="s">
+            <HeaderButton iconLeft={IconRing} />
+          </HeaderModule>
+          <HeaderModule indent="s">
+            <HeaderButton iconLeft={IconBento} />
+          </HeaderModule>
+          <HeaderModule indent="s">
+            <User
+              avatarUrl="/assets/images/user-logo.png"
+              name="Имя Фамилия"
+              info="Доп. информация"
+            />
+          </HeaderModule>
+        </>
+      }
+    />
+  );
 }

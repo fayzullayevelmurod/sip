@@ -1,15 +1,30 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { Layout } from '@components/layouts/'
+import {
+  Route,
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider
+} from 'react-router-dom'
+
+// Layout Components
+import Layout from '@components/layouts'
+
+// Pages
+import Home from '@pages/Home'
+import Analytics from '@pages/Analytics'
+import References from '@pages/References'
+import NotFound from '@pages/NotFound'
 
 export default function App() {
-  const routes = createBrowserRouter([
-    {
-      path: "/",
-      element: <Layout />,
-      errorElement: <h1>404 Error, Page Not Found!</h1>,
-      children: []
-    }
-  ])
+  const routes = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="analytics" element={<Analytics />} />
+        <Route path="references" element={<References />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    )
+  )
 
   return <RouterProvider router={routes} />
 }
