@@ -17,7 +17,7 @@
     gap: 8px;
     top: 0;
     left: 0;
-    height: 97%;
+    height: 96%;
   }
 
   &__header {
@@ -76,4 +76,8 @@
     top: 0;
     right: 0;
   }
+}
+
+.width-ct {
+  width: 163px !important;
 }

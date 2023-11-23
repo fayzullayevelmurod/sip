@@ -71,11 +71,63 @@ const contextMenuItems = [
   },
 ];
 
+const sameMenuItems = [
+  {
+    id: 1,
+    label: 'Завод 1',
+    leftIcon: IconDinosaur,
+  },
+  {
+    id: 2,
+    leftIcon: IconDinosaur,
+    label: 'Завод 2'
+  },
+  {
+    id: 3,
+    leftIcon: IconDinosaur,
+    label: 'Завод 3'
+  },
+]
+const objectMenuItems = [
+  {
+    id: 1,
+    label: 'Фабрика 1',
+    leftIcon: IconDinosaur,
+  },
+  {
+    id: 2,
+    leftIcon: IconDinosaur,
+    label: 'Фабрика 2'
+  },
+  {
+    id: 3,
+    leftIcon: IconDinosaur,
+    label: 'Фабрика 3'
+  },
+  {
+    id: 4,
+    leftIcon: IconDinosaur,
+    label: 'Фабрика 4'
+  },
+  {
+    id: 5,
+    leftIcon: IconDinosaur,
+    label: 'Фабрика 5'
+  },
+]
+
+
 export default function Home() {
   const [leftSideActiveModal, setLeftSideActiveModal] = useState(null)
   const [RightSideActiveModal, setRightSideActiveModal] = useState(false)
+
   const [calculationItemChecked, setCalculationItemChecked] = useState(calculationItems[0]);
   const [dataItemChecked, setDataItemChecked] = useState(dataItems[0]);
+  const [objectItemChecked, setObjectItemChecked] = useState(objectMenuItems[0])
+  const [sameItemChecked, setSameItemChecked] = useState(sameMenuItems[0])
+
+  const [items, setItems] = useState(contextMenuItems);
+  const [isOpen, setIsOpen] = useState(false);
 
 
   const toggleLeftSideModalCalc = () => {
@@ -104,7 +156,7 @@ export default function Home() {
     if (item.switch !== undefined) {
       nodeArray.push(
         <Switch
-          size="m"
+          size="xs"
           checked={item.switch}
           onChange={() => onChange(item)}
           key="Switch"
@@ -114,9 +166,6 @@ export default function Home() {
 
     return nodeArray;
   }
-
-  const [items, setItems] = useState(contextMenuItems);
-  const [isOpen, setIsOpen] = useState(false);
 
   const ref = useRef(null);
 
@@ -204,11 +253,12 @@ export default function Home() {
                   onClick={toggleContextMenu}
                 />
                 <ContextMenu
-                  size="l"
+                  size="xs"
                   isOpen={isOpen}
                   items={items}
                   anchorRef={ref}
                   getItemRightSide={(item) => renderRightSide(item, onChange)}
+                  className="width-ct"
                 />
               </Layout>
             </Layout>
@@ -254,13 +304,23 @@ export default function Home() {
                 {RightSideActiveModal && (
                   <Modal
                     title="Обьекты"
+                    sameTitle="Однотипные"
                     onClose={() => setRightSideActiveModal(false)}
                     defaultType={(
                       <Layout direction='column' className="home__calculations-modal">
                         <List
-                          items={dataItems}
-                          getItemChecked={(item) => dataItemChecked === item}
-                          onItemClick={setDataItemChecked}
+                          items={objectMenuItems}
+                          getItemChecked={(item) => objectItemChecked === item}
+                          onItemClick={setObjectItemChecked}
+                        />
+                      </Layout>
+                    )}
+                    sameType={(
+                      <Layout direction='column' className="home__calculations-modal">
+                        <List
+                          items={sameMenuItems}
+                          getItemChecked={(item) => sameItemChecked === item}
+                          onItemClick={setSameItemChecked}
                         />
                       </Layout>
                     )}
