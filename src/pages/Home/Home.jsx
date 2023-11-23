@@ -36,12 +36,37 @@ const calculationItems = [
   },
 ]
 
-export default function Home() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [calculationItemChecked, setCalculationItemChecked] = useState(calculationItems[0]);
+const dataItems = [
+  {
+    id: 1,
+    label: 'Москва',
+    leftIcon: IconDinosaur,
+  },
+  {
+    id: 2,
+    leftIcon: IconDinosaur,
+    label: 'Казань'
+  },
+  {
+    id: 3,
+    leftIcon: IconDinosaur,
+    label: 'Новосибирск'
+  },
+]
 
-  const toggleModal = () => {
-    setIsModalOpen(prev => !prev)
+export default function Home() {
+  const [leftSideActiveModal, setLeftSideActiveModal] = useState(null)
+  const [calculationItemChecked, setCalculationItemChecked] = useState(calculationItems[0]);
+  const [dataItemChecked, setDataItemChecked] = useState(dataItems[0]);
+
+  const toggleLeftSideModalCalc = () => {
+    const active = leftSideActiveModal === 0 ? null : 0
+    setLeftSideActiveModal(active)
+  }
+
+  const toggleLeftSideModalData = () => {
+    const active = leftSideActiveModal === 1 ? null : 1
+    setLeftSideActiveModal(active)
   }
 
   return (
@@ -55,7 +80,7 @@ export default function Home() {
               <Layout className='home__header-left'>
                 <Button
                   truncate="true"
-                  onClick={toggleModal}
+                  onClick={toggleLeftSideModalCalc}
                   className='home__header--button truncate-btn'
                   label="Расчет региона №1 Зеленая роща"
                   iconLeft={IconHamburger}
@@ -63,6 +88,7 @@ export default function Home() {
                   size="xs"
                 />
                 <Button
+                  onClick={toggleLeftSideModalData}
                   className='home__header--button'
                   label="Данные"
                   iconLeft={IconTree}
@@ -116,19 +142,38 @@ export default function Home() {
               </Layout>
             </Layout>
             <Layout className="home__middle">
-              {isModalOpen && (
-                <Modal onClose={() => setIsModalOpen(false)}>
-                  <Layout direction='column' className="home__calculations-modal">
-                    <List
-                      items={calculationItems}
-                      getItemRightSide={(item) => (
-                        <Text className='home__calculations-modal--date'>{item.date}</Text>
-                      )}
-                      getItemChecked={(item) => calculationItemChecked === item}
-                      onItemClick={setCalculationItemChecked}
-                    />
-                  </Layout>
-                </Modal>
+              {leftSideActiveModal == 0 && (
+                <Modal
+                  title="Расчеты"
+                  onClose={() => setLeftSideActiveModal(null)}
+                  defaultType={(
+                    <Layout direction='column' className="home__calculations-modal">
+                      <List
+                        items={calculationItems}
+                        getItemRightSide={(item) => (
+                          <Text className='home__calculations-modal--date'>{item.date}</Text>
+                        )}
+                        getItemChecked={(item) => calculationItemChecked === item}
+                        onItemClick={setCalculationItemChecked}
+                      />
+                    </Layout>
+                  )}
+                />
+              )}
+              {leftSideActiveModal == 1 && (
+                <Modal
+                  title="Данные"
+                  onClose={() => setLeftSideActiveModal(null)}
+                  defaultType={(
+                    <Layout direction='column' className="home__calculations-modal">
+                      <List
+                        items={dataItems}
+                        getItemChecked={(item) => dataItemChecked === item}
+                        onItemClick={setDataItemChecked}
+                      />
+                    </Layout>
+                  )}
+                />
               )}
             </Layout>
           </Layout>

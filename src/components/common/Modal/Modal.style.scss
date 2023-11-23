@@ -1,7 +1,6 @@
 .modal {
   width: 320px;
-  max-height: 400px;
-  height: 190px;
+  height: 200px;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
@@ -13,13 +12,14 @@
 
   &__content {
     overflow: auto;
-    max-height: 350px;
     width: 100%;
     padding: 12px;
     gap: 12px;
   }
 
   &__header {
+    padding: 12px;
+    padding-bottom: 0;
     width: 100%;
     display: flex;
     align-items: center;
@@ -50,6 +50,7 @@
   }
 
   &__resizer {
+    margin-top: auto;
     width: 100%;
     min-height: 16px;
     user-select: none;
@@ -67,7 +68,6 @@
   }
 }
 
-.fullheight {
-  max-height: unset;
+.fullHeight {
   height: 100%;
 }

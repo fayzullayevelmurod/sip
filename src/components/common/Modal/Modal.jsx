@@ -9,20 +9,21 @@ import { IconClose } from '@consta/icons/IconClose';
 
 import './Modal.style.scss'
 
-export default function Modal({ children, onClose }) {
+export default function Modal({ title, defaultType, sameType, onClose }) {
   const [isShown, setIsShown] = useState(false);
   const [fullHeight, setFullHeight] = useState(false)
 
   return (
-    <Layout direction='column' className={`modal ${fullHeight ? "fullheight" : ""}`}>
-      <Layout direction='column' className="modal__content">
-        <Layout class="modal__header">
-          <Text className='modal__header--title'>Расчеты</Text>
-          <Text className='modal__header--close' onClick={onClose}>
-            <IconClose size='xs' />
-          </Text>
-        </Layout>
-        {children}
+    <Layout direction='column' className={`modal ${fullHeight ? 'fullHeight' : ''}`}>
+      <Layout className="modal__header">
+        <Text className='modal__header--title'>{title}</Text>
+        <Text className='modal__header--close' onClick={onClose}>
+          <IconClose size='xs' />
+        </Text>
+      </Layout>
+      <Layout direction='column' className={`modal__content`}>
+        {defaultType}
+        {sameType}
       </Layout>
       <Layout
         onMouseEnter={() => setIsShown(true)}
@@ -41,12 +42,15 @@ export default function Modal({ children, onClose }) {
           />
         )}
       </Layout>
-    </Layout >
+    </Layout>
   )
 }
 
 
 Modal.propTypes = {
   children: PropTypes.any,
-  onClose: PropTypes.func
+  onClose: PropTypes.func,
+  defaultType: PropTypes.element,
+  sameType: PropTypes.element,
+  title: PropTypes.string
 }
