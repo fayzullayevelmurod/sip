@@ -50,6 +50,8 @@
   }
 
   &__middle {
+    justify-content: space-between;
+    position: relative;
     flex-grow: 1;
   }
 
@@ -67,5 +69,11 @@
       font-weight: 400;
       line-height: 120%;
     }
+  }
+
+  &__context-menu {
+    position: absolute;
+    top: 0;
+    right: 0;
   }
 }

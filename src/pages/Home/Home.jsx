@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { List } from '@consta/uikit/ListCanary';
 import { Button } from '@consta/uikit/Button';
 import { Layout } from '@consta/uikit/Layout';
 import { Text } from '@consta/uikit/Text';
+import { ContextMenu } from '@consta/uikit/ContextMenu';
+import { Switch } from '@consta/uikit/Switch'
 
 import { IconHamburger } from '@consta/uikit/IconHamburger'
 import { IconTree } from '@consta/icons/IconTree'
@@ -54,10 +56,27 @@ const dataItems = [
   },
 ]
 
+const contextMenuItems = [
+  {
+    label: 'Таблица',
+    switch: false,
+  },
+  {
+    label: 'Линейка',
+    switch: false,
+  },
+  {
+    label: 'Легенда',
+    switch: false,
+  },
+];
+
 export default function Home() {
   const [leftSideActiveModal, setLeftSideActiveModal] = useState(null)
+  const [RightSideActiveModal, setRightSideActiveModal] = useState(false)
   const [calculationItemChecked, setCalculationItemChecked] = useState(calculationItems[0]);
   const [dataItemChecked, setDataItemChecked] = useState(dataItems[0]);
+
 
   const toggleLeftSideModalCalc = () => {
     const active = leftSideActiveModal === 0 ? null : 0
@@ -68,6 +87,49 @@ export default function Home() {
     const active = leftSideActiveModal === 1 ? null : 1
     setLeftSideActiveModal(active)
   }
+
+  const toggleRightSideModalObject = () => {
+    setRightSideActiveModal(prev => !prev)
+    setIsOpen(false)
+  }
+
+  const toggleContextMenu = () => {
+    setRightSideActiveModal(false)
+    setIsOpen(!isOpen)
+  }
+
+  function renderRightSide(item, onChange) {
+    const nodeArray = [];
+
+    if (item.switch !== undefined) {
+      nodeArray.push(
+        <Switch
+          size="m"
+          checked={item.switch}
+          onChange={() => onChange(item)}
+          key="Switch"
+        />,
+      );
+    }
+
+    return nodeArray;
+  }
+
+  const [items, setItems] = useState(contextMenuItems);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const ref = useRef(null);
+
+  const onChange = (switchItem) => {
+    const newItems = items.map((item, index) => {
+      if (switchItem.label === item.label) {
+        return { ...items[index], switch: !items[index].switch };
+      }
+      return item;
+    });
+
+    setItems(newItems);
+  };
 
   return (
     <>
@@ -130,6 +192,7 @@ export default function Home() {
                   iconLeft={IconFolderOpen}
                   view="ghost"
                   size="xs"
+                  onClick={() => toggleRightSideModalObject()}
                 />
                 <Layout className="home__header-right--border"></Layout>
                 <Button
@@ -138,43 +201,72 @@ export default function Home() {
                   iconLeft={IconWindow}
                   view="ghost"
                   size="xs"
+                  onClick={toggleContextMenu}
+                />
+                <ContextMenu
+                  size="l"
+                  isOpen={isOpen}
+                  items={items}
+                  anchorRef={ref}
+                  getItemRightSide={(item) => renderRightSide(item, onChange)}
                 />
               </Layout>
             </Layout>
             <Layout className="home__middle">
-              {leftSideActiveModal == 0 && (
-                <Modal
-                  title="Расчеты"
-                  onClose={() => setLeftSideActiveModal(null)}
-                  defaultType={(
-                    <Layout direction='column' className="home__calculations-modal">
-                      <List
-                        items={calculationItems}
-                        getItemRightSide={(item) => (
-                          <Text className='home__calculations-modal--date'>{item.date}</Text>
-                        )}
-                        getItemChecked={(item) => calculationItemChecked === item}
-                        onItemClick={setCalculationItemChecked}
-                      />
-                    </Layout>
-                  )}
-                />
-              )}
-              {leftSideActiveModal == 1 && (
-                <Modal
-                  title="Данные"
-                  onClose={() => setLeftSideActiveModal(null)}
-                  defaultType={(
-                    <Layout direction='column' className="home__calculations-modal">
-                      <List
-                        items={dataItems}
-                        getItemChecked={(item) => dataItemChecked === item}
-                        onItemClick={setDataItemChecked}
-                      />
-                    </Layout>
-                  )}
-                />
-              )}
+              <Layout>
+                {leftSideActiveModal == 0 && (
+                  <Modal
+                    title="Расчеты"
+                    onClose={() => setLeftSideActiveModal(null)}
+                    defaultType={(
+                      <Layout direction='column' className="home__calculations-modal">
+                        <List
+                          items={calculationItems}
+                          getItemRightSide={(item) => (
+                            <Text className='home__calculations-modal--date'>{item.date}</Text>
+                          )}
+                          getItemChecked={(item) => calculationItemChecked === item}
+                          onItemClick={setCalculationItemChecked}
+                        />
+                      </Layout>
+                    )}
+                  />
+                )}
+                {leftSideActiveModal == 1 && (
+                  <Modal
+                    title="Данные"
+                    onClose={() => setLeftSideActiveModal(null)}
+                    defaultType={(
+                      <Layout direction='column' className="home__calculations-modal">
+                        <List
+                          items={dataItems}
+                          getItemChecked={(item) => dataItemChecked === item}
+                          onItemClick={setDataItemChecked}
+                        />
+                      </Layout>
+                    )}
+                  />
+                )}
+              </Layout>
+
+              <Layout ref={ref} class="home__context-menu"></Layout>
+              <Layout >
+                {RightSideActiveModal && (
+                  <Modal
+                    title="Обьекты"
+                    onClose={() => setRightSideActiveModal(false)}
+                    defaultType={(
+                      <Layout direction='column' className="home__calculations-modal">
+                        <List
+                          items={dataItems}
+                          getItemChecked={(item) => dataItemChecked === item}
+                          onItemClick={setDataItemChecked}
+                        />
+                      </Layout>
+                    )}
+                  />
+                )}
+              </Layout>
             </Layout>
           </Layout>
         </Layout>
