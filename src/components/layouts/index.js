@@ -1,7 +1,7 @@
-import Layout from './Layout'
+import RootLayout from './RootLayout'
 import Navbar from './Navbar/Navbar'
 
 export {
-  Layout as default,
+  RootLayout as default,
   Navbar
 }

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Text } from "@consta/uikit/Text";
 import { User } from '@consta/uikit/User';
 
@@ -22,6 +22,7 @@ import './Navbar.style.scss'
 export default function App() {
   const activeMenuItemInitial = JSON.parse(sessionStorage.getItem('active-menu'))
   const [activeMenuItem, setActiveMenuItem] = useState(activeMenuItemInitial || 0);
+  const location = useLocation()
 
   const [value, setValue] = useState(null);
   const navigate = useNavigate()
@@ -61,6 +62,25 @@ export default function App() {
   useEffect(() => {
     sessionStorage.setItem('active-menu', JSON.stringify(activeMenuItem))
   }, [activeMenuItem])
+
+  useEffect(() => {
+    switch (location.pathname) {
+      case '/':
+        setActiveMenuItem(0)
+        break;
+
+      case '/analytics':
+        setActiveMenuItem(1)
+        break;
+
+      case '/references':
+        setActiveMenuItem(2)
+        break;
+
+      default:
+        break;
+    }
+  }, [location])
 
   return (
     <Header
