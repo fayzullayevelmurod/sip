@@ -30,71 +30,7 @@ const calculationItems = [
     label: 'Расчет №2'
   },
   {
-    id: 2,
-    leftIcon: IconDinosaur,
-    label: 'Расчет №2'
-  },
-  {
-    id: 1,
-    label: 'Расчет региона №1',
-    leftIcon: IconDinosaur,
-    date: '20.10.23'
-  },
-  {
-    id: 2,
-    leftIcon: IconDinosaur,
-    label: 'Расчет №2'
-  },
-  {
-    id: 2,
-    leftIcon: IconDinosaur,
-    label: 'Расчет №2'
-  },
-  {
-    id: 1,
-    label: 'Расчет региона №1',
-    leftIcon: IconDinosaur,
-    date: '20.10.23'
-  },
-  {
-    id: 2,
-    leftIcon: IconDinosaur,
-    label: 'Расчет №2'
-  },
-  {
-    id: 2,
-    leftIcon: IconDinosaur,
-    label: 'Расчет №2'
-  },
-  {
-    id: 1,
-    label: 'Расчет региона №1',
-    leftIcon: IconDinosaur,
-    date: '20.10.23'
-  },
-  {
-    id: 2,
-    leftIcon: IconDinosaur,
-    label: 'Расчет №2'
-  },
-  {
-    id: 2,
-    leftIcon: IconDinosaur,
-    label: 'Расчет №2'
-  },
-  {
-    id: 1,
-    label: 'Расчет региона №1',
-    leftIcon: IconDinosaur,
-    date: '20.10.23'
-  },
-  {
-    id: 2,
-    leftIcon: IconDinosaur,
-    label: 'Расчет №2'
-  },
-  {
-    id: 2,
+    id: 3,
     leftIcon: IconDinosaur,
     label: 'Расчет №2'
   },
@@ -102,7 +38,6 @@ const calculationItems = [
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [activeModal, setActiveModal] = useState(0)
   const [calculationItemChecked, setCalculationItemChecked] = useState(calculationItems[0]);
 
   const toggleModal = () => {
