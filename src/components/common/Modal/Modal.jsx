@@ -34,6 +34,7 @@ export default function Modal({ title, defaultType, sameTitle, sameType, onClose
             isOpen={collapseIsOpen}
             onClick={() => setcollapseIsOpen(!collapseIsOpen)}
             iconPosition="right"
+            className='modal__collapse'
           >
             {sameType}
           </Collapse>
