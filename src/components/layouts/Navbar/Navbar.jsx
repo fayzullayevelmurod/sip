@@ -164,6 +164,7 @@ export default function App() {
         onClickOutside={() => setIsSidebarOpen(false)}
         onEsc={() => setIsSidebarOpen(false)}
         className="sidebar"
+        style={{ zIndex: 100 }}
       >
         <Layout className="sidebar__close-btn">
           <Button

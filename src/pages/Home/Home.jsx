@@ -34,7 +34,6 @@ import {
   objectMenuItems
 } from './mock'
 
-import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
 import Modal from '@components/common/Modal/';
 import './Home.style.scss'
 
@@ -54,22 +53,27 @@ export default function Home() {
 
   const [sidebarHeight, setSidebarHeight] = useState(0)
   const [sideBarFullHeight, setSideBarFullHeight] = useState(false)
+  const [sideBarOpen, setSideBarOpen] = useState(false)
 
+  // Toggle pop-up window 1 (left side)
   const toggleLeftSideModalCalc = () => {
     const active = leftSideActiveModal === 0 ? null : 0
     setLeftSideActiveModal(active)
   }
 
+  // Toggle pop-up window 2 (left side)
   const toggleLeftSideModalData = () => {
     const active = leftSideActiveModal === 1 ? null : 1
     setLeftSideActiveModal(active)
   }
 
+  // Toggle pop-up window 3 (right side)
   const toggleRightSideModalObject = () => {
     setRightSideActiveModal(prev => !prev)
     setIsOpen(false)
   }
 
+  // Toggle context menu (right side)
   const toggleContextMenu = () => {
     setRightSideActiveModal(false)
     setIsOpen(!isOpen)
@@ -105,9 +109,11 @@ export default function Home() {
     setItems(newItems);
   };
 
+  // Get window width and height for resize
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth)
+      setWindowHeight(window.innerHeight)
     }
 
     window.addEventListener('resize', handleResize)
@@ -122,7 +128,7 @@ export default function Home() {
       <Layout direction="column" className='home'>
         <Layout
           className='home__background'
-          style={{ height: `calc(100vh - (100px + ${sidebarHeight}px))` }}
+          style={{ height: `calc(100vh - (100px - ${!sideBarOpen ? '40px' : '0px'} + ${sidebarHeight}px))` }}
         >
           <img src="/assets/svg/bg-map.svg" />
 
@@ -136,7 +142,7 @@ export default function Home() {
                   <Button
                     truncate="true"
                     onClick={toggleLeftSideModalCalc}
-                    className='home__header--button truncate-btn'
+                    className={`home__header--button truncate-btn ${leftSideActiveModal == 0 ? 'active-button' : ''}`}
                     label="Расчет региона №1 Зеленая роща"
                     iconLeft={IconHamburger}
                     view="ghost"
@@ -146,7 +152,7 @@ export default function Home() {
 
                   <Button
                     onClick={toggleLeftSideModalData}
-                    className='home__header--button'
+                    className={`home__header--button ${leftSideActiveModal == 1 ? 'active-button' : ''}`}
                     label="Данные"
                     iconLeft={IconTree}
                     view="ghost"
@@ -157,7 +163,7 @@ export default function Home() {
                 <Layout className='home__header-center'>
                   <Button
                     className='home__header--button'
-                    label="Данные"
+                    label="Move"
                     iconLeft={IconCursorMouse}
                     view="ghost"
                     size="xs"
@@ -165,7 +171,7 @@ export default function Home() {
                   />
                   <Button
                     className='home__header--button'
-                    label="Данные"
+                    label="Handle"
                     iconLeft={IconHand}
                     view="ghost"
                     size="xs"
@@ -173,7 +179,7 @@ export default function Home() {
                   />
                   <Button
                     className='home__header--button'
-                    label="Данные"
+                    label="Trim"
                     iconLeft={IconShape}
                     view="ghost"
                     size="xs"
@@ -182,7 +188,7 @@ export default function Home() {
                 </Layout>
                 <Layout className='home__header-right'>
                   <Button
-                    className='home__header--button'
+                    className={`home__header--button ${RightSideActiveModal ? 'active-button' : ''}`}
                     label="Обьекты"
                     iconLeft={IconFolderOpen}
                     view="ghost"
@@ -192,7 +198,7 @@ export default function Home() {
                   />
                   <Layout className="home__header-right--border"></Layout>
                   <Button
-                    className='home__header--button'
+                    className={`home__header--button ${isOpen ? 'active-button' : ''}`}
                     label="Вид"
                     iconLeft={IconWindow}
                     view="ghost"
@@ -206,6 +212,7 @@ export default function Home() {
                     anchorRef={ref}
                     getItemRightSide={(item) => renderRightSide(item, onChange)}
                     className="view-context-menu"
+                    style={{ marginLeft: '-12px' }}
                   />
                 </Layout>
               </Layout>
@@ -218,7 +225,7 @@ export default function Home() {
                   <Button
                     truncate="true"
                     onClick={toggleLeftSideModalCalc}
-                    className='home__header--button truncate-btn'
+                    className={`home__header--button truncate-btn ${leftSideActiveModal == 0 ? 'active-button' : ''}`}
                     label="Расчет региона №1 Зеленая роща"
                     iconLeft={IconHamburger}
                     view="ghost"
@@ -227,7 +234,7 @@ export default function Home() {
                   />
                   <Button
                     onClick={toggleLeftSideModalData}
-                    className='home__header--button'
+                    className={`home__header--button ${leftSideActiveModal == 1 ? 'active-button' : ''}`}
                     label="Данные"
                     iconLeft={IconTree}
                     view="ghost"
@@ -235,7 +242,7 @@ export default function Home() {
                     onlyIcon
                   />
                   <Button
-                    className='home__header--button'
+                    className={`home__header--button  ${RightSideActiveModal ? 'active-button' : ''}`}
                     label="Обьекты"
                     iconLeft={IconFolderOpen}
                     view="ghost"
@@ -244,7 +251,14 @@ export default function Home() {
                     onClick={() => toggleRightSideModalObject()}
                   />
                   <Button
-                    className='home__header--button'
+                    onClick={() => {
+                      setSideBarOpen(prev => !prev)
+                      if (sideBarFullHeight) {
+                        setSidebarHeight(0)
+                        setSideBarFullHeight(false)
+                      }
+                    }}
+                    className={`home__header--button ${sideBarOpen ? 'active-button' : ''}`}
                     label="Таблица"
                     iconLeft={IconTable2}
                     view="ghost"
@@ -252,7 +266,7 @@ export default function Home() {
                     onlyIcon
                   />
                   <Button
-                    className='home__header--button'
+                    className={`home__header--button  ${isOpen ? 'active-button' : ''}`}
                     label="Вид"
                     iconLeft={IconWindow}
                     view="ghost"
@@ -367,7 +381,15 @@ export default function Home() {
               <Layout className="home__footer--tag">
                 <Tag size="xs" mode="link" label="1:200" />
               </Layout>
-              <Tag size="xs" mode="link" label="Название региона, meta info" />
+              <Layout className="home__footer--table-tag">
+                <Tag
+                  onClick={() => setSideBarOpen(prev => !prev)}
+                  size="xs"
+                  mode="link"
+                  label="Название региона, meta info"
+                  style={{ backgroundColor: `${sideBarOpen ? 'white' : ''}` }}
+                />
+              </Layout>
               <Layout className="home__footer--map-layer">
                 <IconMapStroked view="secondary" />
                 <Text size="xs">Слой карты</Text>
@@ -375,8 +397,10 @@ export default function Home() {
             </Layout>
           </Layout>
         </Layout>
-        <Layout direction='column' className="home__sidebar">
-          <Layout className="home__sidebar--table-header">
+        <Layout
+          direction='column'
+          className="home__table" style={{ display: `${!sideBarOpen ? 'none' : ''}` }}>
+          <Layout className="home__table--table-header">
             <Text size="s" weight="semibold">Список районов</Text>
             <Layout>
               <Button
@@ -414,7 +438,7 @@ export default function Home() {
               />
             </Layout>
           </Layout>
-          <Layout className="home__sidebar--table-content" style={{ height: `${sidebarHeight}px` }}>
+          <Layout className="home__table--table-content" style={{ height: `${sidebarHeight}px` }}>
           </Layout>
         </Layout>
       </Layout >
