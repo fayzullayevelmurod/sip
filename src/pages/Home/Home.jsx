@@ -1,12 +1,17 @@
+// React
 import { useRef, useState } from 'react';
 
+// Consta/uikit components
 import { List } from '@consta/uikit/ListCanary';
 import { Button } from '@consta/uikit/Button';
 import { Layout } from '@consta/uikit/Layout';
 import { Text } from '@consta/uikit/Text';
 import { ContextMenu } from '@consta/uikit/ContextMenu';
 import { Switch } from '@consta/uikit/Switch'
+import { Tag } from '@consta/uikit/Tag';
+import { Table } from '@consta/uikit/Table';
 
+// Icons
 import { IconHamburger } from '@consta/uikit/IconHamburger'
 import { IconTree } from '@consta/icons/IconTree'
 import { IconCursorMouse } from '@consta/icons/IconCursorMouse'
@@ -14,108 +19,19 @@ import { IconHand } from '@consta/icons/IconHand'
 import { IconShape } from '@consta/icons/IconShape'
 import { IconFolderOpen } from '@consta/icons/IconFolderOpen'
 import { IconWindow } from '@consta/icons/IconWindow'
-import { IconDinosaur } from '@consta/icons/IconDinosaur'
+import { IconMapStroked } from '@consta/icons/IconMapStroked'
+
+// Mock data
+import {
+  calculationItems,
+  dataItems,
+  contextMenuItems,
+  sameMenuItems,
+  objectMenuItems
+} from './mock'
 
 import Modal from '@components/common/Modal/';
 import './Home.style.scss'
-
-const calculationItems = [
-  {
-    id: 1,
-    label: 'Расчет региона №1',
-    leftIcon: IconDinosaur,
-    date: '20.10.23'
-  },
-  {
-    id: 2,
-    leftIcon: IconDinosaur,
-    label: 'Расчет №2'
-  },
-  {
-    id: 3,
-    leftIcon: IconDinosaur,
-    label: 'Расчет №2'
-  },
-]
-
-const dataItems = [
-  {
-    id: 1,
-    label: 'Москва',
-    leftIcon: IconDinosaur,
-  },
-  {
-    id: 2,
-    leftIcon: IconDinosaur,
-    label: 'Казань'
-  },
-  {
-    id: 3,
-    leftIcon: IconDinosaur,
-    label: 'Новосибирск'
-  },
-]
-
-const contextMenuItems = [
-  {
-    label: 'Таблица',
-    switch: false,
-  },
-  {
-    label: 'Линейка',
-    switch: false,
-  },
-  {
-    label: 'Легенда',
-    switch: false,
-  },
-];
-
-const sameMenuItems = [
-  {
-    id: 1,
-    label: 'Завод 1',
-    leftIcon: IconDinosaur,
-  },
-  {
-    id: 2,
-    leftIcon: IconDinosaur,
-    label: 'Завод 2'
-  },
-  {
-    id: 3,
-    leftIcon: IconDinosaur,
-    label: 'Завод 3'
-  },
-]
-const objectMenuItems = [
-  {
-    id: 1,
-    label: 'Фабрика 1',
-    leftIcon: IconDinosaur,
-  },
-  {
-    id: 2,
-    leftIcon: IconDinosaur,
-    label: 'Фабрика 2'
-  },
-  {
-    id: 3,
-    leftIcon: IconDinosaur,
-    label: 'Фабрика 3'
-  },
-  {
-    id: 4,
-    leftIcon: IconDinosaur,
-    label: 'Фабрика 4'
-  },
-  {
-    id: 5,
-    leftIcon: IconDinosaur,
-    label: 'Фабрика 5'
-  },
-]
-
 
 export default function Home() {
   const [leftSideActiveModal, setLeftSideActiveModal] = useState(null)
@@ -258,7 +174,7 @@ export default function Home() {
                   items={items}
                   anchorRef={ref}
                   getItemRightSide={(item) => renderRightSide(item, onChange)}
-                  className="width-ct"
+                  className="view-context-menu"
                 />
               </Layout>
             </Layout>
@@ -298,8 +214,7 @@ export default function Home() {
                   />
                 )}
               </Layout>
-
-              <Layout ref={ref} class="home__context-menu"></Layout>
+              <Layout ref={ref} className="home__context-menu"></Layout>
               <Layout >
                 {RightSideActiveModal && (
                   <Modal
@@ -326,6 +241,21 @@ export default function Home() {
                     )}
                   />
                 )}
+              </Layout>
+            </Layout>
+            <Layout className="home__footer">
+              <Layout className={`home__footer-top`}>
+                <Layout className="home__footer-top--tag">
+                  <Tag size="xs" mode="link" label="1:200" />
+                </Layout>
+                <Tag size="xs" mode="link" label="Название региона, meta info" />
+                <Layout className="home__footer-top--map-layer">
+                  <IconMapStroked view="secondary" />
+                  <Text size="xs">Слой карты</Text>
+                </Layout>
+              </Layout>
+              <Layout className="home__footer-bottom">
+                {/* <Table rows={} columns={columns} />; */}
               </Layout>
             </Layout>
           </Layout>

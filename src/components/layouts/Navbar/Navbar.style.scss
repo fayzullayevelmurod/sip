@@ -6,6 +6,26 @@
   &__logo {
     cursor: pointer;
   }
+
+  &__search {
+    @include responsive(tablet) {
+      display: none;
+    }
+
+    @include responsive(phone) {
+      display: none;
+    }
+  }
+
+  &__menu {
+    @include responsive(tablet) {
+      display: none;
+    }
+
+    @include responsive(phone) {
+      display: none;
+    }
+  }
 }
 
 .HeaderMenu-Link_active::before {

@@ -1,17 +1,23 @@
+// React
 import PropTypes from 'prop-types'
-
 import { useState } from 'react';
+
+// Consta/uikit components
 import { Layout } from '@consta/uikit/Layout';
 import { Text } from '@consta/uikit/Text';
 import { Collapse } from '@consta/uikit/Collapse';
 
+// Icons
 import { IconSlide } from '@consta/icons/IconSlide';
 import { IconClose } from '@consta/icons/IconClose';
 
+import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
 import './Modal.style.scss'
 
-export default function Modal({ title, defaultType, sameTitle, sameType, onClose }) {
-  const [collapseIsOpen, setcollapseIsOpen] = useState(true);
+export default function Modal({
+  title, defaultType, sameTitle, sameType, onClose
+}) {
+  const [collapseIsOpen, setcollapseIsOpen] = useState(false);
   const [isShown, setIsShown] = useState(false);
   const [fullHeight, setFullHeight] = useState(false)
 
@@ -26,19 +32,37 @@ export default function Modal({ title, defaultType, sameTitle, sameType, onClose
         </Text>
       </Layout>
       <Layout direction='column' className={`modal__content`}>
-        {defaultType}
-        {sameTitle && (
-          <Collapse
-            size="xs"
-            label={sameTitle}
-            isOpen={collapseIsOpen}
-            onClick={() => setcollapseIsOpen(!collapseIsOpen)}
-            iconPosition="right"
-            className='modal__collapse'
+        <PanelGroup direction="vertical">
+          <Panel
+            defaultSize={20}
+            minSizePixels={44}
+            order={1}
           >
-            {sameType}
-          </Collapse>
-        )}
+            {defaultType}
+          </Panel>
+          {sameTitle && (
+            <>
+              <PanelResizeHandle className="modal__resize-handle" />
+              <Panel
+                collapsible={true}
+                defaultSize={40}
+                minSize={4}
+                order={2}
+              >
+                <Collapse
+                  size="xs"
+                  label={sameTitle}
+                  isOpen={collapseIsOpen}
+                  onClick={() => setcollapseIsOpen(!collapseIsOpen)}
+                  iconPosition="right"
+                  className='modal__collapse'
+                >
+                  {sameType}
+                </Collapse>
+              </Panel>
+            </>
+          )}
+        </PanelGroup>
       </Layout>
       <Layout
         onMouseEnter={() => setIsShown(true)}
@@ -57,7 +81,7 @@ export default function Modal({ title, defaultType, sameTitle, sameType, onClose
           />
         )}
       </Layout>
-    </Layout>
+    </Layout >
   )
 }
 
@@ -68,5 +92,5 @@ Modal.propTypes = {
   defaultType: PropTypes.element,
   sameType: PropTypes.element,
   title: PropTypes.string,
-  sameTitle: PropTypes.string
+  sameTitle: PropTypes.string,
 }

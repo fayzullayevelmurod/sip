@@ -11,3 +11,25 @@ body {
 a {
   text-decoration: none;
 }
+
+@media screen and (max-width: 319px) {
+  #root {
+    display: none;
+  }
+
+  body {
+    &:after {
+      content: "Наш сайт в настоящее время не работает на вашем устройстве, используйте устройство с большим экраном. Приносим свои извинения за доставленные неудобства.";
+      width: inherit;
+      height: 100%;
+      position: fixed;
+      z-index: 100;
+      font-size: 20px;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+  }
+}

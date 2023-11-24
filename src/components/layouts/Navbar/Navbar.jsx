@@ -22,6 +22,7 @@ import './Navbar.style.scss'
 export default function App() {
   const activeMenuItemInitial = JSON.parse(sessionStorage.getItem('active-menu'))
   const [activeMenuItem, setActiveMenuItem] = useState(activeMenuItemInitial || 0);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const location = useLocation()
 
   const [value, setValue] = useState(null);
@@ -64,6 +65,18 @@ export default function App() {
   }, [activeMenuItem])
 
   useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth)
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
+  useEffect(() => {
     switch (location.pathname) {
       case '/':
         setActiveMenuItem(0)
@@ -94,7 +107,7 @@ export default function App() {
               </Text>
             </HeaderLogo>
           </HeaderModule>
-          <HeaderModule indent="l">
+          <HeaderModule indent="l" className="header__search">
             <HeaderSearchBar
               placeholder="я ищу"
               label="поиск"
@@ -102,7 +115,7 @@ export default function App() {
               onChange={({ value }) => setValue(value)}
             />
           </HeaderModule>
-          <HeaderModule indent="l">
+          <HeaderModule indent="l" className="header__menu">
             <HeaderMenu items={menuItems} />
           </HeaderModule>
         </>
@@ -117,11 +130,20 @@ export default function App() {
             <HeaderButton iconLeft={IconBento} />
           </HeaderModule>
           <HeaderModule indent="s">
-            <User
-              avatarUrl="/assets/images/user-logo.png"
-              name="Имя Фамилия"
-              info="Доп. информация"
-            />
+            {windowWidth > 800 ? (
+              <User
+                avatarUrl="/assets/images/user-logo.png"
+                name="Имя Фамилия"
+                info="Доп. информация"
+              />
+            ) : (
+              <User
+                avatarUrl="/assets/images/user-logo.png"
+                name="Имя Фамилия"
+                info="Доп. информация"
+                onlyAvatar
+              />
+            )}
           </HeaderModule>
         </>
       }
