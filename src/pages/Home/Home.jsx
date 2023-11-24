@@ -47,10 +47,13 @@ export default function Home() {
   const [objectItemChecked, setObjectItemChecked] = useState(objectMenuItems[0])
   const [sameItemChecked, setSameItemChecked] = useState(sameMenuItems[0])
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
 
   const [items, setItems] = useState(contextMenuItems);
   const [isOpen, setIsOpen] = useState(false);
 
+  const [sidebarHeight, setSidebarHeight] = useState(0)
+  const [sideBarFullHeight, setSideBarFullHeight] = useState(false)
 
   const toggleLeftSideModalCalc = () => {
     const active = leftSideActiveModal === 0 ? null : 0
@@ -117,12 +120,18 @@ export default function Home() {
   return (
     <>
       <Layout direction="column" className='home'>
-        <Layout className='home__background'>
+        <Layout
+          className='home__background'
+          style={{ height: `calc(100vh - (100px + ${sidebarHeight}px))` }}
+        >
           <img src="/assets/svg/bg-map.svg" />
 
           <Layout direction='column' className='home__content'>
             {windowWidth >= 640 ? (
-              <Layout className='home__header'>
+              <Layout
+                className='home__header'
+                style={{ backgroundColor: `${sideBarFullHeight ? 'white' : ''}` }}
+              >
                 <Layout className='home__header-left'>
                   <Button
                     truncate="true"
@@ -201,7 +210,10 @@ export default function Home() {
                 </Layout>
               </Layout>
             ) : (
-              <Layout className='home__header'>
+              <Layout
+                className='home__header'
+                style={{ backgroundColor: `${sideBarFullHeight ? 'white' : ''}` }}
+              >
                 <Layout className='home__header-left'>
                   <Button
                     truncate="true"
@@ -363,9 +375,9 @@ export default function Home() {
             </Layout>
           </Layout>
         </Layout>
-        <Layout className="home__sidebar">
+        <Layout direction='column' className="home__sidebar">
           <Layout className="home__sidebar--table-header">
-            <Text size="m" weight="semibold">Список районов</Text>
+            <Text size="s" weight="semibold">Список районов</Text>
             <Layout>
               <Button
                 size="xs"
@@ -373,6 +385,10 @@ export default function Home() {
                 view="clear"
                 iconLeft={IconExpand}
                 onlyIcon
+                onClick={() => {
+                  setSidebarHeight(windowHeight - 100 - 48)
+                  setSideBarFullHeight(true)
+                }}
               />
               <Button
                 size="xs"
@@ -380,6 +396,10 @@ export default function Home() {
                 view="clear"
                 iconLeft={IconPanelBottom}
                 onlyIcon
+                onClick={() => {
+                  setSidebarHeight((windowHeight / 2) - 40)
+                  setSideBarFullHeight(false)
+                }}
               />
               <Button
                 size="xs"
@@ -387,8 +407,14 @@ export default function Home() {
                 view="clear"
                 iconLeft={IconArrowDown}
                 onlyIcon
+                onClick={() => {
+                  setSidebarHeight(0)
+                  setSideBarFullHeight(false)
+                }}
               />
             </Layout>
+          </Layout>
+          <Layout className="home__sidebar--table-content" style={{ height: `${sidebarHeight}px` }}>
           </Layout>
         </Layout>
       </Layout >
