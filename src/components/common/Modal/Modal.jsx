@@ -1,6 +1,6 @@
 // React
 import PropTypes from 'prop-types'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // Consta/uikit components
 import { Layout } from '@consta/uikit/Layout';
@@ -20,11 +20,28 @@ export default function Modal({
   const [collapseIsOpen, setcollapseIsOpen] = useState(false);
   const [isShown, setIsShown] = useState(false);
   const [fullHeight, setFullHeight] = useState(false)
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth)
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
+  const calculateModalWidth = `calc(${windowWidth}px - 24px)`
 
   return (
     <Layout
       direction='column'
-      className={`modal ${fullHeight ? 'fullHeight' : ''} ${sameTitle ? 'sameType' : ''}`}>
+      className={`modal ${fullHeight ? 'fullHeight' : ''} ${sameTitle ? 'sameType' : ''}`}
+      style={{ width: `${windowWidth <= 640 ? calculateModalWidth : ""}` }}
+    >
       <Layout className="modal__header">
         <Text className='modal__header--title'>{title}</Text>
         <Text className='modal__header--close' onClick={onClose}>

@@ -31,7 +31,10 @@ import {
   dataItems,
   contextMenuItems,
   sameMenuItems,
-  objectMenuItems
+  objectMenuItems,
+  ListOfDistrictsRows,
+  ListOfDistrictsColumns,
+  ListOfDistrictsFilter
 } from './mock'
 
 import Modal from '@components/common/Modal/';
@@ -54,6 +57,7 @@ export default function Home() {
   const [sidebarHeight, setSidebarHeight] = useState(0)
   const [sideBarFullHeight, setSideBarFullHeight] = useState(false)
   const [sideBarOpen, setSideBarOpen] = useState(false)
+  const [isMapLayerOpen, setIsMapLayerOpen] = useState(false)
 
   // Toggle pop-up window 1 (left side)
   const toggleLeftSideModalCalc = () => {
@@ -123,12 +127,14 @@ export default function Home() {
     }
   }, [])
 
+  const calculateMapLayerPopupWidth = `calc(${windowWidth}px - 24px)`
+
   return (
     <>
       <Layout direction="column" className='home'>
         <Layout
           className='home__background'
-          style={{ height: `calc(100vh - (100px - ${!sideBarOpen ? '40px' : '0px'} + ${sidebarHeight}px))` }}
+          style={{ height: `calc(100dvh - (100px - ${!sideBarOpen ? '40px' : '0px'} + ${sidebarHeight}px))` }}
         >
           <img src="/assets/svg/bg-map.svg" />
 
@@ -390,10 +396,38 @@ export default function Home() {
                   style={{ backgroundColor: `${sideBarOpen ? 'white' : ''}` }}
                 />
               </Layout>
-              <Layout className="home__footer--map-layer">
+              <Layout className="home__footer--map-layer" onClick={() => setIsMapLayerOpen(true)}>
                 <IconMapStroked view="secondary" />
                 <Text size="xs">Слой карты</Text>
               </Layout>
+              {isMapLayerOpen && (
+                <Layout
+                  direction='column'
+                  key="1" data-grid={{ x: 100, y: 20, w: 3, h: 2 }}
+                  className="home__footer--map-layer--popup"
+                  style={{ width: `${windowWidth <= 640 ? calculateMapLayerPopupWidth : ''}` }}
+                >
+                  <Layout className="home__footer--map-layer--header">
+                    <Layout style={{ alignItems: "center", gap: '8px' }}>
+                      <IconMapStroked view="secondary" />
+                      <Text size="xs">Слой карты</Text>
+                    </Layout>
+                    <Layout>
+                      <Button
+                        size="xs"
+                        label="Закрыть"
+                        view="clear"
+                        iconLeft={IconArrowDown}
+                        onlyIcon
+                        onClick={() => setIsMapLayerOpen(false)}
+                      />
+                    </Layout>
+                  </Layout>
+                  <Layout className="home__footer--map-layer--content">
+                    <Text size="s">Объектов пока нет</Text>
+                  </Layout>
+                </Layout>
+              )}
             </Layout>
           </Layout>
         </Layout>
@@ -439,6 +473,18 @@ export default function Home() {
             </Layout>
           </Layout>
           <Layout className="home__table--table-content" style={{ height: `${sidebarHeight}px` }}>
+            <Table
+              stickyHeader={true}
+              verticalAlign="top"
+              size="m"
+              headerVerticalAlign="center"
+              isResizable
+              columns={ListOfDistrictsColumns}
+              rows={ListOfDistrictsRows}
+              filters={ListOfDistrictsFilter}
+              borderBetweenRows
+              className="home__table--table-content--table"
+            />
           </Layout>
         </Layout>
       </Layout >
