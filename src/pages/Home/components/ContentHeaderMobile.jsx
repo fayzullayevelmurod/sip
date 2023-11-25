@@ -31,7 +31,8 @@ const ContentHeaderMobile = forwardRef((props, ref) => {
     setSideBarOpen,
     setSidebarHeight,
     setSideBarFullHeight,
-    sideBarOpen
+    sideBarOpen,
+    setIsOpen
   } = props
 
   return (
@@ -68,12 +69,14 @@ const ContentHeaderMobile = forwardRef((props, ref) => {
           onlyIcon
           onClick={() => {
             const active = leftSideActiveModal === 2 ? null : 2
+            setIsOpen(false)
             setLeftSideActiveModal(active)
           }}
         />
         <Button
           onClick={() => {
             setSideBarOpen(prev => !prev)
+
             if (sideBarFullHeight) {
               setSidebarHeight(0)
               setSideBarFullHeight(false)
@@ -149,7 +152,8 @@ ContentHeaderMobile.propTypes = {
   setSideBarOpen: PropTypes.func,
   setSidebarHeight: PropTypes.func,
   setSideBarFullHeight: PropTypes.func,
-  sideBarOpen: PropTypes.func,
+  sideBarOpen: PropTypes.bool,
+  setIsOpen: PropTypes.func
 }
 
 ContentHeaderMobile.displayName = "ContentHeaderMobile"

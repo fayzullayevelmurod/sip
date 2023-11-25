@@ -100,22 +100,22 @@ const ContentMiddle = forwardRef((props, ref) => {
 })
 
 ContentMiddle.propTypes = {
-  leftSideActiveModal: PropTypes.any,
-  setLeftSideActiveModal: PropTypes.any,
-  calculationItems: PropTypes.any,
-  calculationItemChecked: PropTypes.any,
-  setCalculationItemChecked: PropTypes.any,
-  dataItems: PropTypes.any,
-  dataItemChecked: PropTypes.any,
-  setDataItemChecked: PropTypes.any,
-  RightSideActiveModal: PropTypes.any,
-  setRightSideActiveModal: PropTypes.any,
-  objectMenuItems: PropTypes.any,
-  objectItemChecked: PropTypes.any,
-  setObjectItemChecked: PropTypes.any,
-  sameMenuItems: PropTypes.any,
-  sameItemChecked: PropTypes.any,
-  setSameItemChecked: PropTypes.any
+  leftSideActiveModal: PropTypes.number,
+  setLeftSideActiveModal: PropTypes.func,
+  calculationItems: PropTypes.array,
+  calculationItemChecked: PropTypes.object,
+  setCalculationItemChecked: PropTypes.func,
+  dataItems: PropTypes.array,
+  dataItemChecked: PropTypes.object,
+  setDataItemChecked: PropTypes.func,
+  RightSideActiveModal: PropTypes.bool,
+  setRightSideActiveModal: PropTypes.func,
+  objectMenuItems: PropTypes.array,
+  objectItemChecked: PropTypes.object,
+  setObjectItemChecked: PropTypes.func,
+  sameMenuItems: PropTypes.array,
+  sameItemChecked: PropTypes.object,
+  setSameItemChecked: PropTypes.func
 }
 
 ContentMiddle.displayName = "ContentMiddle"

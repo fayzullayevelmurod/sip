@@ -37,21 +37,32 @@ export default function Home() {
   const [items, setItems] = useState(contextMenuItems);
   const [isOpen, setIsOpen] = useState(false);
 
+  // Table states
   const [sidebarHeight, setSidebarHeight] = useState(0)
+  // const [tableHeight, setTableHeight] = useState(0)
   const [sideBarFullHeight, setSideBarFullHeight] = useState(false)
   const [sideBarOpen, setSideBarOpen] = useState(false)
   const [isMapLayerOpen, setIsMapLayerOpen] = useState(false)
 
+  // Context menu
   const ref = useRef(null);
 
   // Toggle pop-up window 1 (left side)
   const toggleLeftSideModalCalc = () => {
+    if (windowWidth <= 639) {
+      setIsOpen(false)
+    }
+
     const active = leftSideActiveModal === 0 ? null : 0
     setLeftSideActiveModal(active)
   }
 
   // Toggle pop-up window 2 (left side)
   const toggleLeftSideModalData = () => {
+    if (windowWidth <= 639) {
+      setIsOpen(false)
+    }
+
     const active = leftSideActiveModal === 1 ? null : 1
     setLeftSideActiveModal(active)
   }
@@ -64,8 +75,13 @@ export default function Home() {
 
   // Toggle context menu (right side)
   const toggleContextMenu = () => {
-    setRightSideActiveModal(false)
-    setIsOpen(!isOpen)
+    if (windowWidth <= 639) {
+      setLeftSideActiveModal(null)
+      setIsOpen(!isOpen)
+    } else {
+      setRightSideActiveModal(false)
+      setIsOpen(!isOpen)
+    }
   }
 
   // Render Switch in Context Menu (right side)
@@ -144,6 +160,7 @@ export default function Home() {
               />
             ) : (
               <ContentHeaderMobile
+                setIsOpen={setIsOpen}
                 sideBarFullHeight={sideBarFullHeight}
                 toggleLeftSideModalCalc={toggleLeftSideModalCalc}
                 leftSideActiveModal={leftSideActiveModal}
@@ -161,7 +178,7 @@ export default function Home() {
                 setSideBarOpen={setSideBarOpen}
                 setSidebarHeight={setSidebarHeight}
                 setSideBarFullHeight={setSideBarFullHeight}
-                sideBarOpen
+                sideBarOpen={sideBarOpen}
               />
             )}
             <ContentMiddle

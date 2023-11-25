@@ -26,11 +26,13 @@ import './Navbar.style.scss'
 
 export default function App() {
   const activeMenuItemInitial = JSON.parse(sessionStorage.getItem('active-menu'))
+
   const [activeMenuItem, setActiveMenuItem] = useState(activeMenuItemInitial || 0);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation()
 
+  // Search Input value
   const [value, setValue] = useState(null);
   const navigate = useNavigate()
 
