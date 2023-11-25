@@ -204,6 +204,6 @@ export const ListOfDistrictsFilter = [
     id: 'location-filter',
     name: 'Все',
     field: 'location',
-    filterer: (value) => (value)
+    filterer: (value) => (value),
   }
 ]
