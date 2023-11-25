@@ -248,13 +248,16 @@ export default function Home() {
                     onlyIcon
                   />
                   <Button
-                    className={`home__header--button  ${RightSideActiveModal ? 'active-button' : ''}`}
+                    className={`home__header--button  ${leftSideActiveModal == 2 ? 'active-button' : ''}`}
                     label="Обьекты"
                     iconLeft={IconFolderOpen}
                     view="ghost"
                     size="xs"
                     onlyIcon
-                    onClick={() => toggleRightSideModalObject()}
+                    onClick={() => {
+                      const active = leftSideActiveModal === 2 ? null : 2
+                      setLeftSideActiveModal(active)
+                    }}
                   />
                   <Button
                     onClick={() => {
@@ -355,11 +358,14 @@ export default function Home() {
               </Layout>
               <Layout ref={ref} className="home__context-menu"></Layout>
               <Layout >
-                {RightSideActiveModal && (
+                {RightSideActiveModal || leftSideActiveModal == 2 ? (
                   <Modal
                     title="Обьекты"
                     sameTitle="Однотипные"
-                    onClose={() => setRightSideActiveModal(false)}
+                    onClose={() => {
+                      setRightSideActiveModal(false)
+                      setLeftSideActiveModal(null)
+                    }}
                     defaultType={(
                       <Layout direction='column' className="home__calculations-modal">
                         <List
@@ -379,7 +385,7 @@ export default function Home() {
                       </Layout>
                     )}
                   />
-                )}
+                ) : null}
               </Layout>
             </Layout>
 
@@ -446,6 +452,7 @@ export default function Home() {
                 onClick={() => {
                   setSidebarHeight(windowHeight - 100 - 48)
                   setSideBarFullHeight(true)
+                  setIsOpen(false)
                 }}
               />
               <Button

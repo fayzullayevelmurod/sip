@@ -227,7 +227,10 @@
 
 .view-context-menu {
   width: 163px !important;
-  z-index: -1;
+
+  @include responsive(phone) {
+    left: 12px;
+  }
 }
 
 .active-button {
