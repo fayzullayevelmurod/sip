@@ -17,7 +17,7 @@ import { IconTable2 } from '@consta/icons/IconTable2'
 
 const ContentHeaderMobile = forwardRef((props, ref) => {
   const {
-    sideBarFullHeight,
+    tableFullHeight,
     toggleLeftSideModalCalc,
     leftSideActiveModal,
     windowWidth,
@@ -28,17 +28,17 @@ const ContentHeaderMobile = forwardRef((props, ref) => {
     renderRightSide,
     onChange,
     setLeftSideActiveModal,
-    setSideBarOpen,
-    setSidebarHeight,
-    setSideBarFullHeight,
-    sideBarOpen,
+    setTableOpen,
+    setTableHeight,
+    setTableFullHeight,
+    tableOpen,
     setIsOpen
   } = props
 
   return (
     <Layout
       className='home__header'
-      style={{ backgroundColor: `${sideBarFullHeight ? 'white' : ''}` }}
+      style={{ backgroundColor: `${tableFullHeight ? 'white' : ''}` }}
     >
       <Layout className='home__header-left'>
         <Button
@@ -75,14 +75,14 @@ const ContentHeaderMobile = forwardRef((props, ref) => {
         />
         <Button
           onClick={() => {
-            setSideBarOpen(prev => !prev)
+            setTableOpen(prev => !prev)
 
-            if (sideBarFullHeight) {
-              setSidebarHeight(0)
-              setSideBarFullHeight(false)
+            if (tableFullHeight) {
+              setTableHeight(0)
+              setTableFullHeight(false)
             }
           }}
-          className={`home__header--button ${sideBarOpen ? 'active-button' : ''}`}
+          className={`home__header--button ${tableOpen ? 'active-button' : ''}`}
           label="Таблица"
           iconLeft={IconTable2}
           view="ghost"
@@ -138,7 +138,7 @@ const ContentHeaderMobile = forwardRef((props, ref) => {
 })
 
 ContentHeaderMobile.propTypes = {
-  sideBarFullHeight: PropTypes.bool,
+  tableFullHeight: PropTypes.bool,
   toggleLeftSideModalCalc: PropTypes.func,
   leftSideActiveModal: PropTypes.number,
   windowWidth: PropTypes.number,
@@ -149,10 +149,10 @@ ContentHeaderMobile.propTypes = {
   renderRightSide: PropTypes.func,
   onChange: PropTypes.func,
   setLeftSideActiveModal: PropTypes.func,
-  setSideBarOpen: PropTypes.func,
-  setSidebarHeight: PropTypes.func,
-  setSideBarFullHeight: PropTypes.func,
-  sideBarOpen: PropTypes.bool,
+  setTableOpen: PropTypes.func,
+  setTableHeight: PropTypes.func,
+  setTableFullHeight: PropTypes.func,
+  tableOpen: PropTypes.bool,
   setIsOpen: PropTypes.func
 }
 

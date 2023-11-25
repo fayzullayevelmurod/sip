@@ -20,18 +20,18 @@ import {
 
 export default function Table(props) {
   const {
-    sideBarOpen,
-    setSidebarHeight,
-    setSideBarFullHeight,
+    tableOpen,
+    setTableHeight,
+    setTableFullHeight,
     setIsOpen,
     windowHeight,
-    sidebarHeight,
+    tableHeight,
   } = props
 
   return (
     <Layout
       direction='column'
-      className="home__table" style={{ display: `${!sideBarOpen ? 'none' : ''}` }}>
+      className="home__table" style={{ display: `${!tableOpen ? 'none' : ''}` }}>
 
       {/* Table Header */}
       <Layout className="home__table--table-header">
@@ -44,8 +44,8 @@ export default function Table(props) {
             iconLeft={IconExpand}
             onlyIcon
             onClick={() => {
-              setSidebarHeight(windowHeight - 100 - 48)
-              setSideBarFullHeight(true)
+              setTableHeight(windowHeight - 100 - 48)
+              setTableFullHeight(true)
               setIsOpen(false)
             }}
           />
@@ -56,8 +56,8 @@ export default function Table(props) {
             iconLeft={IconPanelBottom}
             onlyIcon
             onClick={() => {
-              setSidebarHeight((windowHeight / 2) - 40)
-              setSideBarFullHeight(false)
+              setTableHeight((windowHeight / 2) - 40)
+              setTableFullHeight(false)
             }}
           />
           <Button
@@ -67,15 +67,15 @@ export default function Table(props) {
             iconLeft={IconArrowDown}
             onlyIcon
             onClick={() => {
-              setSidebarHeight(0)
-              setSideBarFullHeight(false)
+              setTableHeight(0)
+              setTableFullHeight(false)
             }}
           />
         </Layout>
       </Layout>
 
       {/* Table Content */}
-      <Layout className="home__table--table-content" style={{ height: `${sidebarHeight}px` }}>
+      <Layout className="home__table--table-content" style={{ height: `${tableHeight}px` }}>
         <ConstaTable
           stickyHeader={true}
           verticalAlign="top"
@@ -94,10 +94,10 @@ export default function Table(props) {
 }
 
 Table.propTypes = {
-  sideBarOpen: PropTypes.bool,
-  setSidebarHeight: PropTypes.func,
-  setSideBarFullHeight: PropTypes.func,
+  tableOpen: PropTypes.bool,
+  setTableHeight: PropTypes.func,
+  setTableFullHeight: PropTypes.func,
   setIsOpen: PropTypes.func,
   windowHeight: PropTypes.number,
-  sidebarHeight: PropTypes.number,
+  tableHeight: PropTypes.number,
 }

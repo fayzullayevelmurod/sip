@@ -16,7 +16,7 @@ import { IconHamburger } from "@consta/uikit/IconHamburger"
 
 const ContentHeader = forwardRef((props, ref) => {
   const {
-    sideBarFullHeight,
+    tableFullHeight,
     toggleLeftSideModalCalc,
     leftSideActiveModal,
     windowWidth,
@@ -34,7 +34,7 @@ const ContentHeader = forwardRef((props, ref) => {
   return (
     <Layout
       className='home__header'
-      style={{ backgroundColor: `${sideBarFullHeight ? 'white' : ''}` }}
+      style={{ backgroundColor: `${tableFullHeight ? 'white' : ''}` }}
     >
       <Layout className='home__header-left'>
         <Button
@@ -118,7 +118,7 @@ const ContentHeader = forwardRef((props, ref) => {
 })
 
 ContentHeader.propTypes = {
-  sideBarFullHeight: PropTypes.bool,
+  tableFullHeight: PropTypes.bool,
   toggleLeftSideModalCalc: PropTypes.func,
   leftSideActiveModal: PropTypes.number,
   windowWidth: PropTypes.number,

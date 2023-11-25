@@ -41,6 +41,7 @@ export default function App() {
     setActiveMenuItem(0)
   }
 
+  // Navbar Menu links
   const menuItems = [
     {
       label: "Главная",

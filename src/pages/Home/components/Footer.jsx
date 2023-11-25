@@ -10,8 +10,8 @@ import { IconArrowDown } from '@consta/icons/IconArrowDown'
 
 export default function Footer(props) {
   const {
-    setSideBarOpen,
-    sideBarOpen,
+    setTableOpen,
+    tableOpen,
     setIsMapLayerOpen,
     isMapLayerOpen,
     windowWidth,
@@ -25,11 +25,11 @@ export default function Footer(props) {
       </Layout>
       <Layout className="home__footer--table-tag">
         <Tag
-          onClick={() => setSideBarOpen(prev => !prev)}
+          onClick={() => setTableOpen(prev => !prev)}
           size="xs"
           mode="link"
           label="Название региона, meta info"
-          style={{ backgroundColor: `${sideBarOpen ? 'white' : ''}` }}
+          style={{ backgroundColor: `${tableOpen ? 'white' : ''}` }}
         />
       </Layout>
       <Layout className="home__footer--map-layer" onClick={() => setIsMapLayerOpen(true)}>
@@ -69,8 +69,8 @@ export default function Footer(props) {
 }
 
 Footer.propTypes = {
-  setSideBarOpen: PropTypes.func,
-  sideBarOpen: PropTypes.bool,
+  setTableOpen: PropTypes.func,
+  tableOpen: PropTypes.bool,
   setIsMapLayerOpen: PropTypes.func,
   isMapLayerOpen: PropTypes.bool,
   windowWidth: PropTypes.number,

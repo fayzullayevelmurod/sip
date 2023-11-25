@@ -24,24 +24,29 @@ import {
 import './Home.style.scss'
 
 export default function Home() {
+  // Active Pop up window states
   const [leftSideActiveModal, setLeftSideActiveModal] = useState(null)
   const [RightSideActiveModal, setRightSideActiveModal] = useState(false)
 
+  // Pop up window data states
   const [calculationItemChecked, setCalculationItemChecked] = useState(calculationItems[0]);
   const [dataItemChecked, setDataItemChecked] = useState(dataItems[0]);
   const [objectItemChecked, setObjectItemChecked] = useState(objectMenuItems[0])
   const [sameItemChecked, setSameItemChecked] = useState(sameMenuItems[0])
+
+  // Window states
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
 
+  // Context menu states
   const [items, setItems] = useState(contextMenuItems);
   const [isOpen, setIsOpen] = useState(false);
 
   // Table states
-  const [sidebarHeight, setSidebarHeight] = useState(0)
-  // const [tableHeight, setTableHeight] = useState(0)
-  const [sideBarFullHeight, setSideBarFullHeight] = useState(false)
-  const [sideBarOpen, setSideBarOpen] = useState(false)
+  const [tableHeight, setTableHeight] = useState(0)
+  const [tableFullHeight, setTableFullHeight] = useState(false)
+  const [tableOpen, setTableOpen] = useState(false)
+
   const [isMapLayerOpen, setIsMapLayerOpen] = useState(false)
 
   // Context menu
@@ -50,7 +55,7 @@ export default function Home() {
   // Toggle pop-up window 1 (left side)
   const toggleLeftSideModalCalc = () => {
     if (windowWidth <= 639) {
-      setIsOpen(false)
+      setIsOpen(false) // close context menu
     }
 
     const active = leftSideActiveModal === 0 ? null : 0
@@ -60,7 +65,7 @@ export default function Home() {
   // Toggle pop-up window 2 (left side)
   const toggleLeftSideModalData = () => {
     if (windowWidth <= 639) {
-      setIsOpen(false)
+      setIsOpen(false) // close context menu
     }
 
     const active = leftSideActiveModal === 1 ? null : 1
@@ -70,7 +75,7 @@ export default function Home() {
   // Toggle pop-up window 3 (right side)
   const toggleRightSideModalObject = () => {
     setRightSideActiveModal(prev => !prev)
-    setIsOpen(false)
+    setIsOpen(false) // close context menu
   }
 
   // Toggle context menu (right side)
@@ -136,7 +141,7 @@ export default function Home() {
         <Layout
           className='home__background'
           style={
-            { height: `calc(100dvh - (100px - ${!sideBarOpen ? '40px' : '0px'} + ${sidebarHeight}px))` }
+            { height: `calc(100dvh - (100px - ${!tableOpen ? '40px' : '0px'} + ${tableHeight}px))` }
           }
         >
           <img src="/assets/svg/bg-map.svg" />
@@ -144,7 +149,7 @@ export default function Home() {
           <Layout direction='column' className='home__content'>
             {windowWidth >= 640 ? (
               <ContentHeader
-                sideBarFullHeight={sideBarFullHeight}
+                tableFullHeight={tableFullHeight}
                 toggleLeftSideModalCalc={toggleLeftSideModalCalc}
                 leftSideActiveModal={leftSideActiveModal}
                 windowWidth={windowWidth}
@@ -161,7 +166,7 @@ export default function Home() {
             ) : (
               <ContentHeaderMobile
                 setIsOpen={setIsOpen}
-                sideBarFullHeight={sideBarFullHeight}
+                tableFullHeight={tableFullHeight}
                 toggleLeftSideModalCalc={toggleLeftSideModalCalc}
                 leftSideActiveModal={leftSideActiveModal}
                 windowWidth={windowWidth}
@@ -175,10 +180,10 @@ export default function Home() {
                 renderRightSide={renderRightSide}
                 onChange={onChange}
                 setLeftSideActiveModal={setLeftSideActiveModal}
-                setSideBarOpen={setSideBarOpen}
-                setSidebarHeight={setSidebarHeight}
-                setSideBarFullHeight={setSideBarFullHeight}
-                sideBarOpen={sideBarOpen}
+                setTableOpen={setTableOpen}
+                setTableHeight={setTableHeight}
+                setTableFullHeight={setTableFullHeight}
+                tableOpen={tableOpen}
               />
             )}
             <ContentMiddle
@@ -202,8 +207,8 @@ export default function Home() {
             />
 
             <Footer
-              setSideBarOpen={setSideBarOpen}
-              sideBarOpen={sideBarOpen}
+              setTableOpen={setTableOpen}
+              tableOpen={tableOpen}
               setIsMapLayerOpen={setIsMapLayerOpen}
               isMapLayerOpen={isMapLayerOpen}
               windowWidth={windowWidth}
@@ -212,12 +217,12 @@ export default function Home() {
           </Layout>
         </Layout>
         <Table
-          sideBarOpen={sideBarOpen}
-          setSidebarHeight={setSidebarHeight}
-          setSideBarFullHeight={setSideBarFullHeight}
+          tableOpen={tableOpen}
+          setTableHeight={setTableHeight}
+          setTableFullHeight={setTableFullHeight}
           setIsOpen={setIsOpen}
           windowHeight={windowHeight}
-          sidebarHeight={sidebarHeight}
+          tableHeight={tableHeight}
         />
       </Layout >
     </>
