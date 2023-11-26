@@ -73,11 +73,6 @@
   }
 
   &__calculations-modal {
-    .ListItemGrid-Slot_position_center {
-      font-size: 12px;
-      align-items: center;
-    }
-
     &--date {
       color: var(--typo-ghost, rgba(0, 32, 51, 0.3));
       text-align: right;
@@ -163,12 +158,8 @@
       }
 
       &--popup {
-        min-width: 200px;
-        min-height: 200px;
-        overflow: auto;
+        flex-direction: column;
         padding: 8px;
-        width: 320px;
-        height: 280px;
         background-color: white;
         position: absolute;
         right: 12px;
@@ -180,15 +171,23 @@
       }
 
       &--header {
+        position: relative;
         width: 100%;
         justify-content: space-between;
         align-items: center;
         height: 40px;
+
+        &--resize {
+          position: absolute;
+          top: -8px;
+          left: -8px;
+          transform: rotate(180deg);
+        }
       }
 
       &--content {
         width: 100%;
-        height: 100%;
+        height: 82%;
         align-items: center;
         justify-content: center;
       }
@@ -217,6 +216,7 @@
   }
 }
 
+// Context menu
 .view-context-menu {
   width: 163px !important;
 
@@ -225,6 +225,7 @@
   }
 }
 
+// Buttons active class
 .active-button {
   background-color: white;
   border: 1px solid #0078d2;
@@ -235,6 +236,13 @@
   border: 1px solid #0078d2;
 }
 
+// Table Header color
 .TableCell-Wrapper_isHeader {
   background-color: #ecf1f4;
+}
+
+// Pop up text
+.ListItemGrid-Slot_position_center {
+  font-size: 12px;
+  align-items: center;
 }

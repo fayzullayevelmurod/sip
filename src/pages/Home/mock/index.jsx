@@ -29,16 +29,19 @@ export const dataItems = [
     id: 1,
     label: 'Москва',
     leftIcon: IconDinosaur,
+    text: "Москва́ — столица России, город федерального значения, административный центр"
   },
   {
     id: 2,
     leftIcon: IconDinosaur,
-    label: 'Казань'
+    label: 'Казань',
+    text: "Казань — lorem ipsum"
   },
   {
     id: 3,
     leftIcon: IconDinosaur,
-    label: 'Новосибирск'
+    label: 'Новосибирск',
+    text: "Новосибирск — lorem ipsum, lorem ipsum"
   },
 ]
 

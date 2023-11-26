@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import { Button } from '@consta/uikit/Button'
@@ -7,16 +8,43 @@ import { Text } from '@consta/uikit/Text'
 
 import { IconMapStroked } from '@consta/icons/IconMapStroked'
 import { IconArrowDown } from '@consta/icons/IconArrowDown'
+import { IconResize } from '@consta/icons/IconResize'
+
+import { Rnd } from "react-rnd";
 
 export default function Footer(props) {
   const {
+    isObjectModalFullHeight,
     setTableOpen,
     tableOpen,
-    setIsMapLayerOpen,
-    isMapLayerOpen,
     windowWidth,
-    calculateMapLayerPopupWidth
+    windowHeight,
+    setTableHeight,
   } = props
+
+  const [isMapLayerOpen, setIsMapLayerOpen] = useState(false)
+  const [layer, setLayer] = useState({
+    width: 320,
+    height: 280,
+    x: windowWidth - 332,
+    y: -280
+  })
+
+  const calculateMapLayerPopupWidth = `calc(${windowWidth}px - 24px)`
+
+  useEffect(() => {
+    if (isObjectModalFullHeight) {
+      setLayer(prev => ({
+        ...prev,
+        x: windowWidth - prev.width - 342
+      }))
+    } else {
+      setLayer(prev => ({
+        ...prev,
+        x: windowWidth - prev.width - 12
+      }))
+    }
+  }, [isObjectModalFullHeight])
 
   return (
     <Layout className="home__footer">
@@ -25,25 +53,57 @@ export default function Footer(props) {
       </Layout>
       <Layout className="home__footer--table-tag">
         <Tag
-          onClick={() => setTableOpen(prev => !prev)}
+          onClick={() => {
+            setTableOpen(prev => !prev)
+
+            if (tableOpen !== 0) {
+              setTableHeight(0)
+            }
+          }}
           size="xs"
           mode="link"
           label="Название региона, meta info"
           style={{ backgroundColor: `${tableOpen ? 'white' : ''}` }}
         />
       </Layout>
-      <Layout className="home__footer--map-layer" onClick={() => setIsMapLayerOpen(true)}>
+      <Layout
+        className="home__footer--map-layer"
+        onClick={() => setIsMapLayerOpen(true)}
+        style={{ right: `${isObjectModalFullHeight && windowWidth >= 640 ? '342px' : ''}` }}
+      >
         <IconMapStroked view="secondary" />
         <Text size="xs">Слой карты</Text>
       </Layout>
       {isMapLayerOpen && (
-        <Layout
-          direction='column'
-          key="1" data-grid={{ x: 100, y: 20, w: 3, h: 2 }}
+        <Rnd
+          minWidth="200px"
+          minHeight="200px"
+          maxWidth={`${windowWidth - 24}px`}
+          maxHeight={`${windowHeight - 120}px`}
+          size={{ width: layer.width, height: layer.height }}
+          position={{ x: layer.x, y: layer.y }}
+          disableDragging={true}
+          enableResizing={{ top: false, right: false, bottom: false, left: false, topRight: false, bottomRight: false, bottomLeft: false, topLeft: true }}
+          onDragStop={(e, d) => {
+            setLayer(prev => ({ ...prev, x: d.x, y: d.y }))
+          }}
+          onResizeStop={(e, direction, ref, delta, position) => {
+            setLayer(prev => ({
+              ...prev,
+              width: ref.style.width,
+              height: ref.style.height,
+              ...position
+            }))
+          }}
+
           className="home__footer--map-layer--popup"
-          style={{ width: `${windowWidth <= 640 ? calculateMapLayerPopupWidth : ''}` }}
+          style={{
+            width: `${windowWidth <= 640 ? calculateMapLayerPopupWidth : ''}`,
+            right: `${isObjectModalFullHeight && windowWidth >= 640 ? '342px' : ''}`
+          }}
         >
           <Layout className="home__footer--map-layer--header">
+            <IconResize size="s" view="ghost" className='home__footer--map-layer--header--resize' />
             <Layout style={{ alignItems: "center", gap: '8px' }}>
               <IconMapStroked view="secondary" />
               <Text size="xs">Слой карты</Text>
@@ -62,7 +122,7 @@ export default function Footer(props) {
           <Layout className="home__footer--map-layer--content">
             <Text size="s">Объектов пока нет</Text>
           </Layout>
-        </Layout>
+        </Rnd>
       )}
     </Layout>
   )
@@ -71,8 +131,8 @@ export default function Footer(props) {
 Footer.propTypes = {
   setTableOpen: PropTypes.func,
   tableOpen: PropTypes.bool,
-  setIsMapLayerOpen: PropTypes.func,
-  isMapLayerOpen: PropTypes.bool,
   windowWidth: PropTypes.number,
-  calculateMapLayerPopupWidth: PropTypes.string
+  windowHeight: PropTypes.number,
+  isObjectModalFullHeight: PropTypes.bool,
+  setTableHeight: PropTypes.func,
 }

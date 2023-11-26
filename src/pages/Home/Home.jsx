@@ -30,9 +30,10 @@ export default function Home() {
 
   // Pop up window data states
   const [calculationItemChecked, setCalculationItemChecked] = useState(calculationItems[0]);
-  const [dataItemChecked, setDataItemChecked] = useState(dataItems[0]);
+  const [dataItemChecked, setDataItemChecked] = useState(null);
   const [objectItemChecked, setObjectItemChecked] = useState(objectMenuItems[0])
   const [sameItemChecked, setSameItemChecked] = useState(sameMenuItems[0])
+  const [isObjectModalFullHeight, setIsObjectModalFullHeight] = useState(false)
 
   // Window states
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -46,8 +47,6 @@ export default function Home() {
   const [tableHeight, setTableHeight] = useState(0)
   const [tableFullHeight, setTableFullHeight] = useState(false)
   const [tableOpen, setTableOpen] = useState(false)
-
-  const [isMapLayerOpen, setIsMapLayerOpen] = useState(false)
 
   // Context menu
   const ref = useRef(null);
@@ -133,7 +132,13 @@ export default function Home() {
     }
   }, [])
 
-  const calculateMapLayerPopupWidth = `calc(${windowWidth}px - 24px)`
+  // If the right sidebar is not active, it will return the map layer to its place.
+  useEffect(() => {
+    if (!RightSideActiveModal) {
+      setIsObjectModalFullHeight(false)
+    }
+  }, [RightSideActiveModal])
+
 
   return (
     <>
@@ -187,6 +192,7 @@ export default function Home() {
               />
             )}
             <ContentMiddle
+              setIsObjectModalFullHeight={setIsObjectModalFullHeight}
               leftSideActiveModal={leftSideActiveModal}
               setLeftSideActiveModal={setLeftSideActiveModal}
               calculationItems={calculationItems}
@@ -205,14 +211,13 @@ export default function Home() {
               setSameItemChecked={setSameItemChecked}
               ref={ref}
             />
-
             <Footer
+              isObjectModalFullHeight={isObjectModalFullHeight}
               setTableOpen={setTableOpen}
               tableOpen={tableOpen}
-              setIsMapLayerOpen={setIsMapLayerOpen}
-              isMapLayerOpen={isMapLayerOpen}
               windowWidth={windowWidth}
-              calculateMapLayerPopupWidth={calculateMapLayerPopupWidth}
+              windowHeight={windowHeight}
+              setTableHeight={setTableHeight}
             />
           </Layout>
         </Layout>

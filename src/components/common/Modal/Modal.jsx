@@ -15,7 +15,7 @@ import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
 import './Modal.style.scss'
 
 export default function Modal({
-  title, defaultType, sameTitle, sameType, onClose
+  title, defaultType, sameTitle, sameType, onClose, setIsObjectModalFullHeight
 }) {
   const [collapseIsOpen, setcollapseIsOpen] = useState(false);
   const [isShown, setIsShown] = useState(false);
@@ -84,7 +84,12 @@ export default function Modal({
       <Layout
         onMouseEnter={() => setIsShown(true)}
         onMouseLeave={() => setIsShown(false)}
-        onClick={() => setFullHeight(prev => !prev)}
+        onClick={() => {
+          setFullHeight(prev => !prev)
+          if (setIsObjectModalFullHeight) {
+            setIsObjectModalFullHeight(prev => !prev)
+          }
+        }}
         className="modal__resizer"
       >
         {!isShown ? (
@@ -110,4 +115,5 @@ Modal.propTypes = {
   sameType: PropTypes.element,
   title: PropTypes.string,
   sameTitle: PropTypes.string,
+  setIsObjectModalFullHeight: PropTypes.func
 }

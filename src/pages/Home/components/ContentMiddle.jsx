@@ -9,6 +9,7 @@ import Modal from '@components/common/Modal/';
 
 const ContentMiddle = forwardRef((props, ref) => {
   const {
+    setIsObjectModalFullHeight,
     leftSideActiveModal,
     setLeftSideActiveModal,
     calculationItems,
@@ -24,7 +25,7 @@ const ContentMiddle = forwardRef((props, ref) => {
     setObjectItemChecked,
     sameMenuItems,
     sameItemChecked,
-    setSameItemChecked
+    setSameItemChecked,
   } = props
 
   return (
@@ -53,7 +54,7 @@ const ContentMiddle = forwardRef((props, ref) => {
             title="Данные"
             onClose={() => setLeftSideActiveModal(null)}
             defaultType={(
-              <Layout direction='column' className="home__calculations-modal">
+              <Layout direction='column'>
                 <List
                   items={dataItems}
                   getItemChecked={(item) => dataItemChecked === item}
@@ -65,9 +66,10 @@ const ContentMiddle = forwardRef((props, ref) => {
         )}
       </Layout>
       <Layout ref={ref} className="home__context-menu"></Layout>
-      <Layout >
+      <Layout>
         {RightSideActiveModal || leftSideActiveModal == 2 ? (
           <Modal
+            setIsObjectModalFullHeight={setIsObjectModalFullHeight}
             title="Обьекты"
             sameTitle="Однотипные"
             onClose={() => {
@@ -75,7 +77,7 @@ const ContentMiddle = forwardRef((props, ref) => {
               setLeftSideActiveModal(null)
             }}
             defaultType={(
-              <Layout direction='column' className="home__calculations-modal">
+              <Layout direction='column'>
                 <List
                   items={objectMenuItems}
                   getItemChecked={(item) => objectItemChecked === item}
@@ -84,7 +86,7 @@ const ContentMiddle = forwardRef((props, ref) => {
               </Layout>
             )}
             sameType={(
-              <Layout direction='column' className="home__calculations-modal">
+              <Layout direction='column'>
                 <List
                   items={sameMenuItems}
                   getItemChecked={(item) => sameItemChecked === item}
@@ -115,7 +117,8 @@ ContentMiddle.propTypes = {
   setObjectItemChecked: PropTypes.func,
   sameMenuItems: PropTypes.array,
   sameItemChecked: PropTypes.object,
-  setSameItemChecked: PropTypes.func
+  setSameItemChecked: PropTypes.func,
+  setIsObjectModalFullHeight: PropTypes.func,
 }
 
 ContentMiddle.displayName = "ContentMiddle"

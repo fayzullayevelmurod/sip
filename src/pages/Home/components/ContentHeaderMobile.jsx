@@ -81,6 +81,10 @@ const ContentHeaderMobile = forwardRef((props, ref) => {
               setTableHeight(0)
               setTableFullHeight(false)
             }
+
+            if (tableOpen !== 0) {
+              setTableHeight(0)
+            }
           }}
           className={`home__header--button ${tableOpen ? 'active-button' : ''}`}
           label="Таблица"
