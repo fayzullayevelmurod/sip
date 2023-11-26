@@ -83,26 +83,126 @@ export const objectMenuItems = [
     id: 1,
     label: 'Фабрика 1',
     leftIcon: IconDinosaur,
+    data: [
+      {
+        id: 1,
+        label: 'Завод 1',
+        leftIcon: IconDinosaur,
+      },
+      {
+        id: 2,
+        leftIcon: IconDinosaur,
+        label: 'Завод 2'
+      },
+      {
+        id: 3,
+        leftIcon: IconDinosaur,
+        label: 'Завод 3'
+      },
+    ]
   },
   {
     id: 2,
     leftIcon: IconDinosaur,
-    label: 'Фабрика 2'
+    label: 'Фабрика 2',
+    data: [
+      {
+        id: 1,
+        label: 'Фабрика 2 | Завод 1',
+        leftIcon: IconDinosaur,
+      },
+      {
+        id: 2,
+        leftIcon: IconDinosaur,
+        label: 'Фабрика 2 | Завод 2'
+      },
+      {
+        id: 3,
+        leftIcon: IconDinosaur,
+        label: 'Фабрика 2 | Завод 3'
+      },
+    ]
   },
   {
     id: 3,
     leftIcon: IconDinosaur,
-    label: 'Фабрика 3'
+    label: 'Фабрика 3',
+    data: [
+      {
+        id: 1,
+        label: 'Фабрика 3 | Завод 1',
+        leftIcon: IconDinosaur,
+      },
+      {
+        id: 2,
+        leftIcon: IconDinosaur,
+        label: 'Фабрика 3 | Завод 2'
+      },
+      {
+        id: 3,
+        leftIcon: IconDinosaur,
+        label: 'Фабрика 3 | Завод 3'
+      },
+      {
+        id: 4,
+        leftIcon: IconDinosaur,
+        label: 'Фабрика 3 | Завод 4'
+      },
+    ]
   },
   {
     id: 4,
     leftIcon: IconDinosaur,
-    label: 'Фабрика 4'
+    label: 'Фабрика 4',
+    data: [
+      {
+        id: 1,
+        label: 'Фабрика 4 | Завод 1',
+        leftIcon: IconDinosaur,
+      },
+      {
+        id: 2,
+        leftIcon: IconDinosaur,
+        label: 'Фабрика 4 | Завод 2'
+      },
+      {
+        id: 3,
+        leftIcon: IconDinosaur,
+        label: 'Фабрика 4 | Завод 3'
+      },
+      {
+        id: 5,
+        leftIcon: IconDinosaur,
+        label: 'Фабрика 4 | Завод 4'
+      },
+      {
+        id: 6,
+        leftIcon: IconDinosaur,
+        label: 'Фабрика 5 | Завод 5'
+      },
+    ]
   },
   {
     id: 5,
     leftIcon: IconDinosaur,
-    label: 'Фабрика 5'
+    label: 'Фабрика 5',
+    data: [
+      {
+        id: 1,
+        label: 'Фабрика 5 | Завод 1',
+        leftIcon: IconDinosaur,
+      },
+      {
+        id: 2,
+        leftIcon: IconDinosaur,
+        label: 'Фабрика 5 | Завод 2'
+      },
+      {
+        id: 3,
+        leftIcon: IconDinosaur,
+        label: 'Фабрика 5 | Завод 3'
+      },
+    ]
   },
 ]
 

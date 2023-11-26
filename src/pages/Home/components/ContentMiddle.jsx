@@ -1,11 +1,17 @@
 import PropTypes from 'prop-types'
 
-import { forwardRef } from "react";
+import { forwardRef, useState } from "react";
 import { Layout } from "@consta/uikit/Layout"
 import { List } from '@consta/uikit/ListCanary';
 import { Text } from '@consta/uikit/Text';
+import { Collapse } from '@consta/uikit/Collapse';
 
 import Modal from '@components/common/Modal/';
+import {
+  dataItems,
+  sameMenuItems,
+  objectMenuItems
+} from '../mock';
 
 const ContentMiddle = forwardRef((props, ref) => {
   const {
@@ -15,21 +21,26 @@ const ContentMiddle = forwardRef((props, ref) => {
     calculationItems,
     calculationItemChecked,
     setCalculationItemChecked,
-    dataItems,
-    dataItemChecked,
-    setDataItemChecked,
     RightSideActiveModal,
     setRightSideActiveModal,
-    objectMenuItems,
-    objectItemChecked,
-    setObjectItemChecked,
-    sameMenuItems,
-    sameItemChecked,
-    setSameItemChecked,
+    windowWidth,
   } = props
+
+  const [collapseIsOpen, setcollapseIsOpen] = useState(true);
+
+  // Left side popup data
+  const [dataItemChecked, setDataItemChecked] = useState(dataItems[0]);
+  const [switchedData, setSwitchedData] = useState(dataItems[0])
+
+  // Right side popup data
+  const [objectItemChecked, setObjectItemChecked] = useState(objectMenuItems[0])
+  const [sameItemChecked, setSameItemChecked] = useState(sameMenuItems[0])
+  const [switchedObject, setSwitchedObject] = useState(null)
 
   return (
     <Layout className="home__middle">
+
+      {/* Calculation and Data Popup menu */}
       <Layout>
         {leftSideActiveModal == 0 && (
           <Modal
@@ -51,48 +62,79 @@ const ContentMiddle = forwardRef((props, ref) => {
         )}
         {leftSideActiveModal == 1 && (
           <Modal
+            style={{ minHeight: '300px' }}
             title="Данные"
             onClose={() => setLeftSideActiveModal(null)}
             defaultType={(
               <Layout direction='column'>
                 <List
                   items={dataItems}
-                  getItemChecked={(item) => dataItemChecked === item}
+                  getItemChecked={(item) => {
+                    if (dataItemChecked === item) {
+                      setSwitchedData(dataItemChecked)
+                    }
+
+                    return dataItemChecked === item
+                  }}
                   onItemClick={setDataItemChecked}
                 />
               </Layout>
             )}
+            sameType={(
+              <Text size="xs" view="secondary">{switchedData.text}</Text>
+            )}
           />
         )}
       </Layout>
+
       <Layout ref={ref} className="home__context-menu"></Layout>
+
+      {/* Objects Popup menu */}
       <Layout>
         {RightSideActiveModal || leftSideActiveModal == 2 ? (
           <Modal
+            style={{ minHeight: '300px' }}
             setIsObjectModalFullHeight={setIsObjectModalFullHeight}
             title="Обьекты"
-            sameTitle="Однотипные"
+            isCollapse={true}
             onClose={() => {
               setRightSideActiveModal(false)
-              setLeftSideActiveModal(null)
+              if (windowWidth <= 640) {
+                setLeftSideActiveModal(null)
+              }
             }}
             defaultType={(
               <Layout direction='column'>
                 <List
                   items={objectMenuItems}
-                  getItemChecked={(item) => objectItemChecked === item}
+                  getItemChecked={(item) => {
+                    if (objectItemChecked === item) {
+                      setSwitchedObject(objectItemChecked)
+                    }
+
+                    return objectItemChecked === item
+                  }}
                   onItemClick={setObjectItemChecked}
                 />
               </Layout>
             )}
             sameType={(
-              <Layout direction='column'>
-                <List
-                  items={sameMenuItems}
-                  getItemChecked={(item) => sameItemChecked === item}
-                  onItemClick={setSameItemChecked}
-                />
-              </Layout>
+              <Collapse
+                size="xs"
+                label="Однотипные"
+                isOpen={collapseIsOpen}
+                onClick={() => setcollapseIsOpen(!collapseIsOpen)}
+                iconPosition="right"
+                className='modal__collapse'
+              >
+                <Layout direction='column'>
+                  <List
+                    items={switchedObject?.data}
+                    getItemChecked={(item) => sameItemChecked === item}
+                    onItemClick={setSameItemChecked}
+                  />
+                </Layout>
+              </Collapse>
             )}
           />
         ) : null}
@@ -107,18 +149,13 @@ ContentMiddle.propTypes = {
   calculationItems: PropTypes.array,
   calculationItemChecked: PropTypes.object,
   setCalculationItemChecked: PropTypes.func,
-  dataItems: PropTypes.array,
-  dataItemChecked: PropTypes.object,
   setDataItemChecked: PropTypes.func,
   RightSideActiveModal: PropTypes.bool,
   setRightSideActiveModal: PropTypes.func,
   objectMenuItems: PropTypes.array,
-  objectItemChecked: PropTypes.object,
-  setObjectItemChecked: PropTypes.func,
-  sameMenuItems: PropTypes.array,
-  sameItemChecked: PropTypes.object,
   setSameItemChecked: PropTypes.func,
   setIsObjectModalFullHeight: PropTypes.func,
+  windowWidth: PropTypes.number
 }
 
 ContentMiddle.displayName = "ContentMiddle"

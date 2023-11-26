@@ -30,7 +30,23 @@ export default function Footer(props) {
     y: -280
   })
 
-  const calculateMapLayerPopupWidth = `calc(${windowWidth}px - 24px)`
+  let calculateMapLayerPopupWidth = `${isObjectModalFullHeight}`
+
+  if (!isObjectModalFullHeight) {
+    if (windowWidth >= 800) {
+      calculateMapLayerPopupWidth = `${windowWidth - (24 + 332)}`
+    } else {
+      calculateMapLayerPopupWidth = `${windowWidth - (24)}`
+    }
+  } else {
+    if (windowWidth <= 800) {
+      calculateMapLayerPopupWidth = `${windowWidth - (24 + 332)}`
+    } else if (windowWidth <= 640) {
+      calculateMapLayerPopupWidth = `${windowWidth - (24)}`
+    } else {
+      calculateMapLayerPopupWidth = `${windowWidth - (24 + 332 + 332)}`
+    }
+  }
 
   useEffect(() => {
     setLayer({
@@ -39,6 +55,7 @@ export default function Footer(props) {
       x: windowWidth - 332,
       y: -280
     })
+    setIsMapLayerOpen(false)
   }, [isObjectModalFullHeight])
 
   return (
@@ -90,7 +107,7 @@ export default function Footer(props) {
         <Rnd
           minWidth="200px"
           minHeight="200px"
-          maxWidth={`${windowWidth - 24}px`}
+          maxWidth={`${calculateMapLayerPopupWidth}px`}
           maxHeight={`${windowHeight - 120}px`}
           size={{ width: layer.width, height: layer.height }}
           position={{ x: layer.x, y: layer.y }}
@@ -107,7 +124,6 @@ export default function Footer(props) {
 
           className="home__footer--map-layer--popup"
           style={{
-            width: `${windowWidth <= 640 ? calculateMapLayerPopupWidth : ''}`,
             right: `${isObjectModalFullHeight && windowWidth >= 640 ? '342px' : ''}`
           }}
         >

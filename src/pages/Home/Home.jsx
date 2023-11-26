@@ -15,10 +15,7 @@ import Footer from './components/Footer';
 // Mock data
 import {
   calculationItems,
-  dataItems,
   contextMenuItems,
-  sameMenuItems,
-  objectMenuItems
 } from './mock'
 
 import './Home.style.scss'
@@ -27,13 +24,10 @@ export default function Home() {
   // Active Pop up window states
   const [leftSideActiveModal, setLeftSideActiveModal] = useState(null)
   const [RightSideActiveModal, setRightSideActiveModal] = useState(false)
+  const [isObjectModalFullHeight, setIsObjectModalFullHeight] = useState(false)
 
   // Pop up window data states
   const [calculationItemChecked, setCalculationItemChecked] = useState(calculationItems[0]);
-  const [dataItemChecked, setDataItemChecked] = useState(null);
-  const [objectItemChecked, setObjectItemChecked] = useState(objectMenuItems[0])
-  const [sameItemChecked, setSameItemChecked] = useState(sameMenuItems[0])
-  const [isObjectModalFullHeight, setIsObjectModalFullHeight] = useState(false)
 
   // Window states
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -198,18 +192,10 @@ export default function Home() {
               calculationItems={calculationItems}
               calculationItemChecked={calculationItemChecked}
               setCalculationItemChecked={setCalculationItemChecked}
-              dataItems={dataItems}
-              dataItemChecked={dataItemChecked}
-              setDataItemChecked={setDataItemChecked}
               RightSideActiveModal={RightSideActiveModal}
               setRightSideActiveModal={setRightSideActiveModal}
-              objectMenuItems={objectMenuItems}
-              objectItemChecked={objectItemChecked}
-              setObjectItemChecked={setObjectItemChecked}
-              sameMenuItems={sameMenuItems}
-              sameItemChecked={sameItemChecked}
-              setSameItemChecked={setSameItemChecked}
               ref={ref}
+              windowWidth={windowWidth}
             />
             <Footer
               isObjectModalFullHeight={isObjectModalFullHeight}
