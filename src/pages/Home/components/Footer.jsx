@@ -33,17 +33,12 @@ export default function Footer(props) {
   const calculateMapLayerPopupWidth = `calc(${windowWidth}px - 24px)`
 
   useEffect(() => {
-    if (isObjectModalFullHeight) {
-      setLayer(prev => ({
-        ...prev,
-        x: windowWidth - prev.width - 342
-      }))
-    } else {
-      setLayer(prev => ({
-        ...prev,
-        x: windowWidth - prev.width - 12
-      }))
-    }
+    setLayer({
+      width: 320,
+      height: 280,
+      x: windowWidth - 332,
+      y: -280
+    })
   }, [isObjectModalFullHeight])
 
   return (
@@ -68,7 +63,24 @@ export default function Footer(props) {
       </Layout>
       <Layout
         className="home__footer--map-layer"
-        onClick={() => setIsMapLayerOpen(true)}
+        onClick={() => {
+          setIsMapLayerOpen(true)
+          if (!isObjectModalFullHeight) {
+            setLayer({
+              width: 320,
+              height: 280,
+              x: windowWidth - 332,
+              y: -280
+            })
+          } else {
+            setLayer({
+              width: 320,
+              height: 280,
+              x: windowWidth - 332 - 330,
+              y: -280
+            })
+          }
+        }}
         style={{ right: `${isObjectModalFullHeight && windowWidth >= 640 ? '342px' : ''}` }}
       >
         <IconMapStroked view="secondary" />
@@ -84,9 +96,6 @@ export default function Footer(props) {
           position={{ x: layer.x, y: layer.y }}
           disableDragging={true}
           enableResizing={{ top: false, right: false, bottom: false, left: false, topRight: false, bottomRight: false, bottomLeft: false, topLeft: true }}
-          onDragStop={(e, d) => {
-            setLayer(prev => ({ ...prev, x: d.x, y: d.y }))
-          }}
           onResizeStop={(e, direction, ref, delta, position) => {
             setLayer(prev => ({
               ...prev,
