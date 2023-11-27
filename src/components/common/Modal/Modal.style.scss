@@ -10,8 +10,11 @@
   border-radius: 8px;
   overflow: hidden;
   border: 1px solid #bdced8;
-  transition: all 0.3s ease-out;
   z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20%);
+  transition: all 0.25s ease;
 
   &__content {
     overflow: auto;
@@ -101,22 +104,14 @@
   background-color: white;
 }
 
-.modal-node-enter {
-  transform: translateY(100%);
-  transition: transform 300ms;
-}
-
-.modal-node-enter-active {
+.active-modal {
+  opacity: 1;
+  pointer-events: all;
   transform: translateY(0);
 }
 
-.modal-node-exit {
-  transform: translateY(0);
+.inactive-modal {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20%);
 }
-
-.modal-node-exit-active {
-  transform: translateY(100%);
-  transition: transform 300ms;
-}
-
-// qolda yozw

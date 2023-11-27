@@ -100,8 +100,8 @@ export default function Footer(props) {
         }}
         style={{ right: `${isObjectModalFullHeight && windowWidth >= 640 ? '342px' : ''}` }}
       >
-        <IconMapStroked view="secondary" />
-        <Text size="xs">Слой карты</Text>
+        <IconMapStroked size="m" view="ghost" />
+        <Text size="xs" className="home__footer--map-layer--text">Слой карты</Text>
       </Layout>
       {isMapLayerOpen && (
         <Rnd
@@ -130,8 +130,8 @@ export default function Footer(props) {
           <Layout className="home__footer--map-layer--header">
             <IconResize size="s" view="ghost" className='home__footer--map-layer--header--resize' />
             <Layout style={{ alignItems: "center", gap: '8px' }}>
-              <IconMapStroked view="secondary" />
-              <Text size="xs">Слой карты</Text>
+              <IconMapStroked size="s" view="ghost" />
+              <Text size="xs" className="home__footer--map-layer--header--text">Слой карты</Text>
             </Layout>
             <Layout>
               <Button
@@ -145,7 +145,7 @@ export default function Footer(props) {
             </Layout>
           </Layout>
           <Layout className="home__footer--map-layer--content">
-            <Text size="s">Объектов пока нет</Text>
+            <Text size="s" className="home__footer--map-layer--content--text">Объектов пока нет</Text>
           </Layout>
         </Rnd>
       )}
