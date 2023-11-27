@@ -90,7 +90,7 @@ Modal.propTypes = {
   sameType: PropTypes.element,
   title: PropTypes.string,
   setIsObjectModalFullHeight: PropTypes.func,
-  isCollapse: PropTypes.func,
+  isCollapse: PropTypes.bool,
   style: PropTypes.any,
   isOpen: PropTypes.bool
 }

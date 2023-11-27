@@ -42,7 +42,7 @@ const ContentMiddle = forwardRef((props, ref) => {
     <Layout className="home__middle">
 
       {/* Calculation and Data Popup menu */}
-      <Layout>
+      <Layout direction='row'>
         <Modal
           isOpen={leftSideActiveModal == 0}
           title="Расчеты"
@@ -69,13 +69,13 @@ const ContentMiddle = forwardRef((props, ref) => {
         />
         <Modal
           isOpen={leftSideActiveModal == 1}
-          style={{ minHeight: '245px' }}
+          style={{ minHeight: '245px', position: 'absolute', left: '12px' }}
           title="Данные"
           onClose={() => setLeftSideActiveModal(null)}
           defaultType={(
             <Panel
               style={{ overflowY: 'auto' }}
-              defaultSize={46}
+              defaultSize={48}
               minSizePixels={44}
               order={1}>
               <Layout direction='column' className="home__data-modal">
@@ -158,10 +158,10 @@ const ContentMiddle = forwardRef((props, ref) => {
                 isOpen={collapseIsOpen}
                 onClick={() => setcollapseIsOpen(!collapseIsOpen)}
                 iconPosition="right"
-                className='modal__collapse'
+                hoverEffect
               >
                 {RightSideActiveModal && (
-                  <Layout direction='column'>
+                  <Layout direction='column' style={{ gap: 6, paddingRight: 3 }}>
                     <List
                       items={switchedObject?.data}
                       getItemChecked={(item) => sameItemChecked === item}
@@ -174,7 +174,7 @@ const ContentMiddle = forwardRef((props, ref) => {
           )}
         />
       </Layout>
-    </Layout>
+    </Layout >
   )
 })
 

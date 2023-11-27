@@ -14,7 +14,7 @@
   opacity: 0;
   pointer-events: none;
   transform: translateY(20%);
-  transition: all 0.25s ease;
+  transition: all 0.3s ease-out;
 
   &__content {
     overflow: auto;
