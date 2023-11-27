@@ -73,6 +73,9 @@
   }
 
   &__calculations-modal {
+    gap: 8px;
+    padding-right: 3px;
+
     &--date {
       color: var(--typo-ghost, rgba(0, 32, 51, 0.3));
       text-align: right;
@@ -81,6 +84,16 @@
       font-weight: 400;
       line-height: 120%;
     }
+  }
+
+  &__data-modal {
+    gap: 6px;
+    padding-right: 3px;
+  }
+
+  &__object-modal {
+    gap: 6px;
+    padding-right: 3px;
   }
 
   &__context-menu {
@@ -197,6 +210,7 @@
   &__table {
     overflow: hidden;
     z-index: 0;
+    height: max-content;
 
     &--table-header {
       padding: 0 12px;
@@ -206,11 +220,20 @@
       justify-content: space-between;
       background-color: white;
       border-top: 2px solid #ccd9e0;
+
+      &--title {
+        color: var(--typo-primary, #002033);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 24px;
+      }
     }
 
     &--table-content {
       &--table {
         width: 100%;
+        align-content: flex-start;
       }
     }
   }
@@ -218,10 +241,24 @@
 
 // Context menu
 .view-context-menu {
-  width: 163px !important;
+  width: 167px !important;
 
   @include responsive(phone) {
     left: 12px;
+  }
+
+  // Context menu text
+  .ListItemGrid-Slot {
+    padding: 4px 12px;
+    color: var(--control-default-typo, #002033);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+  }
+
+  .ContextMenuLevel-Item {
+    padding: 0;
   }
 }
 
@@ -239,10 +276,43 @@
 // Table Header color
 .TableCell-Wrapper_isHeader {
   background-color: #ecf1f4;
+  color: var(--typo-primary, #002033);
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+  letter-spacing: 0.12px;
+  text-transform: uppercase;
+  position: sticky;
+}
+
+.TableCell-Wrapper {
+  align-items: center;
+  height: 32px;
+}
+
+.TableCell {
+  max-height: 32px;
 }
 
 // Pop up text
 .ListItemGrid-Slot_position_center {
   font-size: 12px;
   align-items: center;
+}
+
+// Pop up listitems
+.ListItem {
+  padding: 4px 8px;
+  color: var(--control-default-typo, #002033);
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+}
+
+.TableCell-Wrapper.TableCell-Wrapper_withoutPadding {
+  display: none;
 }

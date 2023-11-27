@@ -35,7 +35,7 @@ export default function Table(props) {
 
       {/* Table Header */}
       <Layout className="home__table--table-header">
-        <Text size="s" weight="semibold">Список районов</Text>
+        <Text size="s" weight="semibold" className="home__table--table-header--title">Список районов</Text>
         <Layout>
           <Button
             size="xs"
@@ -77,7 +77,8 @@ export default function Table(props) {
       {/* Table Content */}
       <Layout className="home__table--table-content" style={{ height: `${tableHeight}px` }}>
         <ConstaTable
-          stickyHeader={true}
+          borderBetweenRows
+          stickyHeader
           verticalAlign="top"
           size="m"
           headerVerticalAlign="center"
@@ -85,7 +86,6 @@ export default function Table(props) {
           columns={ListOfDistrictsColumns}
           rows={ListOfDistrictsRows}
           filters={ListOfDistrictsFilter}
-          borderBetweenRows
           className="home__table--table-content--table"
         />
       </Layout>

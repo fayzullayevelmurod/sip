@@ -5,6 +5,7 @@ import { Layout } from "@consta/uikit/Layout"
 import { List } from '@consta/uikit/ListCanary';
 import { Text } from '@consta/uikit/Text';
 import { Collapse } from '@consta/uikit/Collapse';
+import { Panel } from 'react-resizable-panels';
 
 import Modal from '@components/common/Modal/';
 import {
@@ -47,41 +48,62 @@ const ContentMiddle = forwardRef((props, ref) => {
             title="Расчеты"
             onClose={() => setLeftSideActiveModal(null)}
             defaultType={(
-              <Layout direction='column' className="home__calculations-modal">
-                <List
-                  items={calculationItems}
-                  getItemRightSide={(item) => (
-                    <Text className='home__calculations-modal--date'>{item.date}</Text>
-                  )}
-                  getItemChecked={(item) => calculationItemChecked === item}
-                  onItemClick={setCalculationItemChecked}
-                />
-              </Layout>
+              <Panel
+                style={{ overflowY: 'auto' }}
+                defaultSize={40}
+                minSizePixels={44}
+                order={1}>
+                <Layout direction='column' className="home__calculations-modal">
+                  <List
+                    items={calculationItems}
+                    getItemRightSide={(item) => (
+                      <Text className='home__calculations-modal--date'>{item.date}</Text>
+                    )}
+                    getItemChecked={(item) => calculationItemChecked === item}
+                    onItemClick={setCalculationItemChecked}
+                    className="home__calculations-modal--listitems"
+                  />
+                </Layout>
+              </Panel>
             )}
           />
         )}
         {leftSideActiveModal == 1 && (
           <Modal
-            style={{ minHeight: '300px' }}
+            style={{ minHeight: '245px' }}
             title="Данные"
             onClose={() => setLeftSideActiveModal(null)}
             defaultType={(
-              <Layout direction='column'>
-                <List
-                  items={dataItems}
-                  getItemChecked={(item) => {
-                    if (dataItemChecked === item) {
-                      setSwitchedData(dataItemChecked)
-                    }
+              <Panel
+                style={{ overflowY: 'auto' }}
+                defaultSize={46}
+                minSizePixels={44}
+                order={1}>
+                <Layout direction='column' className="home__data-modal">
+                  <List
+                    items={dataItems}
+                    getItemChecked={(item) => {
+                      if (dataItemChecked === item) {
+                        setSwitchedData(dataItemChecked)
+                      }
 
-                    return dataItemChecked === item
-                  }}
-                  onItemClick={setDataItemChecked}
-                />
-              </Layout>
+                      return dataItemChecked === item
+                    }}
+                    onItemClick={setDataItemChecked}
+                  />
+                </Layout>
+              </Panel>
             )}
             sameType={(
-              <Text size="xs" view="secondary">{switchedData.text}</Text>
+              <Panel
+                style={{ overflowY: 'auto' }}
+                collapsible={true}
+                defaultSize={30}
+                minSize={4}
+                order={2}
+              >
+                <Text size="xs" view="secondary">{switchedData.text}</Text>
+              </Panel>
             )}
           />
         )}
@@ -104,37 +126,51 @@ const ContentMiddle = forwardRef((props, ref) => {
               }
             }}
             defaultType={(
-              <Layout direction='column'>
-                <List
-                  items={objectMenuItems}
-                  getItemChecked={(item) => {
-                    if (objectItemChecked === item) {
-                      setSwitchedObject(objectItemChecked)
-                    }
-
-                    return objectItemChecked === item
-                  }}
-                  onItemClick={setObjectItemChecked}
-                />
-              </Layout>
-            )}
-            sameType={(
-              <Collapse
-                size="xs"
-                label="Однотипные"
-                isOpen={collapseIsOpen}
-                onClick={() => setcollapseIsOpen(!collapseIsOpen)}
-                iconPosition="right"
-                className='modal__collapse'
-              >
-                <Layout direction='column'>
+              <Panel
+                style={{ overflowY: 'auto' }}
+                defaultSize={40}
+                minSizePixels={44}
+                order={1}>
+                <Layout direction='column' className="home__object-modal">
                   <List
-                    items={switchedObject?.data}
-                    getItemChecked={(item) => sameItemChecked === item}
-                    onItemClick={setSameItemChecked}
+                    items={objectMenuItems}
+                    getItemChecked={(item) => {
+                      if (objectItemChecked === item) {
+                        setSwitchedObject(objectItemChecked)
+                      }
+
+                      return objectItemChecked === item
+                    }}
+                    onItemClick={setObjectItemChecked}
                   />
                 </Layout>
-              </Collapse>
+              </Panel>
+            )}
+            sameType={(
+              <Panel
+                style={{ overflowY: 'auto' }}
+                collapsible={true}
+                defaultSize={30}
+                minSize={4}
+                order={2}
+              >
+                <Collapse
+                  size="xs"
+                  label="Однотипные"
+                  isOpen={collapseIsOpen}
+                  onClick={() => setcollapseIsOpen(!collapseIsOpen)}
+                  iconPosition="right"
+                  className='modal__collapse'
+                >
+                  <Layout direction='column'>
+                    <List
+                      items={switchedObject?.data}
+                      getItemChecked={(item) => sameItemChecked === item}
+                      onItemClick={setSameItemChecked}
+                    />
+                  </Layout>
+                </Collapse>
+              </Panel>
             )}
           />
         ) : null}

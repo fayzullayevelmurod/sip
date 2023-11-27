@@ -89,7 +89,7 @@ export default function Home() {
     if (item.switch !== undefined) {
       nodeArray.push(
         <Switch
-          size="xs"
+          size="s"
           checked={item.switch}
           onChange={() => onChange(item)}
           key="Switch"

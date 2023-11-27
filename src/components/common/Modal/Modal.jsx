@@ -10,7 +10,7 @@ import { Text } from '@consta/uikit/Text';
 import { IconSlide } from '@consta/icons/IconSlide';
 import { IconClose } from '@consta/icons/IconClose';
 
-import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
+import { PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
 import './Modal.style.scss'
 
 export default function Modal({
@@ -33,12 +33,11 @@ export default function Modal({
   }, [])
 
   const calculateModalWidth = `calc(${windowWidth}px - 24px)`
-
   return (
     <Layout
       direction='column'
       className={`modal ${fullHeight ? 'fullHeight' : ''} ${isCollapse ? 'bg-white-modal ' : ''}`}
-      style={{ width: `${windowWidth <= 640 ? calculateModalWidth : ""}`, ...style }}
+      style={{ width: `${windowWidth <= 640 ? calculateModalWidth : ""} `, ...style }}
     >
       <Layout className="modal__header">
         <Text className='modal__header--title'>{title}</Text>
@@ -48,25 +47,11 @@ export default function Modal({
       </Layout>
       <Layout direction='column' className={`modal__content`}>
         <PanelGroup direction="vertical">
-          <Panel
-            style={{ overflowY: 'auto' }}
-            defaultSize={40}
-            minSizePixels={44}
-            order={1}>
-            {defaultType}
-          </Panel>
+          {defaultType}
           {sameType && (
             <>
               <PanelResizeHandle className="modal__resize-handle" />
-              <Panel
-                style={{ overflowY: 'auto' }}
-                collapsible={true}
-                defaultSize={30}
-                minSize={4}
-                order={2}
-              >
-                {sameType}
-              </Panel>
+              {sameType}
             </>
           )}
         </PanelGroup>
@@ -106,5 +91,5 @@ Modal.propTypes = {
   title: PropTypes.string,
   setIsObjectModalFullHeight: PropTypes.func,
   isCollapse: PropTypes.func,
-  style: PropTypes.any
+  style: PropTypes.any,
 }

@@ -22,6 +22,22 @@ export const calculationItems = [
     leftIcon: IconDinosaur,
     label: 'Расчет №2'
   },
+  {
+    id: 1,
+    label: 'Расчет региона №1',
+    leftIcon: IconDinosaur,
+    date: '20.10.23'
+  },
+  {
+    id: 2,
+    leftIcon: IconDinosaur,
+    label: 'Расчет №2'
+  },
+  {
+    id: 3,
+    leftIcon: IconDinosaur,
+    label: 'Расчет №2'
+  },
 ]
 
 export const dataItems = [

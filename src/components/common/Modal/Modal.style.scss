@@ -2,7 +2,7 @@
 
 .modal {
   width: 320px;
-  height: 200px;
+  height: 168px;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
@@ -34,10 +34,11 @@
     justify-content: space-between;
 
     &--title {
-      color: #002033;
+      color: var(--typo-primary, #002033);
+      font-family: Inter;
       font-size: 14px;
       font-style: normal;
-      font-weight: 600;
+      font-weight: 500;
       line-height: 24px;
     }
 
@@ -78,10 +79,15 @@
   &__resize-handle {
     width: 100%;
     margin: 13px 0;
-    height: 1px;
+    height: 3px;
     background-color: #ccd9e0;
+    transition: background-color 0.2s ease;
 
     &:active {
+      background-color: #697175;
+    }
+
+    &:hover {
       background-color: #697175;
     }
   }
@@ -94,3 +100,23 @@
 .bg-white-modal {
   background-color: white;
 }
+
+.modal-node-enter {
+  transform: translateY(100%);
+  transition: transform 300ms;
+}
+
+.modal-node-enter-active {
+  transform: translateY(0);
+}
+
+.modal-node-exit {
+  transform: translateY(0);
+}
+
+.modal-node-exit-active {
+  transform: translateY(100%);
+  transition: transform 300ms;
+}
+
+// qolda yozw
