@@ -82,16 +82,17 @@
   &__resize-handle {
     width: 100%;
     margin: 13px 0;
-    height: 3px;
-    background-color: #ccd9e0;
-    transition: background-color 0.2s ease;
+    border: none !important;
+    height: 3px !important;
+    background-color: #ccd9e0 !important;
+    transition: background-color 0.2s;
 
     &:active {
-      background-color: #697175;
+      background-color: #7e8183 !important;
     }
 
     &:hover {
-      background-color: #697175;
+      background-color: #7e8183 !important;
     }
   }
 }
@@ -114,4 +115,19 @@
   opacity: 0;
   pointer-events: none;
   transform: translateY(20%);
+}
+
+// reflex-thin modal__resize-handle  reflex-splitter
+
+.reflex-container.horizontal > .reflex-splitter.reflex-thin {
+  height: 3px !important;
+  margin: 13px 0 !important;
+
+  &:active {
+    background-color: #7e8183 !important;
+  }
+
+  &:hover {
+    background-color: #7e8183 !important;
+  }
 }

@@ -74,6 +74,8 @@ const ContentMiddle = forwardRef((props, ref) => {
           defaultType={(
             <ReflexElement
               className="left-pane"
+              minSize={44}
+              style={{ height: '150px !important' }}
             >
               <Layout direction='column' className="home__data-modal">
                 <List
@@ -103,7 +105,7 @@ const ContentMiddle = forwardRef((props, ref) => {
       <Layout ref={ref} className="home__context-menu"></Layout>
 
       {/* Objects Popup menu */}
-      <Layout>
+      <Layout className="home__object-modal-wrapper">
         <Modal
           isOpen={RightSideActiveModal || leftSideActiveModal == 2}
           style={{ minHeight: '300px' }}

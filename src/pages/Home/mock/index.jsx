@@ -175,11 +175,6 @@ export const objectMenuItems = [
         leftIcon: IconDinosaur,
         label: 'Фабрика 4 | Завод 4'
       },
-      {
-        id: 6,
-        leftIcon: IconDinosaur,
-        label: 'Фабрика 5 | Завод 5'
-      },
     ]
   },
   {

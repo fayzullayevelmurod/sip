@@ -91,6 +91,13 @@
     padding-right: 3px;
   }
 
+  &__object-modal-wrapper {
+    @include responsive(phone) {
+      position: absolute;
+      left: 12px;
+    }
+  }
+
   &__object-modal {
     gap: 6px;
     padding-right: 3px;
