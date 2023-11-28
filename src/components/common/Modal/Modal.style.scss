@@ -1,6 +1,7 @@
 @import "../../../styles/mixin";
 
 .modal {
+  user-select: none;
   width: 320px;
   height: 168px;
   flex-direction: column;
@@ -20,8 +21,31 @@
     overflow: auto;
     height: 100%;
     width: 100%;
-    padding: 12px;
+    padding: 12px 0 0 12px;
     gap: 12px;
+  }
+
+  &__object-choice {
+    user-select: none;
+    display: flex !important;
+    height: 24px !important;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background: var(--control-ghost-bg, rgba(0, 66, 105, 0.07));
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      border: 1px solid #0078d2;
+    }
+
+    .active-choice {
+      border: 1px solid #0078d2;
+      background-color: white;
+    }
   }
 
   &__top {
@@ -80,8 +104,8 @@
   }
 
   &__resize-handle {
-    width: 100%;
-    margin: 13px 0;
+    width: 96.3% !important;
+    margin: 0 0 7px 0;
     border: none !important;
     height: 3px !important;
     background-color: #ccd9e0 !important;
@@ -121,7 +145,7 @@
 
 .reflex-container.horizontal > .reflex-splitter.reflex-thin {
   height: 3px !important;
-  margin: 13px 0 !important;
+  margin: 0 0 13px 0 !important;
 
   &:active {
     background-color: #7e8183 !important;
@@ -129,5 +153,42 @@
 
   &:hover {
     background-color: #7e8183 !important;
+  }
+}
+
+// Swiper buttons
+
+.swiper-wrapper-modal {
+  position: relative;
+  margin-right: 12px;
+}
+
+.swiper-button-prev {
+  user-select: none !important;
+  width: 30px !important;
+  height: 24px !important;
+  position: absolute !important;
+  left: -6px !important;
+  top: 22px !important;
+  background: linear-gradient(to right, white 60%, transparent 100%);
+  padding-right: 8px;
+
+  &:after {
+    display: none !important;
+  }
+}
+
+.swiper-button-next {
+  user-select: none !important;
+  width: 30px !important;
+  height: 24px !important;
+  position: absolute !important;
+  right: -6px !important;
+  top: 22px !important;
+  background: linear-gradient(to left, white 60%, transparent 100%);
+  padding-left: 8px;
+
+  &:after {
+    display: none !important;
   }
 }

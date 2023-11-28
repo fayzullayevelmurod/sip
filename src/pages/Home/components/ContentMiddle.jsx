@@ -5,14 +5,16 @@ import { Layout } from "@consta/uikit/Layout"
 import { List } from '@consta/uikit/ListCanary';
 import { Text } from '@consta/uikit/Text';
 import { Collapse } from '@consta/uikit/Collapse';
-
 import Modal from '@components/common/Modal/';
+import { ReflexElement } from 'react-reflex';
+
 import {
   dataItems,
   sameMenuItems,
-  objectMenuItems
+  objectMenuItems,
+  choiceGroupData
 } from '../mock';
-import { ReflexElement } from 'react-reflex';
+
 import 'react-reflex/styles.css'
 
 const ContentMiddle = forwardRef((props, ref) => {
@@ -95,6 +97,8 @@ const ContentMiddle = forwardRef((props, ref) => {
           sameType={(
             <ReflexElement
               className="right-pane"
+              minSize={33}
+              size={80}
             >
               <Text size="xs" view="secondary">{switchedData.text}</Text>
             </ReflexElement>
@@ -108,10 +112,12 @@ const ContentMiddle = forwardRef((props, ref) => {
       <Layout className="home__object-modal-wrapper">
         <Modal
           isOpen={RightSideActiveModal || leftSideActiveModal == 2}
-          style={{ minHeight: '300px' }}
+          style={{ minHeight: '400px', boxShadow: '0px 8px 24px -4px rgba(24, 39, 75, 0.08), 0px 6px 12px -6px rgba(24, 39, 75, 0.05)' }}
           setIsObjectModalFullHeight={setIsObjectModalFullHeight}
           title="Обьекты"
           isCollapse={true}
+          isChoiceGroup={true}
+          choiceGroupData={choiceGroupData}
           onClose={() => {
             setRightSideActiveModal(false)
             if (windowWidth <= 640) {
@@ -121,7 +127,7 @@ const ContentMiddle = forwardRef((props, ref) => {
           defaultType={(
             <ReflexElement
               className="left-pane"
-              minSize={44}
+              minSize={56}
             >
               <Layout direction='column' className="home__object-modal">
                 <List
@@ -141,6 +147,7 @@ const ContentMiddle = forwardRef((props, ref) => {
           sameType={(
             <ReflexElement
               className="right-pane"
+              minSize={33}
             >
               <Collapse
                 size="xs"
@@ -151,7 +158,7 @@ const ContentMiddle = forwardRef((props, ref) => {
                 hoverEffect
               >
                 {RightSideActiveModal && (
-                  <Layout direction='column' style={{ gap: 6, paddingRight: 3 }}>
+                  <Layout direction='column' style={{ width: '98%', gap: 6, paddingRight: 3 }}>
                     <List
                       items={switchedObject?.data}
                       getItemChecked={(item) => sameItemChecked === item}

@@ -14,12 +14,23 @@ import { ReflexContainer, ReflexSplitter } from 'react-reflex';
 import 'react-reflex/styles.css'
 import './Modal.style.scss'
 
+
+import { Navigation } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/scss';
+import 'swiper/scss/navigation';
+
+import { IconArrowLeft } from '@consta/icons/IconArrowLeft'
+import { IconArrowRight } from '@consta/icons/IconArrowRight'
+
 export default function Modal({
-  title, defaultType, sameType, isCollapse, isOpen, onClose, setIsObjectModalFullHeight, style
+  title, defaultType, sameType, isCollapse, isOpen, onClose, isChoiceGroup, choiceGroupData, setIsObjectModalFullHeight, style
 }) {
   const [isShown, setIsShown] = useState(false);
   const [fullHeight, setFullHeight] = useState(false)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+  const [isLastSlide, setIsLastSlide] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -47,6 +58,41 @@ export default function Modal({
         </Text>
       </Layout>
       <Layout direction='column' className={`modal__content`}>
+        {isChoiceGroup && (
+          <div className="swiper-wrapper-modal">
+            <Swiper
+              navigation={{
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+              }}
+              onSlideChange={(swiper) => {
+                setCurrentSlideIndex(swiper.activeIndex);
+                setIsLastSlide(swiper.isEnd);
+              }}
+              modules={[Navigation]}
+              spaceBetween={4}
+              slidesPerView={6}
+              style={{ marginBottom: '7px' }}
+            >
+              {choiceGroupData.map((item, index) => (
+                <SwiperSlide key={index} className="modal__object-choice">
+                  {item.icon}
+                  {item.badge}
+                </SwiperSlide>
+              ))}
+            </Swiper>
+            <div
+              className="swiper-button-prev"
+              style={{ display: `${currentSlideIndex === 0 ? 'none' : ''}` }}>
+              <IconArrowLeft view="ghost" />
+            </div>
+            <div
+              className="swiper-button-next"
+              style={{ display: `${isLastSlide ? 'none' : ''}` }}>
+              <IconArrowRight view="ghost" />
+            </div>
+          </div>
+        )}
         <ReflexContainer orientation="horizontal">
           {defaultType}
           {sameType && <ReflexSplitter className="modal__resize-handle" />}
@@ -89,5 +135,7 @@ Modal.propTypes = {
   setIsObjectModalFullHeight: PropTypes.func,
   isCollapse: PropTypes.bool,
   style: PropTypes.any,
-  isOpen: PropTypes.bool
+  isOpen: PropTypes.bool,
+  isChoiceGroup: PropTypes.bool,
+  choiceGroupData: PropTypes.array
 }

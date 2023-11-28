@@ -73,6 +73,7 @@
   }
 
   &__calculations-modal {
+    width: 97%;
     gap: 8px;
     padding-right: 3px;
 
@@ -87,6 +88,7 @@
   }
 
   &__data-modal {
+    width: 97%;
     gap: 6px;
     padding-right: 3px;
   }
@@ -99,6 +101,7 @@
   }
 
   &__object-modal {
+    width: 98%;
     gap: 6px;
     padding-right: 3px;
   }
@@ -183,7 +186,7 @@
 
       &:hover {
         box-shadow: 0px 8px 24px -4px rgba(24, 39, 75, 0.1),
-          0px 6px 12px -6px rgba(24, 39, 75, 0.2);
+          0px 6px 12px -6px rgba(24, 39, 75, 0.3);
       }
 
       &--popup {
@@ -351,7 +354,8 @@
 }
 
 .Collapse-Label_form_brick {
-  padding: 6px 3px;
+  padding: 6px 2px;
+  margin-right: 9px;
 }
 
 // Collapse animation

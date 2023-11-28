@@ -1,9 +1,14 @@
-import { IconDinosaur } from '@consta/icons/IconDinosaur'
 import { Button } from '@consta/uikit/Button';
 import { Layout } from '@consta/uikit/Layout';
+import { Badge } from '@consta/uikit/Badge';
 
 import { IconEdit } from '@consta/icons/IconEdit'
 import { IconTrash } from '@consta/icons/IconTrash'
+import { IconDiamond } from '@consta/icons/IconDiamond';
+import { IconWorldFilled } from '@consta/icons/IconWorldFilled'
+import { IconDrillingPartRightFilled } from '@consta/icons/IconDrillingPartRightFilled'
+import { IconDrop } from '@consta/icons/IconDrop'
+import { IconDinosaur } from '@consta/icons/IconDinosaur'
 
 export const calculationItems = [
   {
@@ -392,4 +397,55 @@ export const ListOfDistrictsFilter = [
     field: 'location',
     filterer: (value) => (value),
   }
+]
+
+export const choiceGroupData = [
+  {
+    icon: <IconDiamond size="s" />,
+    badge: <Badge status="system" size="xs" label='8' />
+  },
+  {
+    icon: <IconWorldFilled size="s" />,
+    badge: <Badge status="system" size="xs" label='4' />
+  },
+  {
+    icon: <IconDrillingPartRightFilled size="s" />,
+    badge: <Badge status="system" size="xs" label='2' />
+  },
+  {
+    icon: <IconDrop size="s" />,
+    badge: <Badge status="system" size="xs" label='5' />
+  },
+  {
+    icon: <IconDinosaur size="s" />,
+    badge: <Badge status="system" size="xs" label='3' />
+  },
+  {
+    icon: <IconDiamond size="s" />,
+    badge: <Badge status="system" size="xs" label='7' />
+  },
+  {
+    icon: <IconWorldFilled size="s" />,
+    badge: <Badge status="system" size="xs" label='6' />
+  },
+  {
+    icon: <IconDrillingPartRightFilled size="s" />,
+    badge: <Badge status="system" size="xs" label='2' />
+  },
+  {
+    icon: <IconDrop size="s" />,
+    badge: <Badge status="system" size="xs" label='5' />
+  },
+  {
+    icon: <IconDinosaur size="s" />,
+    badge: <Badge status="system" size="xs" label='3' />
+  },
+  {
+    icon: <IconDiamond size="s" />,
+    badge: <Badge status="system" size="xs" label='7' />
+  },
+  {
+    icon: <IconWorldFilled size="s" />,
+    badge: <Badge status="system" size="xs" label='6' />
+  },
 ]
