@@ -1,7 +1,6 @@
 @import "../../../styles/mixin";
 
 .modal {
-  user-select: none;
   width: 320px;
   height: 168px;
   flex-direction: column;
@@ -28,6 +27,7 @@
   &__object-choice {
     user-select: none;
     display: flex !important;
+    width: 50px !important;
     height: 24px !important;
     justify-content: center;
     align-items: center;
@@ -40,11 +40,6 @@
 
     &:hover {
       border: 1px solid #0078d2;
-    }
-
-    .active-choice {
-      border: 1px solid #0078d2;
-      background-color: white;
     }
   }
 
@@ -141,8 +136,6 @@
   transform: translateY(20%);
 }
 
-// reflex-thin modal__resize-handle  reflex-splitter
-
 .reflex-container.horizontal > .reflex-splitter.reflex-thin {
   height: 3px !important;
   margin: 0 0 13px 0 !important;
@@ -157,7 +150,6 @@
 }
 
 // Swiper buttons
-
 .swiper-wrapper-modal {
   position: relative;
   margin-right: 12px;
@@ -191,4 +183,9 @@
   &:after {
     display: none !important;
   }
+}
+
+.active-choice {
+  border: 1px solid #0078d2;
+  background-color: white;
 }

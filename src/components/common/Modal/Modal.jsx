@@ -5,32 +5,33 @@ import { useEffect, useState } from 'react';
 // Consta/uikit components
 import { Layout } from '@consta/uikit/Layout';
 import { Text } from '@consta/uikit/Text';
-
-// Icons
-import { IconSlide } from '@consta/icons/IconSlide';
-import { IconClose } from '@consta/icons/IconClose';
-
-import { ReflexContainer, ReflexSplitter } from 'react-reflex';
-import 'react-reflex/styles.css'
-import './Modal.style.scss'
-
+import { Badge } from '@consta/uikit/Badge';
 
 import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { ReflexContainer, ReflexSplitter } from 'react-reflex';
+
+// Icons
+import { IconArrowLeft } from '@consta/icons/IconArrowLeft'
+import { IconArrowRight } from '@consta/icons/IconArrowRight'
+import { IconSlide } from '@consta/icons/IconSlide';
+import { IconClose } from '@consta/icons/IconClose';
+
+import 'react-reflex/styles.css'
+import './Modal.style.scss'
+
 import 'swiper/scss';
 import 'swiper/scss/navigation';
 
-import { IconArrowLeft } from '@consta/icons/IconArrowLeft'
-import { IconArrowRight } from '@consta/icons/IconArrowRight'
-
 export default function Modal({
-  title, defaultType, sameType, isCollapse, isOpen, onClose, isChoiceGroup, choiceGroupData, setIsObjectModalFullHeight, style
+  title, defaultType, sameType, isCollapse, isOpen, getChoice, onClose, isChoiceGroup, choiceGroupData, setIsObjectModalFullHeight, style
 }) {
   const [isShown, setIsShown] = useState(false);
   const [fullHeight, setFullHeight] = useState(false)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [isLastSlide, setIsLastSlide] = useState(false);
+  const [activeChoice, setActiveChoice] = useState(0);
 
   useEffect(() => {
     const handleResize = () => {
@@ -75,9 +76,20 @@ export default function Modal({
               style={{ marginBottom: '7px' }}
             >
               {choiceGroupData.map((item, index) => (
-                <SwiperSlide key={index} className="modal__object-choice">
-                  {item.icon}
-                  {item.badge}
+                <SwiperSlide
+                  key={index}
+                  className={`modal__object-choice ${index === activeChoice ? 'active-choice' : ''}`}
+                  onClick={() => {
+                    getChoice(item)
+                    setActiveChoice(index)
+                  }}>
+
+                  {index === activeChoice ? (
+                    <>{item.activeIcon}</>
+                  ) : (
+                    <>{item.icon}</>
+                  )}
+                  <Badge status="system" size="xs" label='8' />
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -137,5 +149,6 @@ Modal.propTypes = {
   style: PropTypes.any,
   isOpen: PropTypes.bool,
   isChoiceGroup: PropTypes.bool,
-  choiceGroupData: PropTypes.array
+  choiceGroupData: PropTypes.array,
+  getChoice: PropTypes.func,
 }

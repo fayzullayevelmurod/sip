@@ -37,9 +37,13 @@ const ContentMiddle = forwardRef((props, ref) => {
   const [switchedData, setSwitchedData] = useState(dataItems[0])
 
   // Right side popup data
-  const [objectItemChecked, setObjectItemChecked] = useState(objectMenuItems[0])
+  const [objectItemChecked, setObjectItemChecked] = useState(objectMenuItems[0].data[0])
   const [sameItemChecked, setSameItemChecked] = useState(sameMenuItems[0])
   const [switchedObject, setSwitchedObject] = useState(null)
+
+  const [choiceDataId, setChoiceDataId] = useState(objectMenuItems[0].id)
+
+  const objectDataChoicedById = objectMenuItems.filter(item => item.id === choiceDataId)[0]?.data
 
   return (
     <Layout className="home__middle">
@@ -112,11 +116,11 @@ const ContentMiddle = forwardRef((props, ref) => {
       <Layout className="home__object-modal-wrapper">
         <Modal
           isOpen={RightSideActiveModal || leftSideActiveModal == 2}
-          style={{ minHeight: '400px', boxShadow: '0px 8px 24px -4px rgba(24, 39, 75, 0.08), 0px 6px 12px -6px rgba(24, 39, 75, 0.05)' }}
           setIsObjectModalFullHeight={setIsObjectModalFullHeight}
           title="Обьекты"
           isCollapse={true}
           isChoiceGroup={true}
+          getChoice={(data) => setChoiceDataId(data.dataID)}
           choiceGroupData={choiceGroupData}
           onClose={() => {
             setRightSideActiveModal(false)
@@ -130,17 +134,19 @@ const ContentMiddle = forwardRef((props, ref) => {
               minSize={56}
             >
               <Layout direction='column' className="home__object-modal">
-                <List
-                  items={objectMenuItems}
-                  getItemChecked={(item) => {
-                    if (objectItemChecked === item) {
-                      setSwitchedObject(objectItemChecked)
-                    }
+                {objectDataChoicedById ? (
+                  <List
+                    items={objectDataChoicedById}
+                    getItemChecked={(item) => {
+                      if (objectItemChecked === item) {
+                        setSwitchedObject(objectItemChecked)
+                      }
 
-                    return objectItemChecked === item
-                  }}
-                  onItemClick={setObjectItemChecked}
-                />
+                      return objectItemChecked === item
+                    }}
+                    onItemClick={setObjectItemChecked}
+                  />
+                ) : <p>No Data</p>}
               </Layout>
             </ReflexElement>
           )}
@@ -169,6 +175,10 @@ const ContentMiddle = forwardRef((props, ref) => {
               </Collapse>
             </ReflexElement>
           )}
+          style={{
+            minHeight: '400px',
+            boxShadow: '0px 8px 24px -4px rgba(24, 39, 75, 0.08), 0px 6px 12px -6px rgba(24, 39, 75, 0.05)'
+          }}
         />
       </Layout>
     </Layout >

@@ -1,6 +1,5 @@
 import { Button } from '@consta/uikit/Button';
 import { Layout } from '@consta/uikit/Layout';
-import { Badge } from '@consta/uikit/Badge';
 
 import { IconEdit } from '@consta/icons/IconEdit'
 import { IconTrash } from '@consta/icons/IconTrash'
@@ -86,209 +85,486 @@ export const sameMenuItems = [
 export const objectMenuItems = [
   {
     id: 1,
-    label: 'Фабрика 1',
-    leftIcon: IconDinosaur,
     data: [
       {
         id: 1,
-        label: 'Завод 1',
+        label: 'Фабрика 1',
         leftIcon: IconDinosaur,
+        data: [
+          {
+            id: 1,
+            label: 'Завод 1',
+            leftIcon: IconDinosaur,
+          },
+          {
+            id: 2,
+            leftIcon: IconDinosaur,
+            label: 'Завод 2'
+          },
+          {
+            id: 3,
+            leftIcon: IconDinosaur,
+            label: 'Завод 3'
+          },
+        ]
       },
       {
         id: 2,
         leftIcon: IconDinosaur,
-        label: 'Завод 2'
+        label: 'Фабрика 2',
+        data: [
+          {
+            id: 1,
+            label: 'Фабрика 2 | Завод 1',
+            leftIcon: IconDinosaur,
+          },
+          {
+            id: 2,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 2 | Завод 2'
+          },
+          {
+            id: 3,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 2 | Завод 3'
+          },
+        ]
       },
       {
         id: 3,
         leftIcon: IconDinosaur,
-        label: 'Завод 3'
+        label: 'Фабрика 3',
+        data: [
+          {
+            id: 1,
+            label: 'Фабрика 3 | Завод 1',
+            leftIcon: IconDinosaur,
+          },
+          {
+            id: 2,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 3 | Завод 2'
+          },
+          {
+            id: 3,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 3 | Завод 3'
+          },
+          {
+            id: 4,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 3 | Завод 4'
+          },
+        ]
+      },
+      {
+        id: 4,
+        leftIcon: IconDinosaur,
+        label: 'Фабрика 4',
+        data: [
+          {
+            id: 1,
+            label: 'Фабрика 4 | Завод 1',
+            leftIcon: IconDinosaur,
+          },
+          {
+            id: 2,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 4 | Завод 2'
+          },
+          {
+            id: 3,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 4 | Завод 3'
+          },
+          {
+            id: 5,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 4 | Завод 4'
+          },
+        ]
+      },
+      {
+        id: 7,
+        leftIcon: IconDinosaur,
+        label: 'Фабрика 7',
+        data: [
+          {
+            id: 1,
+            label: 'Фабрика 7 | Завод 1',
+            leftIcon: IconDinosaur,
+          },
+          {
+            id: 2,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 5 | Завод 2'
+          },
+          {
+            id: 3,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 5 | Завод 3'
+          },
+        ]
+      },
+      {
+        id: 6,
+        leftIcon: IconDinosaur,
+        label: 'Фабрика 6',
+        data: [
+          {
+            id: 1,
+            label: 'Фабрика 5 | Завод 1',
+            leftIcon: IconDinosaur,
+          },
+          {
+            id: 2,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 5 | Завод 2'
+          },
+          {
+            id: 3,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 5 | Завод 3'
+          },
+        ]
+      },
+      {
+        id: 5,
+        leftIcon: IconDinosaur,
+        label: 'Фабрика 5',
+        data: [
+          {
+            id: 1,
+            label: 'Фабрика 5 | Завод 1',
+            leftIcon: IconDinosaur,
+          },
+          {
+            id: 2,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 5 | Завод 2'
+          },
+          {
+            id: 3,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 5 | Завод 3'
+          },
+        ]
+      },
+      {
+        id: 8,
+        leftIcon: IconDinosaur,
+        label: 'Фабрика 8',
+        data: [
+          {
+            id: 1,
+            label: 'Фабрика 8 | Завод 1',
+            leftIcon: IconDinosaur,
+          },
+          {
+            id: 3,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 5 | Завод 3'
+          },
+        ]
+      },
+      {
+        id: 9,
+        leftIcon: IconDinosaur,
+        label: 'Фабрика 9',
+        data: [
+          {
+            id: 1,
+            label: 'Фабрика 9 | Завод 1',
+            leftIcon: IconDinosaur,
+          },
+          {
+            id: 2,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 9 | Завод 2'
+          },
+          {
+            id: 3,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 9 | Завод 3'
+          },
+          {
+            id: 3,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 9 | Завод 3'
+          },
+        ]
       },
     ]
   },
   {
     id: 2,
-    leftIcon: IconDinosaur,
-    label: 'Фабрика 2',
     data: [
       {
         id: 1,
-        label: 'Фабрика 2 | Завод 1',
+        label: 'Компания 1',
         leftIcon: IconDinosaur,
+        data: [
+          {
+            id: 1,
+            label: 'Lorem 1',
+            leftIcon: IconDinosaur,
+          },
+          {
+            id: 2,
+            leftIcon: IconDinosaur,
+            label: 'Lorem 2'
+          },
+          {
+            id: 3,
+            leftIcon: IconDinosaur,
+            label: 'Lorem 3'
+          },
+        ]
       },
       {
         id: 2,
         leftIcon: IconDinosaur,
-        label: 'Фабрика 2 | Завод 2'
+        label: 'Компания 2',
+        data: [
+          {
+            id: 1,
+            label: 'Фабрика 2 | Завод 1',
+            leftIcon: IconDinosaur,
+          },
+          {
+            id: 2,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 2 | Завод 2'
+          },
+          {
+            id: 3,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 2 | Завод 3'
+          },
+        ]
       },
       {
         id: 3,
         leftIcon: IconDinosaur,
-        label: 'Фабрика 2 | Завод 3'
-      },
-    ]
-  },
-  {
-    id: 3,
-    leftIcon: IconDinosaur,
-    label: 'Фабрика 3',
-    data: [
-      {
-        id: 1,
-        label: 'Фабрика 3 | Завод 1',
-        leftIcon: IconDinosaur,
-      },
-      {
-        id: 2,
-        leftIcon: IconDinosaur,
-        label: 'Фабрика 3 | Завод 2'
-      },
-      {
-        id: 3,
-        leftIcon: IconDinosaur,
-        label: 'Фабрика 3 | Завод 3'
+        label: 'Компания 3',
+        data: [
+          {
+            id: 1,
+            label: 'Фабрика 3 | Завод 1',
+            leftIcon: IconDinosaur,
+          },
+          {
+            id: 2,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 3 | Завод 2'
+          },
+          {
+            id: 3,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 3 | Завод 3'
+          },
+          {
+            id: 4,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 3 | Завод 4'
+          },
+        ]
       },
       {
         id: 4,
         leftIcon: IconDinosaur,
-        label: 'Фабрика 3 | Завод 4'
+        label: 'Компания 4',
+        data: [
+          {
+            id: 1,
+            label: 'Фабрика 4 | Завод 1',
+            leftIcon: IconDinosaur,
+          },
+          {
+            id: 2,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 4 | Завод 2'
+          },
+          {
+            id: 3,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 4 | Завод 3'
+          },
+          {
+            id: 5,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 4 | Завод 4'
+          },
+        ]
       },
+      {
+        id: 7,
+        leftIcon: IconDinosaur,
+        label: 'Фабрика 7',
+        data: [
+          {
+            id: 1,
+            label: 'Фабрика 7 | Завод 1',
+            leftIcon: IconDinosaur,
+          },
+          {
+            id: 2,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 5 | Завод 2'
+          },
+          {
+            id: 3,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 5 | Завод 3'
+          },
+        ]
+      },
+      {
+        id: 6,
+        leftIcon: IconDinosaur,
+        label: 'Фабрика 6',
+        data: [
+          {
+            id: 1,
+            label: 'Фабрика 5 | Завод 1',
+            leftIcon: IconDinosaur,
+          },
+          {
+            id: 2,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 5 | Завод 2'
+          },
+          {
+            id: 3,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 5 | Завод 3'
+          },
+        ]
+      }
     ]
   },
   {
-    id: 4,
-    leftIcon: IconDinosaur,
-    label: 'Фабрика 4',
+    id: 3,
     data: [
       {
         id: 1,
-        label: 'Фабрика 4 | Завод 1',
+        label: 'Corporation 1',
         leftIcon: IconDinosaur,
+        data: [
+          {
+            id: 1,
+            label: 'Завод 1',
+            leftIcon: IconDinosaur,
+          },
+          {
+            id: 2,
+            leftIcon: IconDinosaur,
+            label: 'Завод 2'
+          },
+          {
+            id: 3,
+            leftIcon: IconDinosaur,
+            label: 'Завод 3'
+          },
+        ]
       },
       {
         id: 2,
         leftIcon: IconDinosaur,
-        label: 'Фабрика 4 | Завод 2'
+        label: 'Corporation 2',
+        data: [
+          {
+            id: 1,
+            label: 'Фабрика 2 | Завод 1',
+            leftIcon: IconDinosaur,
+          },
+          {
+            id: 2,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 2 | Завод 2'
+          },
+          {
+            id: 3,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 2 | Завод 3'
+          },
+        ]
       },
       {
         id: 3,
         leftIcon: IconDinosaur,
-        label: 'Фабрика 4 | Завод 3'
+        label: 'Corporation 3',
+        data: [
+          {
+            id: 1,
+            label: 'Фабрика 3 | Завод 1',
+            leftIcon: IconDinosaur,
+          },
+          {
+            id: 2,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 3 | Завод 2'
+          },
+          {
+            id: 3,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 3 | Завод 3'
+          },
+          {
+            id: 4,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 3 | Завод 4'
+          },
+        ]
       },
       {
-        id: 5,
+        id: 4,
         leftIcon: IconDinosaur,
-        label: 'Фабрика 4 | Завод 4'
-      },
-    ]
-  },
-  {
-    id: 7,
-    leftIcon: IconDinosaur,
-    label: 'Фабрика 7',
-    data: [
-      {
-        id: 1,
-        label: 'Фабрика 7 | Завод 1',
-        leftIcon: IconDinosaur,
-      },
-      {
-        id: 2,
-        leftIcon: IconDinosaur,
-        label: 'Фабрика 5 | Завод 2'
-      },
-      {
-        id: 3,
-        leftIcon: IconDinosaur,
-        label: 'Фабрика 5 | Завод 3'
-      },
-    ]
-  },
-  {
-    id: 6,
-    leftIcon: IconDinosaur,
-    label: 'Фабрика 6',
-    data: [
-      {
-        id: 1,
-        label: 'Фабрика 5 | Завод 1',
-        leftIcon: IconDinosaur,
+        label: 'Фабрика 4',
+        data: [
+          {
+            id: 1,
+            label: 'Фабрика 4 | Завод 1',
+            leftIcon: IconDinosaur,
+          },
+          {
+            id: 2,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 4 | Завод 2'
+          },
+          {
+            id: 3,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 4 | Завод 3'
+          },
+          {
+            id: 5,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 4 | Завод 4'
+          },
+        ]
       },
       {
-        id: 2,
+        id: 7,
         leftIcon: IconDinosaur,
-        label: 'Фабрика 5 | Завод 2'
-      },
-      {
-        id: 3,
-        leftIcon: IconDinosaur,
-        label: 'Фабрика 5 | Завод 3'
-      },
-    ]
-  },
-  {
-    id: 5,
-    leftIcon: IconDinosaur,
-    label: 'Фабрика 5',
-    data: [
-      {
-        id: 1,
-        label: 'Фабрика 5 | Завод 1',
-        leftIcon: IconDinosaur,
-      },
-      {
-        id: 2,
-        leftIcon: IconDinosaur,
-        label: 'Фабрика 5 | Завод 2'
-      },
-      {
-        id: 3,
-        leftIcon: IconDinosaur,
-        label: 'Фабрика 5 | Завод 3'
-      },
-    ]
-  },
-  {
-    id: 8,
-    leftIcon: IconDinosaur,
-    label: 'Фабрика 8',
-    data: [
-      {
-        id: 1,
-        label: 'Фабрика 8 | Завод 1',
-        leftIcon: IconDinosaur,
-      },
-      {
-        id: 3,
-        leftIcon: IconDinosaur,
-        label: 'Фабрика 5 | Завод 3'
-      },
-    ]
-  },
-  {
-    id: 9,
-    leftIcon: IconDinosaur,
-    label: 'Фабрика 9',
-    data: [
-      {
-        id: 1,
-        label: 'Фабрика 9 | Завод 1',
-        leftIcon: IconDinosaur,
-      },
-      {
-        id: 2,
-        leftIcon: IconDinosaur,
-        label: 'Фабрика 9 | Завод 2'
-      },
-      {
-        id: 3,
-        leftIcon: IconDinosaur,
-        label: 'Фабрика 9 | Завод 3'
-      },
-      {
-        id: 3,
-        leftIcon: IconDinosaur,
-        label: 'Фабрика 9 | Завод 3'
+        label: 'Фабрика 7',
+        data: [
+          {
+            id: 1,
+            label: 'Фабрика 7 | Завод 1',
+            leftIcon: IconDinosaur,
+          },
+          {
+            id: 2,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 5 | Завод 2'
+          },
+          {
+            id: 3,
+            leftIcon: IconDinosaur,
+            label: 'Фабрика 5 | Завод 3'
+          },
+        ]
       },
     ]
   },
@@ -401,51 +677,63 @@ export const ListOfDistrictsFilter = [
 
 export const choiceGroupData = [
   {
+    dataID: 1,
     icon: <IconDiamond size="s" />,
-    badge: <Badge status="system" size="xs" label='8' />
+    activeIcon: <IconDiamond size="s" view="link" />,
   },
   {
+    dataID: 2,
     icon: <IconWorldFilled size="s" />,
-    badge: <Badge status="system" size="xs" label='4' />
+    activeIcon: <IconWorldFilled size="s" view="link" />,
   },
   {
+    dataID: 3,
     icon: <IconDrillingPartRightFilled size="s" />,
-    badge: <Badge status="system" size="xs" label='2' />
+    activeIcon: <IconDrillingPartRightFilled size="s" view="link" />,
   },
   {
+    dataID: 4,
     icon: <IconDrop size="s" />,
-    badge: <Badge status="system" size="xs" label='5' />
+    activeIcon: <IconDrop size="s" view="link" />,
   },
   {
+    dataID: 5,
     icon: <IconDinosaur size="s" />,
-    badge: <Badge status="system" size="xs" label='3' />
+    activeIcon: <IconDinosaur size="s" view="link" />,
   },
   {
+    dataID: 6,
     icon: <IconDiamond size="s" />,
-    badge: <Badge status="system" size="xs" label='7' />
+    activeIcon: <IconDiamond size="s" view="link" />,
   },
   {
+    dataID: 7,
     icon: <IconWorldFilled size="s" />,
-    badge: <Badge status="system" size="xs" label='6' />
+    activeIcon: <IconWorldFilled size="s" view="link" />,
   },
   {
+    dataID: 8,
     icon: <IconDrillingPartRightFilled size="s" />,
-    badge: <Badge status="system" size="xs" label='2' />
+    activeIcon: <IconDrillingPartRightFilled size="s" view="link" />,
   },
   {
+    dataID: 9,
     icon: <IconDrop size="s" />,
-    badge: <Badge status="system" size="xs" label='5' />
+    activeIcon: <IconDrop size="s" view="link" />,
   },
   {
+    dataID: 9,
     icon: <IconDinosaur size="s" />,
-    badge: <Badge status="system" size="xs" label='3' />
+    activeIcon: <IconDinosaur size="s" view="link" />,
   },
   {
+    dataID: 10,
     icon: <IconDiamond size="s" />,
-    badge: <Badge status="system" size="xs" label='7' />
+    activeIcon: <IconDiamond size="s" view="link" />,
   },
   {
+    dataID: 11,
     icon: <IconWorldFilled size="s" />,
-    badge: <Badge status="system" size="xs" label='6' />
+    activeIcon: <IconWorldFilled size="s" view="link" />,
   },
 ]
