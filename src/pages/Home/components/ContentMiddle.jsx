@@ -163,7 +163,7 @@ const ContentMiddle = forwardRef((props, ref) => {
                 iconPosition="right"
                 hoverEffect
               >
-                {RightSideActiveModal && (
+                {(RightSideActiveModal || leftSideActiveModal == 2) && (
                   <Layout direction='column' style={{ width: '98%', gap: 6, paddingRight: 3 }}>
                     <List
                       items={switchedObject?.data}
