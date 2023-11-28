@@ -5,7 +5,6 @@ import { Layout } from "@consta/uikit/Layout"
 import { List } from '@consta/uikit/ListCanary';
 import { Text } from '@consta/uikit/Text';
 import { Collapse } from '@consta/uikit/Collapse';
-import { Panel } from 'react-resizable-panels';
 
 import Modal from '@components/common/Modal/';
 import {
@@ -13,6 +12,8 @@ import {
   sameMenuItems,
   objectMenuItems
 } from '../mock';
+import { ReflexElement } from 'react-reflex';
+import 'react-reflex/styles.css'
 
 const ContentMiddle = forwardRef((props, ref) => {
   const {
@@ -48,11 +49,9 @@ const ContentMiddle = forwardRef((props, ref) => {
           title="Расчеты"
           onClose={() => setLeftSideActiveModal(null)}
           defaultType={(
-            <Panel
-              style={{ overflowY: 'auto' }}
-              defaultSize={40}
-              minSizePixels={44}
-              order={1}>
+            <ReflexElement
+              className="left-pane"
+            >
               <Layout direction='column' className="home__calculations-modal">
                 <List
                   items={calculationItems}
@@ -64,7 +63,7 @@ const ContentMiddle = forwardRef((props, ref) => {
                   className="home__calculations-modal--listitems"
                 />
               </Layout>
-            </Panel>
+            </ReflexElement>
           )}
         />
         <Modal
@@ -73,11 +72,9 @@ const ContentMiddle = forwardRef((props, ref) => {
           title="Данные"
           onClose={() => setLeftSideActiveModal(null)}
           defaultType={(
-            <Panel
-              style={{ overflowY: 'auto' }}
-              defaultSize={48}
-              minSizePixels={44}
-              order={1}>
+            <ReflexElement
+              className="left-pane"
+            >
               <Layout direction='column' className="home__data-modal">
                 <List
                   items={dataItems}
@@ -91,18 +88,14 @@ const ContentMiddle = forwardRef((props, ref) => {
                   onItemClick={setDataItemChecked}
                 />
               </Layout>
-            </Panel>
+            </ReflexElement>
           )}
           sameType={(
-            <Panel
-              style={{ overflowY: 'auto' }}
-              collapsible={true}
-              defaultSize={30}
-              minSize={4}
-              order={2}
+            <ReflexElement
+              className="right-pane"
             >
               <Text size="xs" view="secondary">{switchedData.text}</Text>
-            </Panel>
+            </ReflexElement>
           )}
         />
       </Layout>
@@ -124,11 +117,10 @@ const ContentMiddle = forwardRef((props, ref) => {
             }
           }}
           defaultType={(
-            <Panel
-              style={{ overflowY: 'auto' }}
-              defaultSize={40}
-              minSizePixels={44}
-              order={1}>
+            <ReflexElement
+              className="left-pane"
+              minSize={44}
+            >
               <Layout direction='column' className="home__object-modal">
                 <List
                   items={objectMenuItems}
@@ -142,15 +134,11 @@ const ContentMiddle = forwardRef((props, ref) => {
                   onItemClick={setObjectItemChecked}
                 />
               </Layout>
-            </Panel>
+            </ReflexElement>
           )}
           sameType={(
-            <Panel
-              style={{ overflowY: 'auto' }}
-              collapsible={true}
-              defaultSize={30}
-              minSize={4}
-              order={2}
+            <ReflexElement
+              className="right-pane"
             >
               <Collapse
                 size="xs"
@@ -170,7 +158,7 @@ const ContentMiddle = forwardRef((props, ref) => {
                   </Layout>
                 )}
               </Collapse>
-            </Panel>
+            </ReflexElement>
           )}
         />
       </Layout>

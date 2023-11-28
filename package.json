@@ -13,8 +13,10 @@
     "@consta/icons": "^0.11.0",
     "@consta/uikit": "^4.33.1",
     "@fontsource/inter": "^5.0.15",
+    "re-resizable": "^6.9.11",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-reflex": "^4.1.0",
     "react-resizable-panels": "^0.0.39",
     "react-rnd": "^10.4.1",
     "react-router-dom": "^6.19.0"

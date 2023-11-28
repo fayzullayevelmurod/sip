@@ -10,7 +10,8 @@ import { Text } from '@consta/uikit/Text';
 import { IconSlide } from '@consta/icons/IconSlide';
 import { IconClose } from '@consta/icons/IconClose';
 
-import { PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
+import { ReflexContainer, ReflexSplitter } from 'react-reflex';
+import 'react-reflex/styles.css'
 import './Modal.style.scss'
 
 export default function Modal({
@@ -46,15 +47,11 @@ export default function Modal({
         </Text>
       </Layout>
       <Layout direction='column' className={`modal__content`}>
-        <PanelGroup direction="vertical">
+        <ReflexContainer orientation="horizontal">
           {defaultType}
-          {sameType && (
-            <>
-              <PanelResizeHandle className="modal__resize-handle" />
-              {sameType}
-            </>
-          )}
-        </PanelGroup>
+          {sameType && <ReflexSplitter className="modal__resize-handle" />}
+          {sameType}
+        </ReflexContainer>
       </Layout>
       <Layout
         onMouseEnter={() => setIsShown(true)}
