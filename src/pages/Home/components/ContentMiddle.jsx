@@ -152,7 +152,7 @@ const ContentMiddle = forwardRef((props, ref) => {
           )}
           sameType={(
             <ReflexElement
-              className="right-pane"
+              className="right-pane relative"
               minSize={33}
             >
               <Collapse
@@ -161,10 +161,15 @@ const ContentMiddle = forwardRef((props, ref) => {
                 isOpen={collapseIsOpen}
                 onClick={() => setcollapseIsOpen(!collapseIsOpen)}
                 iconPosition="right"
-                hoverEffect
               >
                 {(RightSideActiveModal || leftSideActiveModal == 2) && (
-                  <Layout direction='column' style={{ width: '98%', gap: 6, paddingRight: 3 }}>
+                  <Layout
+                    direction='column collapse-content'
+                    style={{
+                      width: '98%',
+                      gap: 6,
+                      paddingRight: 3,
+                    }}>
                     <List
                       items={switchedObject?.data}
                       getItemChecked={(item) => sameItemChecked === item}

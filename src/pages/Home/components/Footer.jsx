@@ -103,52 +103,50 @@ export default function Footer(props) {
         <IconMapStroked size="m" view="ghost" />
         <Text size="xs" className="home__footer--map-layer--text">Слой карты</Text>
       </Layout>
-      {isMapLayerOpen && (
-        <Rnd
-          minWidth="200px"
-          minHeight="200px"
-          maxWidth={`${calculateMapLayerPopupWidth}px`}
-          maxHeight={`${windowHeight - 120}px`}
-          size={{ width: layer.width, height: layer.height }}
-          position={{ x: layer.x, y: layer.y }}
-          disableDragging={true}
-          enableResizing={{ top: false, right: false, bottom: false, left: false, topRight: false, bottomRight: false, bottomLeft: false, topLeft: true }}
-          onResizeStop={(e, direction, ref, delta, position) => {
-            setLayer(prev => ({
-              ...prev,
-              width: ref.style.width,
-              height: ref.style.height,
-              ...position
-            }))
-          }}
+      <Rnd
+        minWidth="200px"
+        minHeight="200px"
+        maxWidth={`${calculateMapLayerPopupWidth}px`}
+        maxHeight={`${windowHeight - 120}px`}
+        size={{ width: layer.width, height: layer.height }}
+        position={{ x: layer.x, y: layer.y }}
+        disableDragging={true}
+        enableResizing={{ top: false, right: false, bottom: false, left: false, topRight: false, bottomRight: false, bottomLeft: false, topLeft: true }}
+        onResizeStop={(e, direction, ref, delta, position) => {
+          setLayer(prev => ({
+            ...prev,
+            width: ref.style.width,
+            height: ref.style.height,
+            ...position
+          }))
+        }}
 
-          className="home__footer--map-layer--popup"
-          style={{
-            right: `${isObjectModalFullHeight && windowWidth >= 640 ? '342px' : ''}`
-          }}
-        >
-          <Layout className="home__footer--map-layer--header">
-            <IconResize size="s" view="ghost" className='home__footer--map-layer--header--resize' />
-            <Layout style={{ alignItems: "center", gap: '8px' }}>
-              <IconMapStroked size="s" view="ghost" />
-              <Text size="xs" className="home__footer--map-layer--header--text">Слой карты</Text>
-            </Layout>
-            <Layout>
-              <Button
-                size="xs"
-                label="Закрыть"
-                view="clear"
-                iconLeft={IconArrowDown}
-                onlyIcon
-                onClick={() => setIsMapLayerOpen(false)}
-              />
-            </Layout>
+        className={`home__footer--map-layer--popup ${isMapLayerOpen ? 'active-map' : 'inactive-map'}`}
+        style={{
+          right: `${isObjectModalFullHeight && windowWidth >= 640 ? '342px' : ''}`
+        }}
+      >
+        <Layout className="home__footer--map-layer--header">
+          <IconResize size="s" view="ghost" className='home__footer--map-layer--header--resize' />
+          <Layout style={{ alignItems: "center", gap: '8px' }}>
+            <IconMapStroked size="s" view="ghost" />
+            <Text size="xs" className="home__footer--map-layer--header--text">Слой карты</Text>
           </Layout>
-          <Layout className="home__footer--map-layer--content">
-            <Text size="s" className="home__footer--map-layer--content--text">Объектов пока нет</Text>
+          <Layout>
+            <Button
+              size="xs"
+              label="Закрыть"
+              view="clear"
+              iconLeft={IconArrowDown}
+              onlyIcon
+              onClick={() => setIsMapLayerOpen(false)}
+            />
           </Layout>
-        </Rnd>
-      )}
+        </Layout>
+        <Layout className="home__footer--map-layer--content">
+          <Text size="s" className="home__footer--map-layer--content--text">Объектов пока нет</Text>
+        </Layout>
+      </Rnd>
     </Layout>
   )
 }
