@@ -397,6 +397,10 @@
 
 .relative {
   position: inherit !important;
+
+  &::-webkit-scrollbar-track {
+    margin-top: 33px;
+  }
 }
 
 .collapse-content {
