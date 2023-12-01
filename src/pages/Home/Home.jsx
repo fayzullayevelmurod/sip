@@ -25,6 +25,7 @@ export default function Home() {
   const [leftSideActiveModal, setLeftSideActiveModal] = useState(null)
   const [RightSideActiveModal, setRightSideActiveModal] = useState(false)
   const [isObjectModalFullHeight, setIsObjectModalFullHeight] = useState(false)
+  const [isObjectModalClosedWithFullHeight, setIsObjectModalClosedWithFullHeight] = useState(false)
 
   // Pop up window data states
   const [calculationItemChecked, setCalculationItemChecked] = useState(calculationItems[0]);
@@ -136,10 +137,19 @@ export default function Home() {
   // If the right sidebar is not active, it will return the map layer to its place.
   useEffect(() => {
     if (!RightSideActiveModal) {
+      if (isObjectModalFullHeight) {
+        setIsObjectModalClosedWithFullHeight(true)
+      }
       setIsObjectModalFullHeight(false)
     }
-  }, [RightSideActiveModal])
 
+    if (RightSideActiveModal) {
+      if (isObjectModalClosedWithFullHeight) {
+        setIsObjectModalFullHeight(true)
+        setIsObjectModalClosedWithFullHeight(false)
+      }
+    }
+  }, [RightSideActiveModal])
 
   return (
     <>
