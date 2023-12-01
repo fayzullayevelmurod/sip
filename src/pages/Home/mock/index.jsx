@@ -737,3 +737,18 @@ export const choiceGroupData = [
     activeIcon: <IconWorldFilled size="s" view="link" />,
   },
 ]
+
+export const trimItemsMock = [
+  {
+    label: 'Слой 1',
+    id: 1,
+  },
+  {
+    label: 'Слой 2',
+    id: 2,
+  },
+  {
+    label: 'Слой 3',
+    id: 3,
+  },
+];

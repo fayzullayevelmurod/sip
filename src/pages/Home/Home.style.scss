@@ -47,10 +47,10 @@
 
   &__header-center {
     gap: 4px;
-    margin-right: 90px;
+    margin-right: 50px;
 
     @include responsive(tablet) {
-      margin: 0 0 0 30px;
+      margin: 0 0 0 40px;
     }
   }
 
@@ -422,4 +422,9 @@
 
 .SelectDropdown {
   min-width: 100px;
+}
+
+.Select-Control {
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
 }

@@ -15,21 +15,9 @@ import { IconNodeStep } from "@consta/icons/IconNodeStep"
 import { IconTree } from "@consta/icons/IconTree"
 import { IconWindow } from "@consta/icons/IconWindow"
 import { IconHamburger } from "@consta/uikit/IconHamburger"
+import { IconAdd } from "@consta/uikit/IconAdd"
 
-const trimItemsMock = [
-  {
-    label: 'Слой 1',
-    id: 1,
-  },
-  {
-    label: 'Слой 2',
-    id: 2,
-  },
-  {
-    label: 'Слой 3',
-    id: 3,
-  },
-];
+import { trimItemsMock } from '../mock'
 
 const ContentHeader = forwardRef((props, ref) => {
   const {
@@ -43,14 +31,11 @@ const ContentHeader = forwardRef((props, ref) => {
     isOpen,
     toggleContextMenu,
     items,
+    trimValue,
+    setTrimValue,
     renderRightSide,
     onChange
   } = props
-
-  const [trimValue, setTrimValue] = useState({
-    label: 'Слой 1',
-    id: 1,
-  },);
   const [isTrimSettingsOpen, setIsTrimSettigsOpen] = useState(false)
 
   return (
@@ -134,6 +119,19 @@ const ContentHeader = forwardRef((props, ref) => {
                 onChange={({ value }) => setTrimValue(value)}
                 style={{ width: '100px' }}
               />
+              <Button
+                className='home__header--button'
+                label="Add"
+                size="xs"
+                view="secondary"
+                iconLeft={IconAdd}
+                onlyIcon
+                style={{
+                  borderRadius: '0px 4px 4px 0px',
+                  border: '1px solid #0078D2',
+                  background: 'white'
+                }}
+              />
             </Layout>
             <Button
               className='home__header--button'
@@ -191,6 +189,8 @@ ContentHeader.propTypes = {
   items: PropTypes.array,
   renderRightSide: PropTypes.func,
   onChange: PropTypes.func,
+  trimValue: PropTypes.any,
+  setTrimValue: PropTypes.func,
 }
 
 ContentHeader.displayName = "ContentHeader"

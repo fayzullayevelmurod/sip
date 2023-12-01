@@ -42,6 +42,12 @@ export default function Home() {
   const [tableFullHeight, setTableFullHeight] = useState(false)
   const [tableOpen, setTableOpen] = useState(false)
 
+  // Trim value state
+  const [trimValue, setTrimValue] = useState({
+    label: 'Слой 1',
+    id: 1,
+  },);
+
   // Context menu
   const ref = useRef(null);
 
@@ -161,6 +167,8 @@ export default function Home() {
                 items={items}
                 renderRightSide={renderRightSide}
                 onChange={onChange}
+                trimValue={trimValue}
+                setTrimValue={setTrimValue}
               />
             ) : (
               <ContentHeaderMobile
@@ -183,6 +191,8 @@ export default function Home() {
                 setTableHeight={setTableHeight}
                 setTableFullHeight={setTableFullHeight}
                 tableOpen={tableOpen}
+                trimValue={trimValue}
+                setTrimValue={setTrimValue}
               />
             )}
             <ContentMiddle

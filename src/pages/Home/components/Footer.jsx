@@ -18,7 +18,6 @@ export default function Footer(props) {
     setTableOpen,
     tableOpen,
     windowWidth,
-    windowHeight,
     setTableHeight,
   } = props
 
@@ -107,10 +106,10 @@ export default function Footer(props) {
         minWidth="200px"
         minHeight="200px"
         maxWidth={`${calculateMapLayerPopupWidth}px`}
-        maxHeight={`${windowHeight - 120}px`}
         size={{ width: layer.width, height: layer.height }}
         position={{ x: layer.x, y: layer.y }}
         disableDragging={true}
+        bounds=".home__middle"
         enableResizing={{ top: false, right: false, bottom: false, left: false, topRight: false, bottomRight: false, bottomLeft: false, topLeft: true }}
         onResizeStop={(e, direction, ref, delta, position) => {
           setLayer(prev => ({

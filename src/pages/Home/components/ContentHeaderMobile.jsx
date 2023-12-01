@@ -1,8 +1,9 @@
-import { forwardRef } from 'react'
+import { forwardRef, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import { Layout } from "@consta/uikit/Layout"
 import { Button } from "@consta/uikit/Button"
+import { Select } from '@consta/uikit/Select';
 import { ContextMenu } from "@consta/uikit/ContextMenu"
 
 // Icons
@@ -14,6 +15,11 @@ import { IconTree } from "@consta/icons/IconTree"
 import { IconWindow } from "@consta/icons/IconWindow"
 import { IconHamburger } from "@consta/uikit/IconHamburger"
 import { IconTable2 } from '@consta/icons/IconTable2'
+import { IconAdd } from "@consta/uikit/IconAdd"
+import { IconNodeStep } from "@consta/icons/IconNodeStep"
+import { IconCheck } from "@consta/icons/IconCheck"
+
+import { trimItemsMock } from '../mock'
 
 const ContentHeaderMobile = forwardRef((props, ref) => {
   const {
@@ -32,8 +38,12 @@ const ContentHeaderMobile = forwardRef((props, ref) => {
     setTableHeight,
     setTableFullHeight,
     tableOpen,
-    setIsOpen
+    setIsOpen,
+    trimValue,
+    setTrimValue,
   } = props
+
+  const [isTrimSettingsOpen, setIsTrimSettigsOpen] = useState(false)
 
   return (
     <Layout
@@ -112,32 +122,85 @@ const ContentHeaderMobile = forwardRef((props, ref) => {
         />
       </Layout>
       <Layout className='home__header-right'>
-        <Button
-          className='home__header--button'
-          label="Данные"
-          iconLeft={IconCursorMouse}
-          view="ghost"
-          size="xs"
-          onlyIcon
-        />
-        <Button
-          className='home__header--button'
-          label="Данные"
-          iconLeft={IconHand}
-          view="ghost"
-          size="xs"
-          onlyIcon
-        />
-        <Button
-          className='home__header--button'
-          label="Данные"
-          iconLeft={IconShape}
-          view="ghost"
-          size="xs"
-          onlyIcon
-        />
+        {!isTrimSettingsOpen ? (
+          <>
+            <Button
+              className='home__header--button'
+              label="Move"
+              iconLeft={IconCursorMouse}
+              view="ghost"
+              size="xs"
+              onlyIcon
+            />
+            <Button
+              className='home__header--button'
+              label="Handle"
+              iconLeft={IconHand}
+              view="ghost"
+              size="xs"
+              onlyIcon
+            />
+            <Button
+              className='home__header--button'
+              label="Trim"
+              iconLeft={IconShape}
+              view="ghost"
+              size="xs"
+              onlyIcon
+              onClick={() => setIsTrimSettigsOpen(true)}
+            />
+          </>
+        ) : (
+          <>
+            <Button
+              className='home__header--button'
+              label="Trim"
+              iconLeft={IconShape}
+              size="xs"
+              onlyIcon
+            />
+            <Button
+              className='home__header--button'
+              label="Trim"
+              view="ghost"
+              iconLeft={IconNodeStep}
+              size="xs"
+              onlyIcon
+            />
+            <Layout>
+              <Select
+                items={trimItemsMock}
+                size="xs"
+                value={trimValue}
+                onChange={({ value }) => setTrimValue(value)}
+                style={{ width: !(windowWidth <= 412) ? '100px' : '40px' }}
+              />
+              <Button
+                className='home__header--button'
+                label="Add"
+                size="xs"
+                view="secondary"
+                iconLeft={IconAdd}
+                onlyIcon
+                style={{
+                  borderRadius: '0px 4px 4px 0px',
+                  border: '1px solid #0078D2',
+                  background: 'white'
+                }}
+              />
+            </Layout>
+            <Button
+              className='home__header--button'
+              label="Готово"
+              size="xs"
+              iconLeft={windowWidth <= 412 && IconCheck}
+              onlyIcon={windowWidth <= 412}
+              onClick={() => setIsTrimSettigsOpen(false)}
+            />
+          </>
+        )}
       </Layout>
-    </Layout>
+    </Layout >
   )
 })
 
@@ -157,7 +220,9 @@ ContentHeaderMobile.propTypes = {
   setTableHeight: PropTypes.func,
   setTableFullHeight: PropTypes.func,
   tableOpen: PropTypes.bool,
-  setIsOpen: PropTypes.func
+  setIsOpen: PropTypes.func,
+  trimValue: PropTypes.any,
+  setTrimValue: PropTypes.func,
 }
 
 ContentHeaderMobile.displayName = "ContentHeaderMobile"
