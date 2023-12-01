@@ -123,7 +123,7 @@ export default function Footer(props) {
 
         className={`home__footer--map-layer--popup ${isMapLayerOpen ? 'active-map' : 'inactive-map'}`}
         style={{
-          right: `${isObjectModalFullHeight && windowWidth >= 640 ? '342px' : ''}`
+          right: `${isObjectModalFullHeight && windowWidth >= 640 ? '342px' : ''}`,
         }}
       >
         <Layout className="home__footer--map-layer--header">
