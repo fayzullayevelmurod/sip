@@ -23,6 +23,7 @@ export default function Table(props) {
     tableOpen,
     setTableHeight,
     setTableFullHeight,
+    setTable50,
     setIsOpen,
     windowHeight,
     tableHeight,
@@ -47,6 +48,7 @@ export default function Table(props) {
               setTableHeight(windowHeight - 100 - 48)
               setTableFullHeight(true)
               setIsOpen(false)
+              setTable50(false)
             }}
           />
           <Button
@@ -57,6 +59,7 @@ export default function Table(props) {
             onlyIcon
             onClick={() => {
               setTableHeight((windowHeight / 2) - 40)
+              setTable50(true)
               setTableFullHeight(false)
             }}
           />
@@ -68,6 +71,7 @@ export default function Table(props) {
             onlyIcon
             onClick={() => {
               setTableHeight(0)
+              setTable50(false)
               setTableFullHeight(false)
             }}
           />
@@ -100,4 +104,5 @@ Table.propTypes = {
   setIsOpen: PropTypes.func,
   windowHeight: PropTypes.number,
   tableHeight: PropTypes.number,
+  setTable50: PropTypes.func
 }

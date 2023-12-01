@@ -41,6 +41,7 @@ export default function Home() {
   const [tableHeight, setTableHeight] = useState(0)
   const [tableFullHeight, setTableFullHeight] = useState(false)
   const [tableOpen, setTableOpen] = useState(false)
+  const [table50, setTable50] = useState(false)
 
   // Trim value state
   const [trimValue, setTrimValue] = useState({
@@ -205,6 +206,7 @@ export default function Home() {
               RightSideActiveModal={RightSideActiveModal}
               setRightSideActiveModal={setRightSideActiveModal}
               ref={ref}
+              table50={table50}
               windowWidth={windowWidth}
             />
             <Footer
@@ -214,6 +216,7 @@ export default function Home() {
               windowWidth={windowWidth}
               windowHeight={windowHeight}
               setTableHeight={setTableHeight}
+              RightSideActiveModal={RightSideActiveModal}
             />
           </Layout>
         </Layout>
@@ -224,6 +227,7 @@ export default function Home() {
           setIsOpen={setIsOpen}
           windowHeight={windowHeight}
           tableHeight={tableHeight}
+          setTable50={setTable50}
         />
       </Layout >
     </>

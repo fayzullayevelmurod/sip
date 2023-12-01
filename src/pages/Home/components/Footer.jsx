@@ -19,6 +19,7 @@ export default function Footer(props) {
     tableOpen,
     windowWidth,
     setTableHeight,
+    RightSideActiveModal
   } = props
 
   const [isMapLayerOpen, setIsMapLayerOpen] = useState(false)
@@ -48,14 +49,16 @@ export default function Footer(props) {
   }
 
   useEffect(() => {
-    setLayer({
-      width: 320,
-      height: 280,
-      x: windowWidth - 332,
-      y: -280
-    })
+    if (isObjectModalFullHeight && RightSideActiveModal) {
+      setLayer({
+        width: 320,
+        height: 280,
+        x: windowWidth - 332,
+        y: -280
+      })
+    }
     setIsMapLayerOpen(false)
-  }, [isObjectModalFullHeight])
+  }, [isObjectModalFullHeight, RightSideActiveModal])
 
   return (
     <Layout className="home__footer">
@@ -77,31 +80,33 @@ export default function Footer(props) {
           style={{ backgroundColor: `${tableOpen ? 'white' : ''}` }}
         />
       </Layout>
-      <Layout
-        className="home__footer--map-layer"
-        onClick={() => {
-          setIsMapLayerOpen(true)
-          if (!isObjectModalFullHeight) {
-            setLayer({
-              width: 320,
-              height: 280,
-              x: windowWidth - 332,
-              y: -280
-            })
-          } else {
-            setLayer({
-              width: 320,
-              height: 280,
-              x: windowWidth - 332 - 330,
-              y: -280
-            })
-          }
-        }}
-        style={{ right: `${isObjectModalFullHeight && windowWidth >= 640 ? '342px' : ''}` }}
-      >
-        <IconMapStroked size="m" view="ghost" />
-        <Text size="xs" className="home__footer--map-layer--text">Слой карты</Text>
-      </Layout>
+      {!isMapLayerOpen && (
+        <Layout
+          className="home__footer--map-layer"
+          onClick={() => {
+            setIsMapLayerOpen(true)
+            if (!isObjectModalFullHeight) {
+              setLayer({
+                width: 320,
+                height: 280,
+                x: windowWidth - 332,
+                y: -280
+              })
+            } else {
+              setLayer({
+                width: 320,
+                height: 280,
+                x: windowWidth - 332 - 330,
+                y: -280
+              })
+            }
+          }}
+          style={{ right: `${isObjectModalFullHeight && windowWidth >= 640 ? '342px' : ''}` }}
+        >
+          <IconMapStroked size="m" view="ghost" />
+          <Text size="xs" className="home__footer--map-layer--text">Слой карты</Text>
+        </Layout>
+      )}
       <Rnd
         minWidth="200px"
         minHeight="200px"
@@ -157,4 +162,5 @@ Footer.propTypes = {
   windowHeight: PropTypes.number,
   isObjectModalFullHeight: PropTypes.bool,
   setTableHeight: PropTypes.func,
+  RightSideActiveModal: PropTypes.bool
 }

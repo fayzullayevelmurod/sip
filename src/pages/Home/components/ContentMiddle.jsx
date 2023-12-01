@@ -28,6 +28,7 @@ const ContentMiddle = forwardRef((props, ref) => {
     RightSideActiveModal,
     setRightSideActiveModal,
     windowWidth,
+    table50
   } = props
 
   const [collapseIsOpen, setcollapseIsOpen] = useState(true);
@@ -74,7 +75,7 @@ const ContentMiddle = forwardRef((props, ref) => {
         />
         <Modal
           isOpen={leftSideActiveModal == 1}
-          style={{ minHeight: '245px', position: 'absolute', left: '12px' }}
+          style={{ minHeight: table50 ? '100%' : '245px', position: 'absolute', left: '12px' }}
           title="Данные"
           onClose={() => setLeftSideActiveModal(null)}
           defaultType={(
@@ -181,7 +182,7 @@ const ContentMiddle = forwardRef((props, ref) => {
             </ReflexElement>
           )}
           style={{
-            minHeight: '400px',
+            minHeight: table50 ? '100%' : '400px',
             boxShadow: '0px 8px 24px -4px rgba(24, 39, 75, 0.08), 0px 6px 12px -6px rgba(24, 39, 75, 0.05)'
           }}
         />
@@ -202,7 +203,8 @@ ContentMiddle.propTypes = {
   objectMenuItems: PropTypes.array,
   setSameItemChecked: PropTypes.func,
   setIsObjectModalFullHeight: PropTypes.func,
-  windowWidth: PropTypes.number
+  windowWidth: PropTypes.number,
+  table50: PropTypes.bool
 }
 
 ContentMiddle.displayName = "ContentMiddle"
