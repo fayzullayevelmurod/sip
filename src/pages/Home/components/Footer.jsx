@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import PropTypes from 'prop-types'
 
 import { Button } from '@consta/uikit/Button'
@@ -19,7 +19,6 @@ export default function Footer(props) {
     tableOpen,
     windowWidth,
     setTableHeight,
-    RightSideActiveModal
   } = props
 
   const [isMapLayerOpen, setIsMapLayerOpen] = useState(false)
@@ -30,7 +29,7 @@ export default function Footer(props) {
     y: -280
   })
 
-  let calculateMapLayerPopupWidth = `${isObjectModalFullHeight}`
+  let calculateMapLayerPopupWidth;
 
   if (!isObjectModalFullHeight) {
     if (windowWidth >= 800) {
@@ -39,26 +38,8 @@ export default function Footer(props) {
       calculateMapLayerPopupWidth = `${windowWidth - (24)}`
     }
   } else {
-    if (windowWidth <= 800) {
-      calculateMapLayerPopupWidth = `${windowWidth - (24 + 332)}`
-    } else if (windowWidth <= 640) {
-      calculateMapLayerPopupWidth = `${windowWidth - (24)}`
-    } else {
-      calculateMapLayerPopupWidth = `${windowWidth - (24 + 332 + 332)}`
-    }
+    calculateMapLayerPopupWidth = `${windowWidth - (24)}`
   }
-
-  useEffect(() => {
-    if (isObjectModalFullHeight && RightSideActiveModal) {
-      setLayer({
-        width: 320,
-        height: 280,
-        x: windowWidth - 332,
-        y: -280
-      })
-    }
-    setIsMapLayerOpen(false)
-  }, [isObjectModalFullHeight, RightSideActiveModal])
 
   return (
     <Layout className="home__footer">
@@ -85,21 +66,6 @@ export default function Footer(props) {
           className="home__footer--map-layer"
           onClick={() => {
             setIsMapLayerOpen(true)
-            if (!isObjectModalFullHeight) {
-              setLayer({
-                width: 320,
-                height: 280,
-                x: windowWidth - 332,
-                y: -280
-              })
-            } else {
-              setLayer({
-                width: 320,
-                height: 280,
-                x: windowWidth - 332 - 330,
-                y: -280
-              })
-            }
           }}
           style={{ right: `${isObjectModalFullHeight && windowWidth >= 640 ? '342px' : ''}` }}
         >

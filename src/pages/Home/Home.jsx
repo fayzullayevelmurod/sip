@@ -226,7 +226,6 @@ export default function Home() {
               windowWidth={windowWidth}
               windowHeight={windowHeight}
               setTableHeight={setTableHeight}
-              RightSideActiveModal={RightSideActiveModal}
             />
           </Layout>
         </Layout>
