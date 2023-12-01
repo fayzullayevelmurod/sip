@@ -1,18 +1,35 @@
-import { forwardRef } from 'react'
+import { forwardRef, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import { Layout } from "@consta/uikit/Layout"
 import { Button } from "@consta/uikit/Button"
 import { ContextMenu } from "@consta/uikit/ContextMenu"
+import { Select } from '@consta/uikit/Select';
 
 // Icons
 import { IconCursorMouse } from "@consta/icons/IconCursorMouse"
 import { IconFolderOpen } from "@consta/icons/IconFolderOpen"
 import { IconHand } from "@consta/icons/IconHand"
 import { IconShape } from "@consta/icons/IconShape"
+import { IconNodeStep } from "@consta/icons/IconNodeStep"
 import { IconTree } from "@consta/icons/IconTree"
 import { IconWindow } from "@consta/icons/IconWindow"
 import { IconHamburger } from "@consta/uikit/IconHamburger"
+
+const trimItemsMock = [
+  {
+    label: 'Слой 1',
+    id: 1,
+  },
+  {
+    label: 'Слой 2',
+    id: 2,
+  },
+  {
+    label: 'Слой 3',
+    id: 3,
+  },
+];
 
 const ContentHeader = forwardRef((props, ref) => {
   const {
@@ -30,6 +47,11 @@ const ContentHeader = forwardRef((props, ref) => {
     onChange
   } = props
 
+  const [trimValue, setTrimValue] = useState({
+    label: 'Слой 1',
+    id: 1,
+  },);
+  const [isTrimSettingsOpen, setIsTrimSettigsOpen] = useState(false)
 
   return (
     <Layout
@@ -59,30 +81,69 @@ const ContentHeader = forwardRef((props, ref) => {
         />
       </Layout>
       <Layout className='home__header-center'>
-        <Button
-          className='home__header--button'
-          label="Move"
-          iconLeft={IconCursorMouse}
-          view="ghost"
-          size="xs"
-          onlyIcon
-        />
-        <Button
-          className='home__header--button'
-          label="Handle"
-          iconLeft={IconHand}
-          view="ghost"
-          size="xs"
-          onlyIcon
-        />
-        <Button
-          className='home__header--button'
-          label="Trim"
-          iconLeft={IconShape}
-          view="ghost"
-          size="xs"
-          onlyIcon
-        />
+        {!isTrimSettingsOpen ? (
+          <>
+            <Button
+              className='home__header--button'
+              label="Move"
+              iconLeft={IconCursorMouse}
+              view="ghost"
+              size="xs"
+              onlyIcon
+            />
+            <Button
+              className='home__header--button'
+              label="Handle"
+              iconLeft={IconHand}
+              view="ghost"
+              size="xs"
+              onlyIcon
+            />
+            <Button
+              className='home__header--button'
+              label="Trim"
+              iconLeft={IconShape}
+              view="ghost"
+              size="xs"
+              onlyIcon
+              onClick={() => setIsTrimSettigsOpen(true)}
+            />
+          </>
+        ) : (
+          <>
+            <Button
+              className='home__header--button'
+              label="Trim"
+              iconLeft={IconShape}
+              size="xs"
+              onlyIcon
+            />
+            <Button
+              className='home__header--button'
+              label="Trim"
+              view="ghost"
+              iconLeft={IconNodeStep}
+              size="xs"
+              onlyIcon
+            />
+            <Layout>
+              <Select
+                items={trimItemsMock}
+                size="xs"
+                value={trimValue}
+                onChange={({ value }) => setTrimValue(value)}
+                style={{ width: '100px' }}
+              />
+            </Layout>
+            <Button
+              className='home__header--button'
+              label="Готово"
+              size="xs"
+              onClick={() => setIsTrimSettigsOpen(false)}
+            />
+          </>
+        )}
+
       </Layout>
       <Layout className='home__header-right'>
         <Button
