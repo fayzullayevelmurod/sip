@@ -1,23 +1,24 @@
-import { forwardRef, useState } from 'react'
-import PropTypes from 'prop-types'
+import { forwardRef, useState } from "react";
+import PropTypes from "prop-types";
 
-import { Layout } from "@consta/uikit/Layout"
-import { Button } from "@consta/uikit/Button"
-import { ContextMenu } from "@consta/uikit/ContextMenu"
-import { Select } from '@consta/uikit/Select';
+import { Layout } from "@consta/uikit/Layout";
+import { Button } from "@consta/uikit/Button";
+import { ContextMenu } from "@consta/uikit/ContextMenu";
+import { Select } from "@consta/uikit/Select";
 
 // Icons
-import { IconCursorMouse } from "@consta/icons/IconCursorMouse"
-import { IconFolderOpen } from "@consta/icons/IconFolderOpen"
-import { IconHand } from "@consta/icons/IconHand"
-import { IconShape } from "@consta/icons/IconShape"
-import { IconNodeStep } from "@consta/icons/IconNodeStep"
-import { IconTree } from "@consta/icons/IconTree"
-import { IconWindow } from "@consta/icons/IconWindow"
-import { IconHamburger } from "@consta/uikit/IconHamburger"
-import { IconAdd } from "@consta/uikit/IconAdd"
+import { IconCursorMouse } from "@consta/icons/IconCursorMouse";
+import { IconFolderOpen } from "@consta/icons/IconFolderOpen";
+import { IconHand } from "@consta/icons/IconHand";
+import { IconShape } from "@consta/icons/IconShape";
+import { IconNodeStep } from "@consta/icons/IconNodeStep";
+import { IconTree } from "@consta/icons/IconTree";
+import { IconWindow } from "@consta/icons/IconWindow";
+import { IconHamburger } from "@consta/uikit/IconHamburger";
+import { IconAdd } from "@consta/uikit/IconAdd";
+import { IconSettings } from "@consta/uikit/IconSettings";
 
-import { trimItemsMock } from '../mock'
+import { trimItemsMock } from "../mock";
 
 const ContentHeader = forwardRef((props, ref) => {
   const {
@@ -34,20 +35,32 @@ const ContentHeader = forwardRef((props, ref) => {
     trimValue,
     setTrimValue,
     renderRightSide,
-    onChange
-  } = props
-  const [isTrimSettingsOpen, setIsTrimSettigsOpen] = useState(false)
+    onChange,
+    setIsSettingsModalOpen,
+    isSettingsModalOpen,
+    setIsOpen,
+    setRightSideActiveModal,
+  } = props;
+  const [isTrimSettingsOpen, setIsTrimSettigsOpen] = useState(false);
+
+  const toggleSettingsModal = () => {
+    setIsSettingsModalOpen((prev) => !prev);
+    setIsOpen(false);
+    setRightSideActiveModal(false);
+  };
 
   return (
     <Layout
-      className='home__header'
-      style={{ backgroundColor: `${tableFullHeight ? 'white' : ''}` }}
+      className="home__header"
+      style={{ backgroundColor: `${tableFullHeight ? "white" : ""}` }}
     >
-      <Layout className='home__header-left'>
+      <Layout className="home__header-left">
         <Button
           truncate="true"
           onClick={toggleLeftSideModalCalc}
-          className={`home__header--button truncate-btn ${leftSideActiveModal == 0 ? 'active-button' : ''}`}
+          className={`home__header--button truncate-btn ${
+            leftSideActiveModal == 0 ? "active-button" : ""
+          }`}
           label="Расчет региона №1 Зеленая роща"
           iconLeft={IconHamburger}
           view="ghost"
@@ -57,7 +70,9 @@ const ContentHeader = forwardRef((props, ref) => {
 
         <Button
           onClick={toggleLeftSideModalData}
-          className={`home__header--button ${leftSideActiveModal == 1 ? 'active-button' : ''}`}
+          className={`home__header--button ${
+            leftSideActiveModal == 1 ? "active-button" : ""
+          }`}
           label="Данные"
           iconLeft={IconTree}
           view="ghost"
@@ -65,11 +80,11 @@ const ContentHeader = forwardRef((props, ref) => {
           onlyIcon
         />
       </Layout>
-      <Layout className='home__header-center'>
+      <Layout className="home__header-center">
         {!isTrimSettingsOpen ? (
           <>
             <Button
-              className='home__header--button'
+              className="home__header--button"
               label="Move"
               iconLeft={IconCursorMouse}
               view="ghost"
@@ -77,7 +92,7 @@ const ContentHeader = forwardRef((props, ref) => {
               onlyIcon
             />
             <Button
-              className='home__header--button'
+              className="home__header--button"
               label="Handle"
               iconLeft={IconHand}
               view="ghost"
@@ -85,7 +100,7 @@ const ContentHeader = forwardRef((props, ref) => {
               onlyIcon
             />
             <Button
-              className='home__header--button'
+              className="home__header--button"
               label="Trim"
               iconLeft={IconShape}
               view="ghost"
@@ -97,14 +112,14 @@ const ContentHeader = forwardRef((props, ref) => {
         ) : (
           <>
             <Button
-              className='home__header--button'
+              className="home__header--button"
               label="Trim"
               iconLeft={IconShape}
               size="xs"
               onlyIcon
             />
             <Button
-              className='home__header--button'
+              className="home__header--button"
               label="Trim"
               view="ghost"
               iconLeft={IconNodeStep}
@@ -117,35 +132,36 @@ const ContentHeader = forwardRef((props, ref) => {
                 size="xs"
                 value={trimValue}
                 onChange={({ value }) => setTrimValue(value)}
-                style={{ width: '100px' }}
+                style={{ width: "100px" }}
               />
               <Button
-                className='home__header--button'
+                className="home__header--button"
                 label="Add"
                 size="xs"
                 view="secondary"
                 iconLeft={IconAdd}
                 onlyIcon
                 style={{
-                  borderRadius: '0px 4px 4px 0px',
-                  border: '1px solid #0078D2',
-                  background: 'white'
+                  borderRadius: "0px 4px 4px 0px",
+                  border: "1px solid #0078D2",
+                  background: "white",
                 }}
               />
             </Layout>
             <Button
-              className='home__header--button'
+              className="home__header--button"
               label="Готово"
               size="xs"
               onClick={() => setIsTrimSettigsOpen(false)}
             />
           </>
         )}
-
       </Layout>
-      <Layout className='home__header-right'>
+      <Layout className="home__header-right">
         <Button
-          className={`home__header--button ${RightSideActiveModal ? 'active-button' : ''}`}
+          className={`home__header--button ${
+            RightSideActiveModal ? "active-button" : ""
+          }`}
           label="Обьекты"
           iconLeft={IconFolderOpen}
           view="ghost"
@@ -153,9 +169,20 @@ const ContentHeader = forwardRef((props, ref) => {
           onlyIcon={windowWidth <= 800}
           onClick={() => toggleRightSideModalObject()}
         />
+        <Button
+          className={`home__header--button ${
+            isSettingsModalOpen ? "active-button" : ""
+          }`}
+          label="Настройки"
+          iconLeft={IconSettings}
+          view="ghost"
+          size="xs"
+          onlyIcon
+          onClick={() => toggleSettingsModal()}
+        />
         <Layout className="home__header-right--border"></Layout>
         <Button
-          className={`home__header--button ${isOpen ? 'active-button' : ''}`}
+          className={`home__header--button ${isOpen ? "active-button" : ""}`}
           label="Вид"
           iconLeft={IconWindow}
           view="ghost"
@@ -169,12 +196,12 @@ const ContentHeader = forwardRef((props, ref) => {
           anchorRef={ref}
           getItemRightSide={(item) => renderRightSide(item, onChange)}
           className="view-context-menu"
-          style={{ marginLeft: '-12px' }}
+          style={{ marginLeft: "-12px" }}
         />
       </Layout>
     </Layout>
-  )
-})
+  );
+});
 
 ContentHeader.propTypes = {
   tableFullHeight: PropTypes.bool,
@@ -191,7 +218,11 @@ ContentHeader.propTypes = {
   onChange: PropTypes.func,
   trimValue: PropTypes.any,
   setTrimValue: PropTypes.func,
-}
+  setIsSettingsModalOpen: PropTypes.func,
+  isSettingsModalOpen: PropTypes.bool,
+  setIsOpen: PropTypes.func,
+  setRightSideActiveModal: PropTypes.func,
+};
 
-ContentHeader.displayName = "ContentHeader"
-export default ContentHeader
+ContentHeader.displayName = "ContentHeader";
+export default ContentHeader;

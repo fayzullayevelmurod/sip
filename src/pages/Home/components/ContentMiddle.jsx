@@ -1,21 +1,21 @@
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
 
 import { forwardRef, useState } from "react";
-import { Layout } from "@consta/uikit/Layout"
-import { List } from '@consta/uikit/ListCanary';
-import { Text } from '@consta/uikit/Text';
-import { Collapse } from '@consta/uikit/Collapse';
-import Modal from '@components/common/Modal/';
-import { ReflexElement } from 'react-reflex';
+import { Layout } from "@consta/uikit/Layout";
+import { List } from "@consta/uikit/ListCanary";
+import { Text } from "@consta/uikit/Text";
+import { Collapse } from "@consta/uikit/Collapse";
+import Modal from "@components/common/Modal/";
+import { ReflexElement } from "react-reflex";
 
 import {
   dataItems,
   sameMenuItems,
   objectMenuItems,
-  choiceGroupData
-} from '../mock';
+  choiceGroupData,
+} from "../mock";
 
-import 'react-reflex/styles.css'
+import "react-reflex/styles.css";
 
 const ContentMiddle = forwardRef((props, ref) => {
   const {
@@ -28,42 +28,48 @@ const ContentMiddle = forwardRef((props, ref) => {
     RightSideActiveModal,
     setRightSideActiveModal,
     windowWidth,
-    table50
-  } = props
+    table50,
+    setIsSettingsModalOpen,
+    isSettingsModalOpen,
+    setIsSettingsModalFullHeight,
+  } = props;
 
   const [collapseIsOpen, setcollapseIsOpen] = useState(true);
 
   // Left side popup data
   const [dataItemChecked, setDataItemChecked] = useState(dataItems[0]);
-  const [switchedData, setSwitchedData] = useState(dataItems[0])
+  const [switchedData, setSwitchedData] = useState(dataItems[0]);
 
   // Right side popup data
-  const [objectItemChecked, setObjectItemChecked] = useState(objectMenuItems[0].data[0])
-  const [sameItemChecked, setSameItemChecked] = useState(sameMenuItems[0])
-  const [switchedObject, setSwitchedObject] = useState(null)
+  const [objectItemChecked, setObjectItemChecked] = useState(
+    objectMenuItems[0].data[0]
+  );
+  const [sameItemChecked, setSameItemChecked] = useState(sameMenuItems[0]);
+  const [switchedObject, setSwitchedObject] = useState(null);
 
-  const [choiceDataId, setChoiceDataId] = useState(objectMenuItems[0].id)
+  const [choiceDataId, setChoiceDataId] = useState(objectMenuItems[0].id);
 
-  const objectDataChoicedById = objectMenuItems.filter(item => item.id === choiceDataId)[0]?.data
+  const objectDataChoicedById = objectMenuItems.filter(
+    (item) => item.id === choiceDataId
+  )[0]?.data;
 
   return (
     <Layout className="home__middle">
-
       {/* Calculation and Data Popup menu */}
-      <Layout direction='row'>
+      <Layout direction="row">
         <Modal
           isOpen={leftSideActiveModal == 0}
           title="Расчеты"
           onClose={() => setLeftSideActiveModal(null)}
-          defaultType={(
-            <ReflexElement
-              className="left-pane"
-            >
-              <Layout direction='column' className="home__calculations-modal">
+          defaultType={
+            <ReflexElement className="left-pane">
+              <Layout direction="column" className="home__calculations-modal">
                 <List
                   items={calculationItems}
                   getItemRightSide={(item) => (
-                    <Text className='home__calculations-modal--date'>{item.date}</Text>
+                    <Text className="home__calculations-modal--date">
+                      {item.date}
+                    </Text>
                   )}
                   getItemChecked={(item) => calculationItemChecked === item}
                   onItemClick={setCalculationItemChecked}
@@ -71,43 +77,45 @@ const ContentMiddle = forwardRef((props, ref) => {
                 />
               </Layout>
             </ReflexElement>
-          )}
+          }
         />
         <Modal
           isOpen={leftSideActiveModal == 1}
-          style={{ minHeight: table50 ? '100%' : '245px', position: 'absolute', left: '12px' }}
+          style={{
+            minHeight: table50 ? "100%" : "245px",
+            position: "absolute",
+            left: "12px",
+          }}
           title="Данные"
           onClose={() => setLeftSideActiveModal(null)}
-          defaultType={(
+          defaultType={
             <ReflexElement
               className="left-pane"
               minSize={44}
-              style={{ height: '150px !important' }}
+              style={{ height: "150px !important" }}
             >
-              <Layout direction='column' className="home__data-modal">
+              <Layout direction="column" className="home__data-modal">
                 <List
                   items={dataItems}
                   getItemChecked={(item) => {
                     if (dataItemChecked === item) {
-                      setSwitchedData(dataItemChecked)
+                      setSwitchedData(dataItemChecked);
                     }
 
-                    return dataItemChecked === item
+                    return dataItemChecked === item;
                   }}
                   onItemClick={setDataItemChecked}
                 />
               </Layout>
             </ReflexElement>
-          )}
-          sameType={(
-            <ReflexElement
-              className="right-pane"
-              minSize={33}
-              size={80}
-            >
-              <Text size="xs" view="secondary">{switchedData.text}</Text>
+          }
+          sameType={
+            <ReflexElement className="right-pane" minSize={33} size={80}>
+              <Text size="xs" view="secondary">
+                {switchedData.text}
+              </Text>
             </ReflexElement>
-          )}
+          }
         />
       </Layout>
 
@@ -124,38 +132,34 @@ const ContentMiddle = forwardRef((props, ref) => {
           getChoice={(data) => setChoiceDataId(data.dataID)}
           choiceGroupData={choiceGroupData}
           onClose={() => {
-            setRightSideActiveModal(false)
+            setRightSideActiveModal(false);
             if (windowWidth <= 640) {
-              setLeftSideActiveModal(null)
+              setLeftSideActiveModal(null);
             }
           }}
-          defaultType={(
-            <ReflexElement
-              className="left-pane"
-              minSize={56}
-            >
-              <Layout direction='column' className="home__object-modal">
+          defaultType={
+            <ReflexElement className="left-pane" minSize={56}>
+              <Layout direction="column" className="home__object-modal">
                 {objectDataChoicedById ? (
                   <List
                     items={objectDataChoicedById}
                     getItemChecked={(item) => {
                       if (objectItemChecked === item) {
-                        setSwitchedObject(objectItemChecked)
+                        setSwitchedObject(objectItemChecked);
                       }
 
-                      return objectItemChecked === item
+                      return objectItemChecked === item;
                     }}
                     onItemClick={setObjectItemChecked}
                   />
-                ) : <p>No Data</p>}
+                ) : (
+                  <p>No Data</p>
+                )}
               </Layout>
             </ReflexElement>
-          )}
-          sameType={(
-            <ReflexElement
-              className="right-pane relative"
-              minSize={33}
-            >
+          }
+          sameType={
+            <ReflexElement className="right-pane relative" minSize={33}>
               <Collapse
                 size="xs"
                 label="Однотипные"
@@ -165,12 +169,13 @@ const ContentMiddle = forwardRef((props, ref) => {
               >
                 {(RightSideActiveModal || leftSideActiveModal == 2) && (
                   <Layout
-                    direction='column collapse-content'
+                    direction="column collapse-content"
                     style={{
-                      width: '98%',
+                      width: "98%",
                       gap: 6,
                       paddingRight: 3,
-                    }}>
+                    }}
+                  >
                     <List
                       items={switchedObject?.data}
                       getItemChecked={(item) => sameItemChecked === item}
@@ -180,16 +185,33 @@ const ContentMiddle = forwardRef((props, ref) => {
                 )}
               </Collapse>
             </ReflexElement>
-          )}
+          }
           style={{
-            minHeight: table50 ? '100%' : '400px',
-            boxShadow: '0px 8px 24px -4px rgba(24, 39, 75, 0.08), 0px 6px 12px -6px rgba(24, 39, 75, 0.05)'
+            minHeight: table50 ? "100%" : "400px",
+            boxShadow:
+              "0px 8px 24px -4px rgba(24, 39, 75, 0.08), 0px 6px 12px -6px rgba(24, 39, 75, 0.05)",
           }}
         />
       </Layout>
-    </Layout >
-  )
-})
+      <Layout>
+        <Modal
+          isOpen={isSettingsModalOpen}
+          setIsSettingsModalFullHeight={setIsSettingsModalFullHeight}
+          title="Настройки"
+          isCollapse={true}
+          onClose={() => {
+            setIsSettingsModalOpen(false);
+          }}
+          style={{
+            minHeight: table50 ? "100%" : "400px",
+            boxShadow:
+              "0px 8px 24px -4px rgba(24, 39, 75, 0.08), 0px 6px 12px -6px rgba(24, 39, 75, 0.05)",
+          }}
+        />
+      </Layout>
+    </Layout>
+  );
+});
 
 ContentMiddle.propTypes = {
   leftSideActiveModal: PropTypes.number,
@@ -204,8 +226,11 @@ ContentMiddle.propTypes = {
   setSameItemChecked: PropTypes.func,
   setIsObjectModalFullHeight: PropTypes.func,
   windowWidth: PropTypes.number,
-  table50: PropTypes.bool
-}
+  table50: PropTypes.bool,
+  setIsSettingsModalOpen: PropTypes.func,
+  isSettingsModalOpen: PropTypes.bool,
+  setIsSettingsModalFullHeight: PropTypes.func,
+};
 
-ContentMiddle.displayName = "ContentMiddle"
-export default ContentMiddle
+ContentMiddle.displayName = "ContentMiddle";
+export default ContentMiddle;
