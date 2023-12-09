@@ -112,6 +112,52 @@
     padding-right: 3px;
   }
 
+  &__settings-modal {
+    @include responsive(phone) {
+      position: absolute;
+      height: 100%;
+      left: 12px;
+    }
+
+    &--content {
+      background-color: white;
+    }
+
+    &--bottom {
+      width: 104%;
+      margin-left: -12px;
+      padding: 8px 0;
+      position: sticky;
+      bottom: 0;
+      right: 0;
+      background-color: white;
+      margin-top: 8px;
+      align-items: end;
+    }
+
+    .Collapse-Label {
+      height: 26px;
+      background-color: #edf2f5;
+      width: 104%;
+      margin-left: -12px;
+      padding: 0 12px;
+      border-bottom: 1px solid lightgray;
+    }
+
+    .ListItem {
+      padding: 4px 8px;
+      color: var(--control-default-typo, #002033);
+      font-family: Inter;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 120%;
+      border-radius: 2px;
+      margin-bottom: 8px;
+      width: 97%;
+    }
+  }
+
   &__context-menu {
     position: absolute;
     top: 0;
@@ -401,7 +447,7 @@
   transition: all 0.4s ease;
 }
 
-.Collapse-Label {
+.home__object-modal-wrapper .Collapse-Label {
   position: fixed;
   top: inherit;
   left: 0;
@@ -427,9 +473,10 @@
 
 .SelectDropdown {
   min-width: 100px;
+  z-index: 10;
 }
 
-.Select-Control {
+.Select-Control:not(.home__settings-modal .Select-Control) {
   border-top-right-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
 }

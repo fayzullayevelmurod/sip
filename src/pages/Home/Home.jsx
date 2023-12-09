@@ -66,6 +66,7 @@ export default function Home() {
   const toggleLeftSideModalCalc = () => {
     if (windowWidth <= 639) {
       setIsOpen(false); // close context menu
+      setIsSettingsModalOpen(false);
     }
 
     const active = leftSideActiveModal === 0 ? null : 0;
@@ -75,7 +76,8 @@ export default function Home() {
   // Toggle pop-up window 2 (left side)
   const toggleLeftSideModalData = () => {
     if (windowWidth <= 639) {
-      setIsOpen(false); // close context menu
+      setIsOpen(false);
+      setIsSettingsModalOpen(false); // close context menu
     }
 
     const active = leftSideActiveModal === 1 ? null : 1;
@@ -94,6 +96,7 @@ export default function Home() {
     if (windowWidth <= 639) {
       setLeftSideActiveModal(null);
       setIsOpen(!isOpen);
+      setIsSettingsModalOpen(false);
     } else {
       setRightSideActiveModal(false);
       setIsSettingsModalOpen(false);
@@ -174,6 +177,7 @@ export default function Home() {
         setIsSettingsModalClosedWithFullHeight(false);
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [RightSideActiveModal, isSettingsModalOpen]);
 
   return (
@@ -235,6 +239,8 @@ export default function Home() {
                 tableOpen={tableOpen}
                 trimValue={trimValue}
                 setTrimValue={setTrimValue}
+                setIsSettingsModalOpen={setIsSettingsModalOpen}
+                isSettingsModalOpen={isSettingsModalOpen}
               />
             )}
             <ContentMiddle
@@ -249,6 +255,7 @@ export default function Home() {
               ref={ref}
               table50={table50}
               windowWidth={windowWidth}
+              windowHeight={windowHeight}
               setIsSettingsModalOpen={setIsSettingsModalOpen}
               isSettingsModalOpen={isSettingsModalOpen}
               setIsSettingsModalFullHeight={setIsSettingsModalFullHeight}

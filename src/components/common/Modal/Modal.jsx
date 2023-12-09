@@ -16,12 +16,14 @@ import { IconArrowLeft } from "@consta/icons/IconArrowLeft";
 import { IconArrowRight } from "@consta/icons/IconArrowRight";
 import { IconSlide } from "@consta/icons/IconSlide";
 import { IconClose } from "@consta/icons/IconClose";
+import { IconBackward } from "@consta/icons/IconBackward";
 
 import "react-reflex/styles.css";
 import "./Modal.style.scss";
 
 import "swiper/scss";
 import "swiper/scss/navigation";
+import { Button } from "@consta/uikit/Button";
 
 export default function Modal({
   title,
@@ -36,6 +38,7 @@ export default function Modal({
   setIsObjectModalFullHeight,
   setIsSettingsModalFullHeight,
   style,
+  isSettingsModal,
 }) {
   const [isShown, setIsShown] = useState(false);
   const [fullHeight, setFullHeight] = useState(false);
@@ -69,12 +72,23 @@ export default function Modal({
       }}
     >
       <Layout className="modal__header">
-        <Text className="modal__header--title">{title}</Text>
-        <Text className="modal__header--close" onClick={onClose}>
-          <IconClose size="xs" />
-        </Text>
+        <Layout style={{ alignItems: "center", gap: "4px" }}>
+          <Button view="clear" size="xs" iconLeft={IconBackward} />
+          <Text className="modal__header--title">{title}</Text>
+        </Layout>
+        <Layout style={{ alignItems: "center", gap: "4px" }}>
+          <Badge size="xs" status="success" label="Статус" />
+          <Text className="modal__header--close" onClick={onClose}>
+            <IconClose size="xs" />
+          </Text>
+        </Layout>
       </Layout>
-      <Layout direction="column" className={`modal__content`}>
+      <Layout
+        direction="column"
+        className={`modal__content ${
+          isSettingsModal ? "settings-scrollbar" : ""
+        }`}
+      >
         {isChoiceGroup && (
           <div className="swiper-wrapper-modal">
             <Swiper
@@ -175,4 +189,5 @@ Modal.propTypes = {
   choiceGroupData: PropTypes.array,
   getChoice: PropTypes.func,
   setIsSettingsModalFullHeight: PropTypes.func,
+  isSettingsModal: PropTypes.bool,
 };

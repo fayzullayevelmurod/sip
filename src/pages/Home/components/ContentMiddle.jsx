@@ -7,6 +7,7 @@ import { Text } from "@consta/uikit/Text";
 import { Collapse } from "@consta/uikit/Collapse";
 import Modal from "@components/common/Modal/";
 import { ReflexElement } from "react-reflex";
+import { CollapseGroup } from "@consta/uikit/CollapseGroup";
 
 import {
   dataItems,
@@ -14,8 +15,10 @@ import {
   objectMenuItems,
   choiceGroupData,
 } from "../mock";
+import useSettingsData from "../mock/useSettingsData";
 
 import "react-reflex/styles.css";
+import { Button } from "@consta/uikit/Button";
 
 const ContentMiddle = forwardRef((props, ref) => {
   const {
@@ -28,13 +31,18 @@ const ContentMiddle = forwardRef((props, ref) => {
     RightSideActiveModal,
     setRightSideActiveModal,
     windowWidth,
+    windowHeight,
     table50,
     setIsSettingsModalOpen,
     isSettingsModalOpen,
     setIsSettingsModalFullHeight,
   } = props;
 
+  const settings = useSettingsData();
+  const defaultOpened = settings[1].data.map((_, index) => index);
+
   const [collapseIsOpen, setcollapseIsOpen] = useState(true);
+  const [openedCollapses, setOpenedCollapses] = useState(defaultOpened);
 
   // Left side popup data
   const [dataItemChecked, setDataItemChecked] = useState(dataItems[0]);
@@ -46,6 +54,7 @@ const ContentMiddle = forwardRef((props, ref) => {
   );
   const [sameItemChecked, setSameItemChecked] = useState(sameMenuItems[0]);
   const [switchedObject, setSwitchedObject] = useState(null);
+  const [settingsItemChecked, setSettingsItemChecked] = useState(null);
 
   const [choiceDataId, setChoiceDataId] = useState(objectMenuItems[0].id);
 
@@ -193,20 +202,71 @@ const ContentMiddle = forwardRef((props, ref) => {
           }}
         />
       </Layout>
-      <Layout>
+      <Layout className="home__settings-modal">
         <Modal
           isOpen={isSettingsModalOpen}
           setIsSettingsModalFullHeight={setIsSettingsModalFullHeight}
           title="Настройки"
           isCollapse={true}
+          isSettingsModal={true}
           onClose={() => {
             setIsSettingsModalOpen(false);
           }}
           style={{
-            minHeight: table50 ? "100%" : "400px",
+            minHeight: table50 || windowHeight < 711 ? "100%" : "557px",
             boxShadow:
               "0px 8px 24px -4px rgba(24, 39, 75, 0.08), 0px 6px 12px -6px rgba(24, 39, 75, 0.05)",
           }}
+          defaultType={
+            <Layout>
+              <Layout direction="column">
+                <List
+                  items={settings}
+                  size="xs"
+                  getItemChecked={(item) => settingsItemChecked === item}
+                  onItemClick={setSettingsItemChecked}
+                  className="home__settings-list"
+                />
+              </Layout>
+
+              {/* <Layout
+                direction="column"
+                className="home__settings-modal--content"
+              >
+                <CollapseGroup
+                  items={settings[1].data}
+                  size="s"
+                  horizontalSpace="m"
+                  iconPosition="right"
+                  opened={openedCollapses}
+                />
+                <Layout className="home__settings-modal--bottom">
+                  <Layout
+                    style={{
+                      borderTop: "1px solid lightgray",
+                      gap: "4px",
+                      paddingTop: "8px",
+                      paddingRight: "12px",
+                      paddingLeft: "12px",
+                    }}
+                  >
+                    <Button
+                      label="Сбросить"
+                      view="ghost"
+                      size="xs"
+                      style={{ width: "50%" }}
+                    />
+                    <Button
+                      label="Сохранить"
+                      view="primary"
+                      size="xs"
+                      style={{ width: "50%" }}
+                    />
+                  </Layout>
+                </Layout>
+              </Layout> */}
+            </Layout>
+          }
         />
       </Layout>
     </Layout>
@@ -230,6 +290,7 @@ ContentMiddle.propTypes = {
   setIsSettingsModalOpen: PropTypes.func,
   isSettingsModalOpen: PropTypes.bool,
   setIsSettingsModalFullHeight: PropTypes.func,
+  windowHeight: PropTypes.number,
 };
 
 ContentMiddle.displayName = "ContentMiddle";
