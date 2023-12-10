@@ -384,6 +384,21 @@
 .TableCell-Wrapper {
   align-items: center;
   height: 32px;
+  padding: 0;
+  display: block;
+}
+
+.TableCell-Wrapper_isHeader {
+  padding-top: 6px;
+  padding-left: 8px;
+}
+
+.TableHeader-Cell_level_high .TableCell-Wrapper {
+  display: block;
+}
+
+.TableCell_isHeader:hover {
+  background-color: #ecf1f4;
 }
 
 .TableCell {

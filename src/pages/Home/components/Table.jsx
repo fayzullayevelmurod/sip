@@ -85,7 +85,7 @@ export default function Table(props) {
       {/* Table Content */}
       <Layout
         className="home__table--table-content"
-        style={{ height: `${tableHeight}px` }}
+        style={{ height: `${tableHeight}px`, maxWidth: "inherit" }}
       >
         <ConstaTable
           rows={tableData.rows}

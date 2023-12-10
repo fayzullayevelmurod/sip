@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { Button } from "@consta/uikit/Button";
 import { Layout } from "@consta/uikit/Layout";
@@ -54,15 +54,18 @@ export default function useTableData() {
       {
         title: "Обьекты",
         accessor: "field",
+        width: 441,
         columns: [
           {
             title: "Название, м",
             accessor: "field",
+            width: 441,
             renderCell: (row) => (
               <Layout
                 style={{
                   justifyContent: "space-between",
                   alignItems: "center",
+                  paddingTop: "5px",
                 }}
               >
                 <Layout style={{ alignItems: "center", gap: "8px" }}>
@@ -83,6 +86,7 @@ export default function useTableData() {
       {
         title: "Группа 1",
         accessor: "group1",
+        width: 200,
         control: () => (
           <Button
             size="xs"
@@ -96,6 +100,7 @@ export default function useTableData() {
           {
             title: "Статус",
             accessor: "status",
+            width: 200,
             renderCell: (row) => <> {row.status}</>,
           },
         ],
@@ -103,6 +108,7 @@ export default function useTableData() {
       {
         title: "Группа 2",
         accessor: "group2",
+        width: 360,
         control: () => (
           <Button
             size="xs"
@@ -116,50 +122,61 @@ export default function useTableData() {
           {
             title: "Название, м",
             accessor: "type",
+            width: 160,
           },
           {
             title: "Название, м",
             accessor: "type2",
+            width: 100,
           },
           {
             title: "Название, м",
             accessor: "type3",
+            width: 100,
           },
         ],
       },
       {
         title: "Группа 3",
         accessor: "group3",
+        width: 360,
         columns: [
           {
             title: "Название, м",
             accessor: "group3.1",
+            width: 160,
           },
           {
             title: "Название, м",
             accessor: "group3.2",
+            width: 100,
           },
           {
             title: "Название, м",
             accessor: "group3.3",
+            width: 100,
           },
         ],
       },
       {
         title: "Группа 4",
         accessor: "group4",
+        width: 360,
         columns: [
           {
             title: "Название, м",
             accessor: "group4.1",
+            width: 160,
           },
           {
             title: "Название, м",
             accessor: "group4.2",
+            width: 100,
           },
           {
             title: "Название, м",
             accessor: "group4.3",
+            width: 100,
           },
         ],
       },
@@ -170,7 +187,14 @@ export default function useTableData() {
         field: "Страна",
         leftIcon: <IconFolderClosed size="xs" view="secondary" />,
         status: (
-          <Layout style={{ alignItems: "center", gap: "20px" }}>
+          <Layout
+            style={{
+              justifyContent: "space-between",
+              alignItems: "center",
+              gap: "20px",
+              padding: "4px 8px",
+            }}
+          >
             <Badge
               size="xs"
               view="stroked"
@@ -182,7 +206,10 @@ export default function useTableData() {
           </Layout>
         ),
         type: (
-          <Layout className="active-cell" style={{ gap: "4px" }}>
+          <Layout
+            className="active-cell"
+            style={{ gap: "4px", height: "100%" }}
+          >
             <Tag size="xs" mode="check" label="Тип 1" group={8} />
             <Tag size="xs" mode="check" label="Тип 1" group={5} />
           </Layout>
