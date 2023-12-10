@@ -1,4 +1,4 @@
-// Custom table design with inline styles and mock data
+// Warning: Custom table design with inline styles and mock data
 import { useRef, useState } from "react";
 
 import { Button } from "@consta/uikit/Button";
@@ -6,7 +6,7 @@ import { Layout } from "@consta/uikit/Layout";
 import { ContextMenu } from "@consta/uikit/ContextMenu";
 import { Badge } from "@consta/uikit/Badge";
 import { Tag } from "@consta/uikit/Tag";
-import { Switch } from "@consta/uikit/Switch";
+import SwitchComponent from "../components/ui/SwitchComponent";
 
 import { IconFlagFilled } from "@consta/icons/IconFlagFilled";
 import { IconFolderClosed } from "@consta/icons/IconFolderClosed";
@@ -19,9 +19,8 @@ import { IconAlert } from "@consta/icons/IconAlert";
 import { IconPlay } from "@consta/icons/IconPlay";
 import { IconAllDone } from "@consta/icons/IconAllDone";
 import { IconArrowRight } from "@consta/icons/IconArrowRight";
-import { IconSelect } from "@consta/icons/IconSelect";
 
-import Input from "../components/Input";
+import Input from "../components/ui/Input";
 
 const contextItems = [
   {
@@ -69,47 +68,40 @@ export default function useTableData() {
 
   // switch context
   const [isSwitchContextOpen_1, setIsSwitchContextOpen_1] = useState(false);
+  const [isSwitchContextOpen_2, setIsSwitchContextOpen_2] = useState(false);
+  const [isSwitchContextOpen_3, setIsSwitchContextOpen_3] = useState(false);
+  const [isSwitchContextOpen_4, setIsSwitchContextOpen_4] = useState(false);
 
-  // switch context
-  const switchContextRef1 = useRef(null);
+  const [switchItems, setSwitchItems] = useState({
+    switch1: switchContextItems,
+    switch2: switchContextItems,
+    switch3: switchContextItems,
+    switch4: switchContextItems,
+  });
 
   // input values
   const [inputValue, setInputValue] = useState({
     input1: "-",
     input2: "1",
+    input3: "2",
+    input4: "-",
+    input5: "1",
+    input6: "-",
+    input7: "1",
+    input8: "-",
+    input9: "1",
+    input10: "-",
+    input11: "1",
+    input12: "2",
+    input13: "-",
+    input14: "1",
+    input15: "2",
+    input16: "-",
+    input17: "1",
+    input18: "2",
+    input19: "-",
+    input20: "1",
   });
-
-  const [switchItems, setSwitchItems] = useState(switchContextItems);
-
-  // Render Switch in Context Menu (right side)
-  function renderSwitch(item, onChange) {
-    const nodeArray = [];
-
-    if (item.switch !== undefined) {
-      nodeArray.push(
-        <Switch
-          size="s"
-          checked={item.switch}
-          onChange={() => onChange(item)}
-          key="Switch"
-        />
-      );
-    }
-
-    return nodeArray;
-  }
-
-  // Get state switched Item
-  const onChangeSwitch = (switchItem) => {
-    const newItems = switchItems.map((item, index) => {
-      if (switchItem.label === item.label) {
-        return { ...switchItems[index], switch: !switchItems[index].switch };
-      }
-      return item;
-    });
-
-    setSwitchItems(newItems);
-  };
 
   // All table data
   return {
@@ -128,7 +120,7 @@ export default function useTableData() {
                 style={{
                   justifyContent: "space-between",
                   alignItems: "center",
-                  paddingTop: "5px",
+                  paddingTop: "6px",
                 }}
               >
                 <Layout style={{ alignItems: "center", gap: "8px" }}>
@@ -206,7 +198,7 @@ export default function useTableData() {
         columns: [
           {
             title: "Название, м",
-            accessor: "group3.1",
+            accessor: "type4",
             width: 100,
           },
           {
@@ -216,12 +208,12 @@ export default function useTableData() {
           },
           {
             title: "Название, м",
-            accessor: "group3.3",
+            accessor: "type6",
             width: 100,
           },
           {
             title: "Название, м",
-            accessor: "group3.3",
+            accessor: "type7",
             width: 100,
           },
         ],
@@ -276,10 +268,15 @@ export default function useTableData() {
         type: (
           <Layout
             className="active-cell"
-            style={{ gap: "4px", height: "100%", padding: "4px 8px" }}
+            style={{
+              gap: "4px",
+              height: "100%",
+              padding: "4px 8px",
+              alignItems: "center",
+            }}
           >
             <Tag size="xs" mode="check" label="Тип 1" group={8} />
-            <Tag size="xs" mode="check" label="Тип 1" group={5} />
+            <Tag size="xs" mode="check" label="Тип 2" group={5} />
           </Layout>
         ),
         type2: (
@@ -316,39 +313,64 @@ export default function useTableData() {
             />
           </Layout>
         ),
-        type5: (
+        type4: (
           <Layout
-            className={`active-cell ${
-              isSwitchContextOpen_1 ? "focus-cell" : ""
-            }`}
             style={{
-              justifyContent: "space-between",
-              alignItems: "center",
-              gap: "2px",
+              justifyContent: "end",
               height: "100%",
-              padding: "4px 4px",
             }}
-            ref={switchContextRef1}
-            onClick={() => setIsSwitchContextOpen_1((prev) => !prev)}
+            className="active-cell"
           >
-            {switchItems.map(
-              (item) =>
-                item.switch && (
-                  <Layout key={item.label}>
-                    <Tag size="xs" mode="check" label={item.label} />
-                  </Layout>
-                )
-            )}
-            {!switchItems.some((item) => item.switch) && <span>-</span>}
-            <IconSelect size="xs" />
-            <ContextMenu
-              size="xs"
-              isOpen={isSwitchContextOpen_1}
-              items={switchItems}
-              anchorRef={switchContextRef1}
-              getItemRightSide={(item) => renderSwitch(item, onChangeSwitch)}
-              direction="downStartLeft"
-              style={{ width: "100px" }}
+            <Input
+              type="text"
+              value={inputValue.input3}
+              onChange={(e) =>
+                setInputValue((prev) => ({ ...prev, input3: e.target.value }))
+              }
+            />
+          </Layout>
+        ),
+        type5: (
+          <SwitchComponent
+            items={switchItems.switch1}
+            setItems={(items) =>
+              setSwitchItems((prev) => ({ ...prev, switch1: items }))
+            }
+            isOpen={isSwitchContextOpen_1}
+            setIsOpen={setIsSwitchContextOpen_1}
+          />
+        ),
+        type6: (
+          <Layout
+            style={{
+              justifyContent: "end",
+              height: "100%",
+            }}
+            className="active-cell"
+          >
+            <Input
+              type="text"
+              value={inputValue.input4}
+              onChange={(e) =>
+                setInputValue((prev) => ({ ...prev, input4: e.target.value }))
+              }
+            />
+          </Layout>
+        ),
+        type7: (
+          <Layout
+            style={{
+              justifyContent: "end",
+              height: "100%",
+            }}
+            className="active-cell"
+          >
+            <Input
+              type="text"
+              value={inputValue.input5}
+              onChange={(e) =>
+                setInputValue((prev) => ({ ...prev, input5: e.target.value }))
+              }
             />
           </Layout>
         ),
@@ -358,7 +380,14 @@ export default function useTableData() {
             field: "Граница 1",
             km: "200 км",
             status: (
-              <Layout style={{ alignItems: "center", gap: "20px" }}>
+              <Layout
+                style={{
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  gap: "20px",
+                  padding: "4px 8px",
+                }}
+              >
                 <Badge
                   size="xs"
                   view="stroked"
@@ -422,7 +451,14 @@ export default function useTableData() {
                   </>
                 ),
                 status: (
-                  <Layout style={{ alignItems: "center", gap: "20px" }}>
+                  <Layout
+                    style={{
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      gap: "20px",
+                      padding: "4px 8px",
+                    }}
+                  >
                     <Badge
                       size="xs"
                       view="stroked"
@@ -439,25 +475,127 @@ export default function useTableData() {
                   </Layout>
                 ),
                 type: (
-                  <Layout className="active-cell" style={{ gap: "4px" }}>
+                  <Layout
+                    className="active-cell"
+                    style={{
+                      gap: "4px",
+                      height: "100%",
+                      padding: "4px 8px",
+                      alignItems: "center",
+                    }}
+                  >
                     <Tag size="xs" mode="check" label="Тип 1" group={8} />
                     <Tag size="xs" mode="check" label="Тип 1" group={5} />
                   </Layout>
                 ),
                 type2: (
                   <Layout
-                    style={{ justifyContent: "end" }}
+                    style={{
+                      justifyContent: "end",
+                      height: "100%",
+                    }}
                     className="active-cell"
                   >
-                    <span>-</span>
+                    <Input
+                      type="text"
+                      value={inputValue.input6}
+                      onChange={(e) =>
+                        setInputValue((prev) => ({
+                          ...prev,
+                          input6: e.target.value,
+                        }))
+                      }
+                    />
                   </Layout>
                 ),
                 type3: (
                   <Layout
-                    style={{ justifyContent: "end" }}
+                    style={{
+                      justifyContent: "end",
+                      height: "100%",
+                    }}
                     className="active-cell"
                   >
-                    <span>1</span>
+                    <Input
+                      type="text"
+                      value={inputValue.input7}
+                      onChange={(e) =>
+                        setInputValue((prev) => ({
+                          ...prev,
+                          input7: e.target.value,
+                        }))
+                      }
+                    />
+                  </Layout>
+                ),
+                type4: (
+                  <Layout
+                    style={{
+                      justifyContent: "end",
+                      height: "100%",
+                    }}
+                    className="active-cell"
+                  >
+                    <Input
+                      type="text"
+                      value={inputValue.input12}
+                      onChange={(e) =>
+                        setInputValue((prev) => ({
+                          ...prev,
+                          input12: e.target.value,
+                        }))
+                      }
+                    />
+                  </Layout>
+                ),
+                type5: (
+                  <SwitchComponent
+                    items={switchItems.switch2}
+                    setItems={(items) =>
+                      setSwitchItems((prev) => ({ ...prev, switch2: items }))
+                    }
+                    isOpen={isSwitchContextOpen_2}
+                    setIsOpen={setIsSwitchContextOpen_2}
+                  />
+                ),
+                type6: (
+                  <Layout
+                    style={{
+                      justifyContent: "end",
+                      height: "100%",
+                    }}
+                    className="active-cell"
+                  >
+                    <Input
+                      type="text"
+                      value={inputValue.input13}
+                      onChange={(e) =>
+                        setInputValue((prev) => ({
+                          ...prev,
+                          input13: e.target.value,
+                        }))
+                      }
+                    />
+                  </Layout>
+                ),
+                type7: (
+                  <Layout
+                    style={{
+                      justifyContent: "end",
+                      height: "100%",
+                    }}
+                    className="active-cell"
+                  >
+                    <Input
+                      type="text"
+                      value={inputValue.input14}
+                      onChange={(e) =>
+                        setInputValue((prev) => ({
+                          ...prev,
+                          input14: e.target.value,
+                        }))
+                      }
+                    />
                   </Layout>
                 ),
                 rows: [
@@ -494,7 +632,14 @@ export default function useTableData() {
                       </>
                     ),
                     status: (
-                      <Layout style={{ alignItems: "center", gap: "20px" }}>
+                      <Layout
+                        style={{
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          gap: "20px",
+                          padding: "4px 8px",
+                        }}
+                      >
                         <Badge
                           size="xs"
                           view="stroked"
@@ -511,9 +656,130 @@ export default function useTableData() {
                       </Layout>
                     ),
                     type: (
-                      <Layout className="active-cell" style={{ gap: "4px" }}>
+                      <Layout
+                        className="active-cell"
+                        style={{
+                          gap: "4px",
+                          height: "100%",
+                          padding: "4px 8px",
+                          alignItems: "center",
+                        }}
+                      >
                         <Tag size="xs" mode="check" label="Тип 1" group={8} />
                         <Tag size="xs" mode="check" label="Тип 1" group={5} />
+                      </Layout>
+                    ),
+                    type2: (
+                      <Layout
+                        style={{
+                          justifyContent: "end",
+                          height: "100%",
+                        }}
+                        className="active-cell"
+                      >
+                        <Input
+                          type="text"
+                          value={inputValue.input8}
+                          onChange={(e) =>
+                            setInputValue((prev) => ({
+                              ...prev,
+                              input8: e.target.value,
+                            }))
+                          }
+                        />
+                      </Layout>
+                    ),
+                    type3: (
+                      <Layout
+                        style={{
+                          justifyContent: "end",
+                          height: "100%",
+                        }}
+                        className="active-cell"
+                      >
+                        <Input
+                          type="text"
+                          value={inputValue.input9}
+                          onChange={(e) =>
+                            setInputValue((prev) => ({
+                              ...prev,
+                              input9: e.target.value,
+                            }))
+                          }
+                        />
+                      </Layout>
+                    ),
+                    type4: (
+                      <Layout
+                        style={{
+                          justifyContent: "end",
+                          height: "100%",
+                        }}
+                        className="active-cell"
+                      >
+                        <Input
+                          type="text"
+                          value={inputValue.input15}
+                          onChange={(e) =>
+                            setInputValue((prev) => ({
+                              ...prev,
+                              input15: e.target.value,
+                            }))
+                          }
+                        />
+                      </Layout>
+                    ),
+                    type5: (
+                      <SwitchComponent
+                        items={switchItems.switch3}
+                        setItems={(items) =>
+                          setSwitchItems((prev) => ({
+                            ...prev,
+                            switch3: items,
+                          }))
+                        }
+                        isOpen={isSwitchContextOpen_3}
+                        setIsOpen={setIsSwitchContextOpen_3}
+                      />
+                    ),
+                    type6: (
+                      <Layout
+                        style={{
+                          justifyContent: "end",
+                          height: "100%",
+                        }}
+                        className="active-cell"
+                      >
+                        <Input
+                          type="text"
+                          value={inputValue.input16}
+                          onChange={(e) =>
+                            setInputValue((prev) => ({
+                              ...prev,
+                              input16: e.target.value,
+                            }))
+                          }
+                        />
+                      </Layout>
+                    ),
+                    type7: (
+                      <Layout
+                        style={{
+                          justifyContent: "end",
+                          height: "100%",
+                        }}
+                        className="active-cell"
+                      >
+                        <Input
+                          type="text"
+                          value={inputValue.input17}
+                          onChange={(e) =>
+                            setInputValue((prev) => ({
+                              ...prev,
+                              input17: e.target.value,
+                            }))
+                          }
+                        />
                       </Layout>
                     ),
                   },
@@ -550,7 +816,14 @@ export default function useTableData() {
                       </>
                     ),
                     status: (
-                      <Layout style={{ alignItems: "center", gap: "20px" }}>
+                      <Layout
+                        style={{
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          gap: "20px",
+                          padding: "4px 8px",
+                        }}
+                      >
                         <Badge
                           size="xs"
                           view="stroked"
@@ -567,25 +840,130 @@ export default function useTableData() {
                       </Layout>
                     ),
                     type: (
-                      <Layout className="active-cell" style={{ gap: "4px" }}>
+                      <Layout
+                        className="active-cell"
+                        style={{
+                          gap: "4px",
+                          height: "100%",
+                          padding: "4px 8px",
+                          alignItems: "center",
+                        }}
+                      >
                         <Tag size="xs" mode="check" label="Тип 1" group={8} />
                         <Tag size="xs" mode="check" label="Тип 1" group={5} />
                       </Layout>
                     ),
                     type2: (
                       <Layout
-                        style={{ justifyContent: "end" }}
+                        style={{
+                          justifyContent: "end",
+                          height: "100%",
+                        }}
                         className="active-cell"
                       >
-                        <span>-</span>
+                        <Input
+                          type="text"
+                          value={inputValue.input10}
+                          onChange={(e) =>
+                            setInputValue((prev) => ({
+                              ...prev,
+                              input10: e.target.value,
+                            }))
+                          }
+                        />
                       </Layout>
                     ),
                     type3: (
                       <Layout
-                        style={{ justifyContent: "end" }}
+                        style={{
+                          justifyContent: "end",
+                          height: "100%",
+                        }}
                         className="active-cell"
                       >
-                        <span>1</span>
+                        <Input
+                          type="text"
+                          value={inputValue.input11}
+                          onChange={(e) =>
+                            setInputValue((prev) => ({
+                              ...prev,
+                              input11: e.target.value,
+                            }))
+                          }
+                        />
+                      </Layout>
+                    ),
+                    type4: (
+                      <Layout
+                        style={{
+                          justifyContent: "end",
+                          height: "100%",
+                        }}
+                        className="active-cell"
+                      >
+                        <Input
+                          type="text"
+                          value={inputValue.input18}
+                          onChange={(e) =>
+                            setInputValue((prev) => ({
+                              ...prev,
+                              input18: e.target.value,
+                            }))
+                          }
+                        />
+                      </Layout>
+                    ),
+                    type5: (
+                      <SwitchComponent
+                        items={switchItems.switch4}
+                        setItems={(items) =>
+                          setSwitchItems((prev) => ({
+                            ...prev,
+                            switch4: items,
+                          }))
+                        }
+                        isOpen={isSwitchContextOpen_4}
+                        setIsOpen={setIsSwitchContextOpen_4}
+                      />
+                    ),
+                    type6: (
+                      <Layout
+                        style={{
+                          justifyContent: "end",
+                          height: "100%",
+                        }}
+                        className="active-cell"
+                      >
+                        <Input
+                          type="text"
+                          value={inputValue.input19}
+                          onChange={(e) =>
+                            setInputValue((prev) => ({
+                              ...prev,
+                              input19: e.target.value,
+                            }))
+                          }
+                        />
+                      </Layout>
+                    ),
+                    type7: (
+                      <Layout
+                        style={{
+                          justifyContent: "end",
+                          height: "100%",
+                        }}
+                        className="active-cell"
+                      >
+                        <Input
+                          type="text"
+                          value={inputValue.input20}
+                          onChange={(e) =>
+                            setInputValue((prev) => ({
+                              ...prev,
+                              input20: e.target.value,
+                            }))
+                          }
+                        />
                       </Layout>
                     ),
                   },
@@ -620,7 +998,14 @@ export default function useTableData() {
                   </>
                 ),
                 status: (
-                  <Layout style={{ alignItems: "center", gap: "20px" }}>
+                  <Layout
+                    style={{
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      gap: "20px",
+                      padding: "4px 8px",
+                    }}
+                  >
                     <Badge
                       size="xs"
                       view="stroked"
@@ -670,7 +1055,14 @@ export default function useTableData() {
                       </>
                     ),
                     status: (
-                      <Layout style={{ alignItems: "center", gap: "20px" }}>
+                      <Layout
+                        style={{
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          gap: "20px",
+                          padding: "4px 8px",
+                        }}
+                      >
                         <Badge
                           size="xs"
                           view="stroked"
@@ -687,25 +1079,17 @@ export default function useTableData() {
                       </Layout>
                     ),
                     type: (
-                      <Layout className="active-cell" style={{ gap: "4px" }}>
+                      <Layout
+                        className="active-cell"
+                        style={{
+                          gap: "4px",
+                          height: "100%",
+                          padding: "4px 8px",
+                          alignItems: "center",
+                        }}
+                      >
                         <Tag size="xs" mode="check" label="Тип 1" group={8} />
                         <Tag size="xs" mode="check" label="Тип 1" group={5} />
-                      </Layout>
-                    ),
-                    type2: (
-                      <Layout
-                        style={{ justifyContent: "end" }}
-                        className="active-cell"
-                      >
-                        <span>-</span>
-                      </Layout>
-                    ),
-                    type3: (
-                      <Layout
-                        style={{ justifyContent: "end" }}
-                        className="active-cell"
-                      >
-                        <span>1</span>
                       </Layout>
                     ),
                     rows: [
@@ -742,7 +1126,14 @@ export default function useTableData() {
                           </>
                         ),
                         status: (
-                          <Layout style={{ alignItems: "center", gap: "20px" }}>
+                          <Layout
+                            style={{
+                              justifyContent: "space-between",
+                              alignItems: "center",
+                              gap: "20px",
+                              padding: "4px 8px",
+                            }}
+                          >
                             <Badge
                               size="xs"
                               view="stroked"
@@ -761,7 +1152,12 @@ export default function useTableData() {
                         type: (
                           <Layout
                             className="active-cell"
-                            style={{ gap: "4px" }}
+                            style={{
+                              gap: "4px",
+                              height: "100%",
+                              padding: "4px 8px",
+                              alignItems: "center",
+                            }}
                           >
                             <Tag
                               size="xs"
@@ -775,22 +1171,6 @@ export default function useTableData() {
                               label="Тип 1"
                               group={5}
                             />
-                          </Layout>
-                        ),
-                        type2: (
-                          <Layout
-                            style={{ justifyContent: "end" }}
-                            className="active-cell"
-                          >
-                            <span>-</span>
-                          </Layout>
-                        ),
-                        type3: (
-                          <Layout
-                            style={{ justifyContent: "end" }}
-                            className="active-cell"
-                          >
-                            <span>1</span>
                           </Layout>
                         ),
                       },
@@ -827,7 +1207,14 @@ export default function useTableData() {
                           </>
                         ),
                         status: (
-                          <Layout style={{ alignItems: "center", gap: "20px" }}>
+                          <Layout
+                            style={{
+                              justifyContent: "space-between",
+                              alignItems: "center",
+                              gap: "20px",
+                              padding: "4px 8px",
+                            }}
+                          >
                             <Badge
                               size="xs"
                               view="stroked"
@@ -846,7 +1233,12 @@ export default function useTableData() {
                         type: (
                           <Layout
                             className="active-cell"
-                            style={{ gap: "4px" }}
+                            style={{
+                              gap: "4px",
+                              height: "100%",
+                              padding: "4px 8px",
+                              alignItems: "center",
+                            }}
                           >
                             <Tag
                               size="xs"
@@ -860,22 +1252,6 @@ export default function useTableData() {
                               label="Тип 1"
                               group={5}
                             />
-                          </Layout>
-                        ),
-                        type2: (
-                          <Layout
-                            style={{ justifyContent: "end" }}
-                            className="active-cell"
-                          >
-                            <span>-</span>
-                          </Layout>
-                        ),
-                        type3: (
-                          <Layout
-                            style={{ justifyContent: "end" }}
-                            className="active-cell"
-                          >
-                            <span>1</span>
                           </Layout>
                         ),
                       },

@@ -391,6 +391,7 @@
 .TableCell-Wrapper_isHeader {
   padding-top: 6px;
   padding-left: 8px;
+  border-bottom: 1px solid #ccd9e0;
 }
 
 .TableHeader-Cell_level_high .TableCell-Wrapper {
@@ -406,7 +407,7 @@
 }
 
 .TableCell {
-  max-height: 32px;
+  max-height: 33px;
 }
 
 .TableCell-Wrapper.TableCell-Wrapper_withoutPadding {
