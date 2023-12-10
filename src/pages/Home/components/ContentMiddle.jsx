@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-import { forwardRef, useState } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import { Layout } from "@consta/uikit/Layout";
 import { List } from "@consta/uikit/ListCanary";
 import { Text } from "@consta/uikit/Text";
@@ -55,12 +55,24 @@ const ContentMiddle = forwardRef((props, ref) => {
   const [sameItemChecked, setSameItemChecked] = useState(sameMenuItems[0]);
   const [switchedObject, setSwitchedObject] = useState(null);
   const [settingsItemChecked, setSettingsItemChecked] = useState(null);
+  const [currentSettingsData, setCurrentSettingsData] = useState(null);
 
   const [choiceDataId, setChoiceDataId] = useState(objectMenuItems[0].id);
 
   const objectDataChoicedById = objectMenuItems.filter(
     (item) => item.id === choiceDataId
   )[0]?.data;
+
+  const [transform, setTransform] = useState(false);
+
+  useEffect(() => {
+    if (settingsItemChecked) {
+      setTransform(true);
+      setCurrentSettingsData(settingsItemChecked.data);
+    }
+  }, [settingsItemChecked]);
+
+  useEffect(() => {}, [currentSettingsData]);
 
   return (
     <Layout className="home__middle">
@@ -207,6 +219,9 @@ const ContentMiddle = forwardRef((props, ref) => {
           isOpen={isSettingsModalOpen}
           setIsSettingsModalFullHeight={setIsSettingsModalFullHeight}
           title="Настройки"
+          settingsData={settingsItemChecked ? settingsItemChecked : null}
+          setTransform={setTransform}
+          setCurrentSettingsData={setCurrentSettingsData}
           isCollapse={true}
           isSettingsModal={true}
           onClose={() => {
@@ -218,8 +233,15 @@ const ContentMiddle = forwardRef((props, ref) => {
               "0px 8px 24px -4px rgba(24, 39, 75, 0.08), 0px 6px 12px -6px rgba(24, 39, 75, 0.05)",
           }}
           defaultType={
-            <Layout>
-              {/* <Layout direction="column">
+            <Layout style={{ overflow: "hidden", gap: "20px" }}>
+              <Layout
+                direction="column"
+                style={{
+                  minWidth: "305px",
+                  position: "absolute",
+                }}
+                className={`${transform ? "slide-left" : "slide-right"}`}
+              >
                 <List
                   items={settings}
                   size="xs"
@@ -227,14 +249,17 @@ const ContentMiddle = forwardRef((props, ref) => {
                   onItemClick={setSettingsItemChecked}
                   className="home__settings-list"
                 />
-              </Layout> */}
+              </Layout>
 
               <Layout
                 direction="column"
-                className="home__settings-modal--content"
+                style={{ minWidth: "305px", position: "absolute" }}
+                className={`home__settings-modal--content ${
+                  transform ? "slide-left2" : "slide-right2"
+                }`}
               >
                 <CollapseGroup
-                  items={settings[1].data}
+                  items={currentSettingsData || []}
                   size="s"
                   horizontalSpace="m"
                   iconPosition="right"

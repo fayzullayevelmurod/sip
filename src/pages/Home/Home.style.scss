@@ -499,3 +499,24 @@
   border-top-right-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
 }
+
+// Settings modal menu animation
+.slide-left {
+  transform: translateX(-100%);
+  transition: all 0.3s ease;
+}
+
+.slide-right {
+  transform: translateX(0);
+  transition: all 0.3s ease;
+}
+
+.slide-left2 {
+  left: 0px;
+  transition: all 0.3s ease;
+}
+
+.slide-right2 {
+  left: 318px;
+  transition: all 0.3s ease;
+}

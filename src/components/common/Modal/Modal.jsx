@@ -39,6 +39,9 @@ export default function Modal({
   setIsSettingsModalFullHeight,
   style,
   isSettingsModal,
+  setTransform,
+  settingsData,
+  setCurrentSettingsData,
 }) {
   const [isShown, setIsShown] = useState(false);
   const [fullHeight, setFullHeight] = useState(false);
@@ -74,13 +77,29 @@ export default function Modal({
       <Layout className="modal__header">
         <Layout style={{ alignItems: "center", gap: "4px" }}>
           {isSettingsModal && (
-            <Button view="clear" size="xs" iconLeft={IconBackward} />
+            <>
+              {settingsData && (
+                <Button
+                  onClick={() => {
+                    setTransform(false);
+                    setCurrentSettingsData(null);
+                  }}
+                  view="clear"
+                  size="xs"
+                  iconLeft={IconBackward}
+                />
+              )}
+            </>
           )}
           <Text className="modal__header--title">{title}</Text>
         </Layout>
         <Layout style={{ alignItems: "center", gap: "4px" }}>
           {isSettingsModal && (
-            <Badge size="xs" status="success" label="Статус" />
+            <>
+              {settingsData?.badge && (
+                <Badge size="xs" status={settingsData.badge} label="Статус" />
+              )}
+            </>
           )}
           <Text className="modal__header--close" onClick={onClose}>
             <IconClose size="xs" />
@@ -194,4 +213,7 @@ Modal.propTypes = {
   getChoice: PropTypes.func,
   setIsSettingsModalFullHeight: PropTypes.func,
   isSettingsModal: PropTypes.bool,
+  setTransform: PropTypes.func,
+  settingsData: PropTypes.func,
+  setCurrentSettingsData: PropTypes.func,
 };
