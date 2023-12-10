@@ -92,10 +92,11 @@ export default function Table(props) {
           columns={tableData.cols}
           borderBetweenColumns
           borderBetweenRows
-          stickyColumns={0}
+          stickyColumns={1}
           headerVerticalAlign="center"
           verticalAlign="top"
           className="home__table--table-content--table"
+          // onCellClick={(e) => console.log(e.ref.current)}
         />
       </Layout>
     </Layout>

@@ -38,3 +38,14 @@ a {
 .table-context {
   width: max-content !important;
 }
+
+.active-cell {
+  cursor: pointer;
+  width: 100%;
+  border: 2px solid transparent;
+}
+
+.active-cell:active {
+  border: 2px solid lightseagreen;
+  border-radius: 5px;
+}

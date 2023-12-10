@@ -3,6 +3,8 @@ import { useRef, useState } from "react";
 import { Button } from "@consta/uikit/Button";
 import { Layout } from "@consta/uikit/Layout";
 import { ContextMenu } from "@consta/uikit/ContextMenu";
+import { Badge } from "@consta/uikit/Badge";
+import { Tag } from "@consta/uikit/Tag";
 
 import { IconFlagFilled } from "@consta/icons/IconFlagFilled";
 import { IconFolderClosed } from "@consta/icons/IconFolderClosed";
@@ -11,6 +13,10 @@ import { IconHome } from "@consta/icons/IconHome";
 import { IconEye } from "@consta/icons/IconEye";
 import { IconEyeClose } from "@consta/icons/IconEyeClose";
 import { IconKebab } from "@consta/icons/IconKebab";
+import { IconAlert } from "@consta/icons/IconAlert";
+import { IconPlay } from "@consta/icons/IconPlay";
+import { IconAllDone } from "@consta/icons/IconAllDone";
+import { IconArrowRight } from "@consta/icons/IconArrowRight";
 
 const contextItems = [
   {
@@ -48,41 +54,114 @@ export default function useTableData() {
       {
         title: "Обьекты",
         accessor: "field",
-        renderCell: (row) => (
-          <Layout
-            style={{
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <Layout style={{ alignItems: "center", gap: "8px" }}>
-              {row.leftIcon}
-              <span>
-                {row.field} <i style={{ color: "gray" }}>{row.km}</i>
-              </span>
-            </Layout>
-            <Layout style={{ gap: "4px", marginLeft: "20px" }}>
-              {row.rightIcon1}
-              {row.rightIcon2}
-            </Layout>
-          </Layout>
-        ),
+        columns: [
+          {
+            title: "Название, м",
+            accessor: "field",
+            renderCell: (row) => (
+              <Layout
+                style={{
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <Layout style={{ alignItems: "center", gap: "8px" }}>
+                  {row.leftIcon}
+                  <span>
+                    {row.field} <i style={{ color: "gray" }}>{row.km}</i>
+                  </span>
+                </Layout>
+                <Layout style={{ gap: "4px", marginLeft: "20px" }}>
+                  {row.rightIcon1}
+                  {row.rightIcon2}
+                </Layout>
+              </Layout>
+            ),
+          },
+        ],
       },
       {
         title: "Группа 1",
-        accessor: "group_1",
+        accessor: "group1",
+        control: () => (
+          <Button
+            size="xs"
+            iconSize="s"
+            view="clear"
+            onlyIcon
+            iconLeft={IconArrowRight}
+          />
+        ),
+        columns: [
+          {
+            title: "Статус",
+            accessor: "status",
+            renderCell: (row) => <> {row.status}</>,
+          },
+        ],
       },
       {
         title: "Группа 2",
-        accessor: "group_2",
+        accessor: "group2",
+        control: () => (
+          <Button
+            size="xs"
+            iconSize="s"
+            view="clear"
+            onlyIcon
+            iconLeft={IconArrowRight}
+          />
+        ),
+        columns: [
+          {
+            title: "Название, м",
+            accessor: "type",
+          },
+          {
+            title: "Название, м",
+            accessor: "type2",
+          },
+          {
+            title: "Название, м",
+            accessor: "type3",
+          },
+        ],
       },
       {
         title: "Группа 3",
-        accessor: "group_3",
+        accessor: "group3",
+        columns: [
+          {
+            title: "Название, м",
+            accessor: "group3.1",
+          },
+          {
+            title: "Название, м",
+            accessor: "group3.2",
+          },
+          {
+            title: "Название, м",
+            accessor: "group3.3",
+          },
+        ],
       },
       {
         title: "Группа 4",
-        accessor: "group_4",
+        accessor: "group4",
+        columns: [
+          {
+            title: "Название, м",
+            accessor: "group4.1",
+          },
+          {
+            title: "Название, м",
+            accessor: "group4.2",
+          },
+          {
+            title: "Название, м",
+            accessor: "group4.3",
+          },
+        ],
       },
     ],
     rows: [
@@ -90,11 +169,46 @@ export default function useTableData() {
         id: "row1",
         field: "Страна",
         leftIcon: <IconFolderClosed size="xs" view="secondary" />,
+        status: (
+          <Layout style={{ alignItems: "center", gap: "20px" }}>
+            <Badge
+              size="xs"
+              view="stroked"
+              iconLeft={IconAlert}
+              status="system"
+              label="Черновик"
+            />
+            <Button iconLeft={IconPlay} onlyIcon size="xs" view="ghost" />
+          </Layout>
+        ),
+        type: (
+          <Layout className="active-cell" style={{ gap: "4px" }}>
+            <Tag size="xs" mode="check" label="Тип 1" group={8} />
+            <Tag size="xs" mode="check" label="Тип 1" group={5} />
+          </Layout>
+        ),
+        type2: (
+          <Layout style={{ justifyContent: "end" }} className="active-cell">
+            <span>-</span>
+          </Layout>
+        ),
         rows: [
           {
             id: "row1.1",
             field: "Граница 1",
             km: "200 км",
+            status: (
+              <Layout style={{ alignItems: "center", gap: "20px" }}>
+                <Badge
+                  size="xs"
+                  view="stroked"
+                  iconLeft={IconAllDone}
+                  status="success"
+                  label="Готово"
+                />
+                <Button iconLeft={IconPlay} onlyIcon size="xs" view="ghost" />
+              </Layout>
+            ),
             leftIcon: <IconFlagFilled size="xs" view="secondary" />,
             rightIcon1: (
               <Button size="xs" view="clear" onlyIcon iconLeft={IconEye} />
@@ -147,6 +261,45 @@ export default function useTableData() {
                     />
                   </>
                 ),
+                status: (
+                  <Layout style={{ alignItems: "center", gap: "20px" }}>
+                    <Badge
+                      size="xs"
+                      view="stroked"
+                      iconLeft={IconAllDone}
+                      status="success"
+                      label="Готово"
+                    />
+                    <Button
+                      iconLeft={IconPlay}
+                      onlyIcon
+                      size="xs"
+                      view="ghost"
+                    />
+                  </Layout>
+                ),
+                type: (
+                  <Layout className="active-cell" style={{ gap: "4px" }}>
+                    <Tag size="xs" mode="check" label="Тип 1" group={8} />
+                    <Tag size="xs" mode="check" label="Тип 1" group={5} />
+                  </Layout>
+                ),
+                type2: (
+                  <Layout
+                    style={{ justifyContent: "end" }}
+                    className="active-cell"
+                  >
+                    <span>-</span>
+                  </Layout>
+                ),
+                type3: (
+                  <Layout
+                    style={{ justifyContent: "end" }}
+                    className="active-cell"
+                  >
+                    <span>1</span>
+                  </Layout>
+                ),
                 rows: [
                   {
                     id: "row1.1.1.1",
@@ -179,6 +332,29 @@ export default function useTableData() {
                           className="table-context"
                         />
                       </>
+                    ),
+                    status: (
+                      <Layout style={{ alignItems: "center", gap: "20px" }}>
+                        <Badge
+                          size="xs"
+                          view="stroked"
+                          iconLeft={IconAlert}
+                          status="warning"
+                          label="Изменено"
+                        />
+                        <Button
+                          iconLeft={IconPlay}
+                          onlyIcon
+                          size="xs"
+                          view="ghost"
+                        />
+                      </Layout>
+                    ),
+                    type: (
+                      <Layout className="active-cell" style={{ gap: "4px" }}>
+                        <Tag size="xs" mode="check" label="Тип 1" group={8} />
+                        <Tag size="xs" mode="check" label="Тип 1" group={5} />
+                      </Layout>
                     ),
                   },
                   {
@@ -213,6 +389,45 @@ export default function useTableData() {
                         />
                       </>
                     ),
+                    status: (
+                      <Layout style={{ alignItems: "center", gap: "20px" }}>
+                        <Badge
+                          size="xs"
+                          view="stroked"
+                          iconLeft={IconAlert}
+                          status="system"
+                          label="Черновик"
+                        />
+                        <Button
+                          iconLeft={IconPlay}
+                          onlyIcon
+                          size="xs"
+                          view="ghost"
+                        />
+                      </Layout>
+                    ),
+                    type: (
+                      <Layout className="active-cell" style={{ gap: "4px" }}>
+                        <Tag size="xs" mode="check" label="Тип 1" group={8} />
+                        <Tag size="xs" mode="check" label="Тип 1" group={5} />
+                      </Layout>
+                    ),
+                    type2: (
+                      <Layout
+                        style={{ justifyContent: "end" }}
+                        className="active-cell"
+                      >
+                        <span>-</span>
+                      </Layout>
+                    ),
+                    type3: (
+                      <Layout
+                        style={{ justifyContent: "end" }}
+                        className="active-cell"
+                      >
+                        <span>1</span>
+                      </Layout>
+                    ),
                   },
                 ],
               },
@@ -243,6 +458,23 @@ export default function useTableData() {
                       className="table-context"
                     />
                   </>
+                ),
+                status: (
+                  <Layout style={{ alignItems: "center", gap: "20px" }}>
+                    <Badge
+                      size="xs"
+                      view="stroked"
+                      iconLeft={IconAlert}
+                      status="system"
+                      label="Черновик"
+                    />
+                    <Button
+                      iconLeft={IconPlay}
+                      onlyIcon
+                      size="xs"
+                      view="ghost"
+                    />
+                  </Layout>
                 ),
                 rows: [
                   {
@@ -277,6 +509,45 @@ export default function useTableData() {
                         />
                       </>
                     ),
+                    status: (
+                      <Layout style={{ alignItems: "center", gap: "20px" }}>
+                        <Badge
+                          size="xs"
+                          view="stroked"
+                          iconLeft={IconAlert}
+                          status="system"
+                          label="Черновик"
+                        />
+                        <Button
+                          iconLeft={IconPlay}
+                          onlyIcon
+                          size="xs"
+                          view="ghost"
+                        />
+                      </Layout>
+                    ),
+                    type: (
+                      <Layout className="active-cell" style={{ gap: "4px" }}>
+                        <Tag size="xs" mode="check" label="Тип 1" group={8} />
+                        <Tag size="xs" mode="check" label="Тип 1" group={5} />
+                      </Layout>
+                    ),
+                    type2: (
+                      <Layout
+                        style={{ justifyContent: "end" }}
+                        className="active-cell"
+                      >
+                        <span>-</span>
+                      </Layout>
+                    ),
+                    type3: (
+                      <Layout
+                        style={{ justifyContent: "end" }}
+                        className="active-cell"
+                      >
+                        <span>1</span>
+                      </Layout>
+                    ),
                     rows: [
                       {
                         id: "row1.2.1.2",
@@ -310,6 +581,58 @@ export default function useTableData() {
                             />
                           </>
                         ),
+                        status: (
+                          <Layout style={{ alignItems: "center", gap: "20px" }}>
+                            <Badge
+                              size="xs"
+                              view="stroked"
+                              iconLeft={IconAllDone}
+                              status="success"
+                              label="Готово"
+                            />
+                            <Button
+                              iconLeft={IconPlay}
+                              onlyIcon
+                              size="xs"
+                              view="ghost"
+                            />
+                          </Layout>
+                        ),
+                        type: (
+                          <Layout
+                            className="active-cell"
+                            style={{ gap: "4px" }}
+                          >
+                            <Tag
+                              size="xs"
+                              mode="check"
+                              label="Тип 1"
+                              group={8}
+                            />
+                            <Tag
+                              size="xs"
+                              mode="check"
+                              label="Тип 1"
+                              group={5}
+                            />
+                          </Layout>
+                        ),
+                        type2: (
+                          <Layout
+                            style={{ justifyContent: "end" }}
+                            className="active-cell"
+                          >
+                            <span>-</span>
+                          </Layout>
+                        ),
+                        type3: (
+                          <Layout
+                            style={{ justifyContent: "end" }}
+                            className="active-cell"
+                          >
+                            <span>1</span>
+                          </Layout>
+                        ),
                       },
                       {
                         id: "row1.2.1.3",
@@ -342,6 +665,58 @@ export default function useTableData() {
                               className="table-context"
                             />
                           </>
+                        ),
+                        status: (
+                          <Layout style={{ alignItems: "center", gap: "20px" }}>
+                            <Badge
+                              size="xs"
+                              view="stroked"
+                              iconLeft={IconAlert}
+                              status="system"
+                              label="Черновик"
+                            />
+                            <Button
+                              iconLeft={IconPlay}
+                              onlyIcon
+                              size="xs"
+                              view="ghost"
+                            />
+                          </Layout>
+                        ),
+                        type: (
+                          <Layout
+                            className="active-cell"
+                            style={{ gap: "4px" }}
+                          >
+                            <Tag
+                              size="xs"
+                              mode="check"
+                              label="Тип 1"
+                              group={8}
+                            />
+                            <Tag
+                              size="xs"
+                              mode="check"
+                              label="Тип 1"
+                              group={5}
+                            />
+                          </Layout>
+                        ),
+                        type2: (
+                          <Layout
+                            style={{ justifyContent: "end" }}
+                            className="active-cell"
+                          >
+                            <span>-</span>
+                          </Layout>
+                        ),
+                        type3: (
+                          <Layout
+                            style={{ justifyContent: "end" }}
+                            className="active-cell"
+                          >
+                            <span>1</span>
+                          </Layout>
                         ),
                       },
                     ],
