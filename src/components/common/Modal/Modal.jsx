@@ -73,11 +73,15 @@ export default function Modal({
     >
       <Layout className="modal__header">
         <Layout style={{ alignItems: "center", gap: "4px" }}>
-          <Button view="clear" size="xs" iconLeft={IconBackward} />
+          {isSettingsModal && (
+            <Button view="clear" size="xs" iconLeft={IconBackward} />
+          )}
           <Text className="modal__header--title">{title}</Text>
         </Layout>
         <Layout style={{ alignItems: "center", gap: "4px" }}>
-          <Badge size="xs" status="success" label="Статус" />
+          {isSettingsModal && (
+            <Badge size="xs" status="success" label="Статус" />
+          )}
           <Text className="modal__header--close" onClick={onClose}>
             <IconClose size="xs" />
           </Text>

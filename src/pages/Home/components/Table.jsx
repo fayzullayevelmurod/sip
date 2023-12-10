@@ -1,22 +1,17 @@
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
 
 // Consta/uikit components
-import { Table as ConstaTable } from "@consta/uikit/Table"
-import { Button } from "@consta/uikit/Button"
-import { Layout } from "@consta/uikit/Layout"
-import { Text } from "@consta/uikit/Text"
+import { Table as ConstaTable } from "@consta/uikit/Table";
+import { Button } from "@consta/uikit/Button";
+import { Layout } from "@consta/uikit/Layout";
+import { Text } from "@consta/uikit/Text";
 
 // Icons
-import { IconExpand } from "@consta/icons/IconExpand"
-import { IconPanelBottom } from "@consta/icons/IconPanelBottom"
-import { IconArrowDown } from "@consta/icons/IconArrowDown"
+import { IconExpand } from "@consta/icons/IconExpand";
+import { IconPanelBottom } from "@consta/icons/IconPanelBottom";
+import { IconArrowDown } from "@consta/icons/IconArrowDown";
 
-// Mock data
-import {
-  ListOfDistrictsColumns,
-  ListOfDistrictsFilter,
-  ListOfDistrictsRows
-} from "../mock"
+import useTableData from "../mock/useTableData";
 
 export default function Table(props) {
   const {
@@ -27,16 +22,25 @@ export default function Table(props) {
     setIsOpen,
     windowHeight,
     tableHeight,
-  } = props
+  } = props;
+
+  const tableData = useTableData();
 
   return (
     <Layout
-      direction='column'
-      className="home__table" style={{ display: `${!tableOpen ? 'none' : ''}` }}>
-
+      direction="column"
+      className="home__table"
+      style={{ display: `${!tableOpen ? "none" : ""}` }}
+    >
       {/* Table Header */}
       <Layout className="home__table--table-header">
-        <Text size="s" weight="semibold" className="home__table--table-header--title">Список районов</Text>
+        <Text
+          size="s"
+          weight="semibold"
+          className="home__table--table-header--title"
+        >
+          Таблица
+        </Text>
         <Layout>
           <Button
             size="xs"
@@ -45,10 +49,10 @@ export default function Table(props) {
             iconLeft={IconExpand}
             onlyIcon
             onClick={() => {
-              setTableHeight(windowHeight - 100 - 48)
-              setTableFullHeight(true)
-              setIsOpen(false)
-              setTable50(false)
+              setTableHeight(windowHeight - 100 - 48);
+              setTableFullHeight(true);
+              setIsOpen(false);
+              setTable50(false);
             }}
           />
           <Button
@@ -58,9 +62,9 @@ export default function Table(props) {
             iconLeft={IconPanelBottom}
             onlyIcon
             onClick={() => {
-              setTableHeight((windowHeight / 2) - 40)
-              setTable50(true)
-              setTableFullHeight(false)
+              setTableHeight(windowHeight / 2 - 40);
+              setTable50(true);
+              setTableFullHeight(false);
             }}
           />
           <Button
@@ -70,31 +74,32 @@ export default function Table(props) {
             iconLeft={IconArrowDown}
             onlyIcon
             onClick={() => {
-              setTableHeight(0)
-              setTable50(false)
-              setTableFullHeight(false)
+              setTableHeight(0);
+              setTable50(false);
+              setTableFullHeight(false);
             }}
           />
         </Layout>
       </Layout>
 
       {/* Table Content */}
-      <Layout className="home__table--table-content" style={{ height: `${tableHeight}px` }}>
+      <Layout
+        className="home__table--table-content"
+        style={{ height: `${tableHeight}px` }}
+      >
         <ConstaTable
+          rows={tableData.rows}
+          columns={tableData.cols}
+          borderBetweenColumns
           borderBetweenRows
-          stickyHeader
-          verticalAlign="top"
-          size="m"
+          stickyColumns={0}
           headerVerticalAlign="center"
-          isResizable
-          columns={ListOfDistrictsColumns}
-          rows={ListOfDistrictsRows}
-          filters={ListOfDistrictsFilter}
+          verticalAlign="top"
           className="home__table--table-content--table"
         />
       </Layout>
     </Layout>
-  )
+  );
 }
 
 Table.propTypes = {
@@ -104,5 +109,5 @@ Table.propTypes = {
   setIsOpen: PropTypes.func,
   windowHeight: PropTypes.number,
   tableHeight: PropTypes.number,
-  setTable50: PropTypes.func
-}
+  setTable50: PropTypes.func,
+};

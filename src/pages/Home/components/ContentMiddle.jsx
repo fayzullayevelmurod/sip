@@ -219,7 +219,7 @@ const ContentMiddle = forwardRef((props, ref) => {
           }}
           defaultType={
             <Layout>
-              <Layout direction="column">
+              {/* <Layout direction="column">
                 <List
                   items={settings}
                   size="xs"
@@ -227,9 +227,9 @@ const ContentMiddle = forwardRef((props, ref) => {
                   onItemClick={setSettingsItemChecked}
                   className="home__settings-list"
                 />
-              </Layout>
+              </Layout> */}
 
-              {/* <Layout
+              <Layout
                 direction="column"
                 className="home__settings-modal--content"
               >
@@ -264,7 +264,7 @@ const ContentMiddle = forwardRef((props, ref) => {
                     />
                   </Layout>
                 </Layout>
-              </Layout> */}
+              </Layout>
             </Layout>
           }
         />

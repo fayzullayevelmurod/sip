@@ -371,15 +371,14 @@
 // Table
 .TableCell-Wrapper_isHeader {
   background-color: #ecf1f4;
-  color: var(--typo-primary, #002033);
-  font-family: Inter;
+  text-transform: none;
+  position: sticky;
+  color: var(--typo-secondary, rgba(0, 32, 51, 0.6));
   font-size: 12px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 150%;
   letter-spacing: 0.12px;
-  text-transform: uppercase;
-  position: sticky;
 }
 
 .TableCell-Wrapper {
