@@ -72,8 +72,6 @@ const ContentMiddle = forwardRef((props, ref) => {
     }
   }, [settingsItemChecked]);
 
-  useEffect(() => {}, [currentSettingsData]);
-
   return (
     <Layout className="home__middle">
       {/* Calculation and Data Popup menu */}
@@ -221,6 +219,7 @@ const ContentMiddle = forwardRef((props, ref) => {
           title="Настройки"
           settingsData={settingsItemChecked ? settingsItemChecked : null}
           setTransform={setTransform}
+          currentSettingsData={currentSettingsData}
           setCurrentSettingsData={setCurrentSettingsData}
           isCollapse={true}
           isSettingsModal={true}

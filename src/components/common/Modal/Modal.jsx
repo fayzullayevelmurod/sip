@@ -42,6 +42,7 @@ export default function Modal({
   setTransform,
   settingsData,
   setCurrentSettingsData,
+  currentSettingsData,
 }) {
   const [isShown, setIsShown] = useState(false);
   const [fullHeight, setFullHeight] = useState(false);
@@ -78,7 +79,7 @@ export default function Modal({
         <Layout style={{ alignItems: "center", gap: "4px" }}>
           {isSettingsModal && (
             <>
-              {settingsData && (
+              {currentSettingsData && (
                 <Button
                   onClick={() => {
                     setTransform(false);
@@ -96,7 +97,7 @@ export default function Modal({
         <Layout style={{ alignItems: "center", gap: "4px" }}>
           {isSettingsModal && (
             <>
-              {settingsData?.badge && (
+              {currentSettingsData && settingsData?.badge && (
                 <Badge size="xs" status={settingsData.badge} label="Статус" />
               )}
             </>
@@ -214,6 +215,7 @@ Modal.propTypes = {
   setIsSettingsModalFullHeight: PropTypes.func,
   isSettingsModal: PropTypes.bool,
   setTransform: PropTypes.func,
-  settingsData: PropTypes.func,
+  settingsData: PropTypes.any,
+  currentSettingsData: PropTypes.any,
   setCurrentSettingsData: PropTypes.func,
 };
