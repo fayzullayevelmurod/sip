@@ -279,6 +279,7 @@ export default function Home() {
           windowHeight={windowHeight}
           tableHeight={tableHeight}
           setTable50={setTable50}
+          windowWidth={windowWidth}
         />
       </Layout>
     </>

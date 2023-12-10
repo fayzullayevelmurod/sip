@@ -42,10 +42,16 @@ a {
 .active-cell {
   cursor: pointer;
   width: 100%;
-  border: 2px solid transparent;
+  border: 1px solid transparent;
 }
 
 .active-cell:active {
-  border: 2px solid lightseagreen;
+  border: 1px solid #0078d2;
   border-radius: 5px;
+}
+
+.focus-cell {
+  border: 1px solid #0078d2;
+  border-radius: 5px;
+  background-color: white;
 }

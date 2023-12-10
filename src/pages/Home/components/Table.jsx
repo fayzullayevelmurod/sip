@@ -21,6 +21,7 @@ export default function Table(props) {
     setTable50,
     setIsOpen,
     windowHeight,
+    windowWidth,
     tableHeight,
   } = props;
 
@@ -92,11 +93,10 @@ export default function Table(props) {
           columns={tableData.cols}
           borderBetweenColumns
           borderBetweenRows
-          stickyColumns={1}
+          stickyColumns={windowWidth > 800 ? 1 : 0}
           headerVerticalAlign="center"
           verticalAlign="top"
           className="home__table--table-content--table"
-          // onCellClick={(e) => console.log(e.ref.current)}
         />
       </Layout>
     </Layout>
@@ -111,4 +111,5 @@ Table.propTypes = {
   windowHeight: PropTypes.number,
   tableHeight: PropTypes.number,
   setTable50: PropTypes.func,
+  windowWidth: PropTypes.number,
 };

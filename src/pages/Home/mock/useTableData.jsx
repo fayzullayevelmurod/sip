@@ -1,10 +1,12 @@
-import { useEffect, useRef, useState } from "react";
+// Custom table design with inline styles and mock data
+import { useRef, useState } from "react";
 
 import { Button } from "@consta/uikit/Button";
 import { Layout } from "@consta/uikit/Layout";
 import { ContextMenu } from "@consta/uikit/ContextMenu";
 import { Badge } from "@consta/uikit/Badge";
 import { Tag } from "@consta/uikit/Tag";
+import { Switch } from "@consta/uikit/Switch";
 
 import { IconFlagFilled } from "@consta/icons/IconFlagFilled";
 import { IconFolderClosed } from "@consta/icons/IconFolderClosed";
@@ -17,6 +19,9 @@ import { IconAlert } from "@consta/icons/IconAlert";
 import { IconPlay } from "@consta/icons/IconPlay";
 import { IconAllDone } from "@consta/icons/IconAllDone";
 import { IconArrowRight } from "@consta/icons/IconArrowRight";
+import { IconSelect } from "@consta/icons/IconSelect";
+
+import Input from "../components/Input";
 
 const contextItems = [
   {
@@ -30,7 +35,19 @@ const contextItems = [
   },
 ];
 
+const switchContextItems = [
+  {
+    label: "Тип 1",
+    switch: true,
+  },
+  {
+    label: "Тип 2",
+    switch: false,
+  },
+];
+
 export default function useTableData() {
+  // table left side
   const [isContextOpen_1, setIsContextOpen_1] = useState(false);
   const [isContextOpen_2, setIsContextOpen_2] = useState(false);
   const [isContextOpen_3, setIsContextOpen_3] = useState(false);
@@ -40,6 +57,7 @@ export default function useTableData() {
   const [isContextOpen_7, setIsContextOpen_7] = useState(false);
   const [isContextOpen_8, setIsContextOpen_8] = useState(false);
 
+  // table left side
   const contextRef1 = useRef(null);
   const contextRef2 = useRef(null);
   const contextRef3 = useRef(null);
@@ -49,6 +67,51 @@ export default function useTableData() {
   const contextRef7 = useRef(null);
   const contextRef8 = useRef(null);
 
+  // switch context
+  const [isSwitchContextOpen_1, setIsSwitchContextOpen_1] = useState(false);
+
+  // switch context
+  const switchContextRef1 = useRef(null);
+
+  // input values
+  const [inputValue, setInputValue] = useState({
+    input1: "-",
+    input2: "1",
+  });
+
+  const [switchItems, setSwitchItems] = useState(switchContextItems);
+
+  // Render Switch in Context Menu (right side)
+  function renderSwitch(item, onChange) {
+    const nodeArray = [];
+
+    if (item.switch !== undefined) {
+      nodeArray.push(
+        <Switch
+          size="s"
+          checked={item.switch}
+          onChange={() => onChange(item)}
+          key="Switch"
+        />
+      );
+    }
+
+    return nodeArray;
+  }
+
+  // Get state switched Item
+  const onChangeSwitch = (switchItem) => {
+    const newItems = switchItems.map((item, index) => {
+      if (switchItem.label === item.label) {
+        return { ...switchItems[index], switch: !switchItems[index].switch };
+      }
+      return item;
+    });
+
+    setSwitchItems(newItems);
+  };
+
+  // All table data
   return {
     cols: [
       {
@@ -57,7 +120,7 @@ export default function useTableData() {
         width: 441,
         columns: [
           {
-            title: "Название, м",
+            title: "Название",
             accessor: "field",
             width: 441,
             renderCell: (row) => (
@@ -139,16 +202,21 @@ export default function useTableData() {
       {
         title: "Группа 3",
         accessor: "group3",
-        width: 360,
+        width: 400,
         columns: [
           {
             title: "Название, м",
             accessor: "group3.1",
-            width: 160,
+            width: 100,
           },
           {
             title: "Название, м",
-            accessor: "group3.2",
+            accessor: "type5",
+            width: 100,
+          },
+          {
+            title: "Название, м",
+            accessor: "group3.3",
             width: 100,
           },
           {
@@ -208,15 +276,80 @@ export default function useTableData() {
         type: (
           <Layout
             className="active-cell"
-            style={{ gap: "4px", height: "100%" }}
+            style={{ gap: "4px", height: "100%", padding: "4px 8px" }}
           >
             <Tag size="xs" mode="check" label="Тип 1" group={8} />
             <Tag size="xs" mode="check" label="Тип 1" group={5} />
           </Layout>
         ),
         type2: (
-          <Layout style={{ justifyContent: "end" }} className="active-cell">
-            <span>-</span>
+          <Layout
+            style={{
+              justifyContent: "end",
+              height: "100%",
+            }}
+            className="active-cell"
+          >
+            <Input
+              type="text"
+              value={inputValue.input1}
+              onChange={(e) =>
+                setInputValue((prev) => ({ ...prev, input1: e.target.value }))
+              }
+            />
+          </Layout>
+        ),
+        type3: (
+          <Layout
+            style={{
+              justifyContent: "end",
+              height: "100%",
+            }}
+            className="active-cell"
+          >
+            <Input
+              type="text"
+              value={inputValue.input2}
+              onChange={(e) =>
+                setInputValue((prev) => ({ ...prev, input2: e.target.value }))
+              }
+            />
+          </Layout>
+        ),
+        type5: (
+          <Layout
+            className={`active-cell ${
+              isSwitchContextOpen_1 ? "focus-cell" : ""
+            }`}
+            style={{
+              justifyContent: "space-between",
+              alignItems: "center",
+              gap: "2px",
+              height: "100%",
+              padding: "4px 4px",
+            }}
+            ref={switchContextRef1}
+            onClick={() => setIsSwitchContextOpen_1((prev) => !prev)}
+          >
+            {switchItems.map(
+              (item) =>
+                item.switch && (
+                  <Layout key={item.label}>
+                    <Tag size="xs" mode="check" label={item.label} />
+                  </Layout>
+                )
+            )}
+            {!switchItems.some((item) => item.switch) && <span>-</span>}
+            <IconSelect size="xs" />
+            <ContextMenu
+              size="xs"
+              isOpen={isSwitchContextOpen_1}
+              items={switchItems}
+              anchorRef={switchContextRef1}
+              getItemRightSide={(item) => renderSwitch(item, onChangeSwitch)}
+              direction="downStartLeft"
+              style={{ width: "100px" }}
+            />
           </Layout>
         ),
         rows: [
