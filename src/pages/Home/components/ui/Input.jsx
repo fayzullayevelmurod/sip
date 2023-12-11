@@ -2,6 +2,7 @@ import { useState } from "react";
 
 export default function Input(props) {
   const [isEditable, setIsEditable] = useState(false);
+  // const [isActive, setIsActive] = useState(false);
 
   return (
     <input
@@ -27,7 +28,7 @@ export default function Input(props) {
         padding: "4px 8px",
         cursor: "pointer",
       }}
-      className={`active-cell`}
+      className={`active-cell ${props.isActive ? "cell-is-active" : ""}`}
       {...props}
     />
   );

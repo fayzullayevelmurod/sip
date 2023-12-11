@@ -104,6 +104,12 @@ export default function useTableData() {
     input20: "1",
   });
 
+  const [activeCell, setActiveCell] = useState(null);
+
+  const handleCellClick = (cellId) => {
+    setActiveCell(cellId);
+  };
+
   // All table data
   return {
     cols: [
@@ -286,13 +292,16 @@ export default function useTableData() {
         ),
         type: (
           <Layout
-            className="active-cell"
+            className={`active-cell ${
+              activeCell === "cell0" ? "cell-is-active" : ""
+            }`}
             style={{
               gap: "4px",
               height: "100%",
               padding: "4px 8px",
               alignItems: "center",
             }}
+            onClick={() => handleCellClick("cell0")}
           >
             <Tag size="xs" mode="check" label="Тип 1" group={8} />
             <Tag size="xs" mode="check" label="Тип 2" group={5} />
@@ -312,6 +321,8 @@ export default function useTableData() {
               onChange={(e) =>
                 setInputValue((prev) => ({ ...prev, input1: e.target.value }))
               }
+              isActive={activeCell === "cell1"}
+              onClick={() => handleCellClick("cell1")}
             />
           </Layout>
         ),
@@ -329,6 +340,8 @@ export default function useTableData() {
               onChange={(e) =>
                 setInputValue((prev) => ({ ...prev, input2: e.target.value }))
               }
+              isActive={activeCell === "cell2"}
+              onClick={() => handleCellClick("cell2")}
             />
           </Layout>
         ),
@@ -346,6 +359,8 @@ export default function useTableData() {
               onChange={(e) =>
                 setInputValue((prev) => ({ ...prev, input3: e.target.value }))
               }
+              isActive={activeCell === "cell3"}
+              onClick={() => handleCellClick("cell3")}
             />
           </Layout>
         ),
@@ -357,6 +372,8 @@ export default function useTableData() {
             }
             isOpen={isSwitchContextOpen_1}
             setIsOpen={setIsSwitchContextOpen_1}
+            isActive={activeCell === "cell4"}
+            onClick={() => handleCellClick("cell4")}
           />
         ),
         type6: (
@@ -373,6 +390,8 @@ export default function useTableData() {
               onChange={(e) =>
                 setInputValue((prev) => ({ ...prev, input4: e.target.value }))
               }
+              isActive={activeCell === "cell5"}
+              onClick={() => handleCellClick("cell5")}
             />
           </Layout>
         ),
@@ -390,6 +409,8 @@ export default function useTableData() {
               onChange={(e) =>
                 setInputValue((prev) => ({ ...prev, input5: e.target.value }))
               }
+              isActive={activeCell === "cell6"}
+              onClick={() => handleCellClick("cell6")}
             />
           </Layout>
         ),
@@ -495,13 +516,16 @@ export default function useTableData() {
                 ),
                 type: (
                   <Layout
-                    className="active-cell"
+                    className={`active-cell ${
+                      activeCell === "cell7" ? "cell-is-active" : ""
+                    }`}
                     style={{
                       gap: "4px",
                       height: "100%",
                       padding: "4px 8px",
                       alignItems: "center",
                     }}
+                    onClick={() => handleCellClick("cell7")}
                   >
                     <Tag size="xs" mode="check" label="Тип 1" group={8} />
                     <Tag size="xs" mode="check" label="Тип 1" group={5} />
@@ -524,6 +548,8 @@ export default function useTableData() {
                           input6: e.target.value,
                         }))
                       }
+                      isActive={activeCell === "cell8"}
+                      onClick={() => handleCellClick("cell9")}
                     />
                   </Layout>
                 ),
@@ -544,6 +570,8 @@ export default function useTableData() {
                           input7: e.target.value,
                         }))
                       }
+                      isActive={activeCell === "cell10"}
+                      onClick={() => handleCellClick("cell10")}
                     />
                   </Layout>
                 ),
@@ -564,6 +592,8 @@ export default function useTableData() {
                           input12: e.target.value,
                         }))
                       }
+                      isActive={activeCell === "cell11"}
+                      onClick={() => handleCellClick("cell11")}
                     />
                   </Layout>
                 ),
@@ -575,6 +605,8 @@ export default function useTableData() {
                     }
                     isOpen={isSwitchContextOpen_2}
                     setIsOpen={setIsSwitchContextOpen_2}
+                    isActive={activeCell === "cell12"}
+                    onClick={() => handleCellClick("cell12")}
                   />
                 ),
                 type6: (
@@ -594,6 +626,8 @@ export default function useTableData() {
                           input13: e.target.value,
                         }))
                       }
+                      isActive={activeCell === "cell13"}
+                      onClick={() => handleCellClick("cell13")}
                     />
                   </Layout>
                 ),
@@ -614,6 +648,8 @@ export default function useTableData() {
                           input14: e.target.value,
                         }))
                       }
+                      isActive={activeCell === "cell14"}
+                      onClick={() => handleCellClick("cell14")}
                     />
                   </Layout>
                 ),
@@ -676,13 +712,16 @@ export default function useTableData() {
                     ),
                     type: (
                       <Layout
-                        className="active-cell"
+                        className={`active-cell ${
+                          activeCell === "cell15" ? "cell-is-active" : ""
+                        }`}
                         style={{
                           gap: "4px",
                           height: "100%",
                           padding: "4px 8px",
                           alignItems: "center",
                         }}
+                        onClick={() => handleCellClick("cell15")}
                       >
                         <Tag size="xs" mode="check" label="Тип 1" group={8} />
                         <Tag size="xs" mode="check" label="Тип 1" group={5} />
@@ -705,6 +744,8 @@ export default function useTableData() {
                               input8: e.target.value,
                             }))
                           }
+                          isActive={activeCell === "cell16"}
+                          onClick={() => handleCellClick("cell16")}
                         />
                       </Layout>
                     ),
@@ -725,6 +766,8 @@ export default function useTableData() {
                               input9: e.target.value,
                             }))
                           }
+                          isActive={activeCell === "cell17"}
+                          onClick={() => handleCellClick("cell17")}
                         />
                       </Layout>
                     ),
@@ -745,6 +788,8 @@ export default function useTableData() {
                               input15: e.target.value,
                             }))
                           }
+                          isActive={activeCell === "cell18"}
+                          onClick={() => handleCellClick("cell18")}
                         />
                       </Layout>
                     ),
@@ -759,6 +804,8 @@ export default function useTableData() {
                         }
                         isOpen={isSwitchContextOpen_3}
                         setIsOpen={setIsSwitchContextOpen_3}
+                        isActive={activeCell === "cell19"}
+                        onClick={() => handleCellClick("cell19")}
                       />
                     ),
                     type6: (
@@ -778,6 +825,8 @@ export default function useTableData() {
                               input16: e.target.value,
                             }))
                           }
+                          isActive={activeCell === "cell20"}
+                          onClick={() => handleCellClick("cell20")}
                         />
                       </Layout>
                     ),
@@ -798,6 +847,8 @@ export default function useTableData() {
                               input17: e.target.value,
                             }))
                           }
+                          isActive={activeCell === "cell21"}
+                          onClick={() => handleCellClick("cell21")}
                         />
                       </Layout>
                     ),
@@ -860,13 +911,16 @@ export default function useTableData() {
                     ),
                     type: (
                       <Layout
-                        className="active-cell"
+                        className={`active-cell ${
+                          activeCell === "cell22" ? "cell-is-active" : ""
+                        }`}
                         style={{
                           gap: "4px",
                           height: "100%",
                           padding: "4px 8px",
                           alignItems: "center",
                         }}
+                        onClick={() => handleCellClick("cell22")}
                       >
                         <Tag size="xs" mode="check" label="Тип 1" group={8} />
                         <Tag size="xs" mode="check" label="Тип 1" group={5} />
@@ -889,6 +943,8 @@ export default function useTableData() {
                               input10: e.target.value,
                             }))
                           }
+                          isActive={activeCell === "cell23"}
+                          onClick={() => handleCellClick("cell23")}
                         />
                       </Layout>
                     ),
@@ -909,6 +965,8 @@ export default function useTableData() {
                               input11: e.target.value,
                             }))
                           }
+                          isActive={activeCell === "cell24"}
+                          onClick={() => handleCellClick("cell24")}
                         />
                       </Layout>
                     ),
@@ -929,6 +987,8 @@ export default function useTableData() {
                               input18: e.target.value,
                             }))
                           }
+                          isActive={activeCell === "cell25"}
+                          onClick={() => handleCellClick("cell25")}
                         />
                       </Layout>
                     ),
@@ -943,6 +1003,8 @@ export default function useTableData() {
                         }
                         isOpen={isSwitchContextOpen_4}
                         setIsOpen={setIsSwitchContextOpen_4}
+                        isActive={activeCell === "cell26"}
+                        onClick={() => handleCellClick("cell26")}
                       />
                     ),
                     type6: (
@@ -962,6 +1024,8 @@ export default function useTableData() {
                               input19: e.target.value,
                             }))
                           }
+                          isActive={activeCell === "cell27"}
+                          onClick={() => handleCellClick("cell27")}
                         />
                       </Layout>
                     ),
@@ -982,6 +1046,8 @@ export default function useTableData() {
                               input20: e.target.value,
                             }))
                           }
+                          isActive={activeCell === "cell28"}
+                          onClick={() => handleCellClick("cell28")}
                         />
                       </Layout>
                     ),

@@ -11,6 +11,8 @@ export default function SwitchComponent({
   setItems,
   isOpen,
   setIsOpen,
+  onClick,
+  isActive,
 }) {
   // switch context
   const switchContextRef1 = useRef(null);
@@ -47,7 +49,9 @@ export default function SwitchComponent({
 
   return (
     <Layout
-      className={`active-cell ${isOpen ? "focus-cell" : ""}`}
+      className={`active-cell ${isOpen ? "focus-cell" : ""} ${
+        isActive ? "cell-is-active" : ""
+      }`}
       style={{
         justifyContent: "space-between",
         alignItems: "center",
@@ -56,7 +60,12 @@ export default function SwitchComponent({
         padding: "4px 4px",
       }}
       ref={switchContextRef1}
-      onClick={() => setIsOpen((prev) => !prev)}
+      onClick={() => {
+        setIsOpen((prev) => !prev);
+        {
+          onClick();
+        }
+      }}
     >
       {items.map(
         (item) =>

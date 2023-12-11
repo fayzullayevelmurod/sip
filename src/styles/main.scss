@@ -45,9 +45,14 @@ a {
   border: 1px solid transparent;
 }
 
-.active-cell:active {
-  border: 1px solid #0078d2;
-  border-radius: 5px;
+// .active-cell:active {
+//   border: 1px solid #0078d2;
+//   border-radius: 5px;
+// }
+
+.cell-is-active {
+  border: 1px solid #0078d2 !important;
+  border-radius: 5px !important;
 }
 
 .focus-cell {
