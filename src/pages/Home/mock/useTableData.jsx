@@ -19,6 +19,7 @@ import { IconAlert } from "@consta/icons/IconAlert";
 import { IconPlay } from "@consta/icons/IconPlay";
 import { IconAllDone } from "@consta/icons/IconAllDone";
 import { IconArrowRight } from "@consta/icons/IconArrowRight";
+import { IconArrowLeft } from "@consta/icons/IconArrowLeft";
 
 import Input from "../components/ui/Input";
 
@@ -170,7 +171,7 @@ export default function useTableData() {
             iconSize="s"
             view="clear"
             onlyIcon
-            iconLeft={IconArrowRight}
+            iconLeft={IconArrowLeft}
           />
         ),
         columns: [
@@ -195,6 +196,15 @@ export default function useTableData() {
         title: "Группа 3",
         accessor: "group3",
         width: 400,
+        control: () => (
+          <Button
+            size="xs"
+            iconSize="s"
+            view="clear"
+            onlyIcon
+            iconLeft={IconArrowLeft}
+          />
+        ),
         columns: [
           {
             title: "Название, м",
@@ -222,6 +232,15 @@ export default function useTableData() {
         title: "Группа 4",
         accessor: "group4",
         width: 360,
+        control: () => (
+          <Button
+            size="xs"
+            iconSize="s"
+            view="clear"
+            onlyIcon
+            iconLeft={IconArrowLeft}
+          />
+        ),
         columns: [
           {
             title: "Название, м",
