@@ -39,7 +39,11 @@ const ContentMiddle = forwardRef((props, ref) => {
   } = props;
 
   const settings = useSettingsData();
-  const defaultOpened = settings[1].data.map((_, index) => index);
+
+  // Default opened collapse counter: 10
+  const defaultOpened = Array(10)
+    .fill(null)
+    .map((_, index) => index);
 
   const [collapseIsOpen, setcollapseIsOpen] = useState(true);
   const [openedCollapses] = useState(defaultOpened);
@@ -257,6 +261,7 @@ const ContentMiddle = forwardRef((props, ref) => {
                   minWidth: "305px",
                   width: "100%",
                   position: "absolute",
+                  height: "100%",
                 }}
                 className={`home__settings-modal--content ${
                   transform ? "slide-left2" : "slide-right2"
@@ -269,7 +274,10 @@ const ContentMiddle = forwardRef((props, ref) => {
                   iconPosition="right"
                   opened={openedCollapses}
                 />
-                <Layout className="home__settings-modal--bottom">
+                <Layout
+                  style={{ flexGrow: "1" }}
+                  className="home__settings-modal--bottom"
+                >
                   <Layout
                     style={{
                       borderTop: "1px solid lightgray",
