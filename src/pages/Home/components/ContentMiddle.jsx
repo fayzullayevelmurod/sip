@@ -42,7 +42,7 @@ const ContentMiddle = forwardRef((props, ref) => {
   const defaultOpened = settings[1].data.map((_, index) => index);
 
   const [collapseIsOpen, setcollapseIsOpen] = useState(true);
-  const [openedCollapses, setOpenedCollapses] = useState(defaultOpened);
+  const [openedCollapses] = useState(defaultOpened);
 
   // Left side popup data
   const [dataItemChecked, setDataItemChecked] = useState(dataItems[0]);
@@ -237,6 +237,7 @@ const ContentMiddle = forwardRef((props, ref) => {
                 direction="column"
                 style={{
                   minWidth: "305px",
+                  width: "100%",
                   position: "absolute",
                 }}
                 className={`${transform ? "slide-left" : "slide-right"}`}
@@ -252,7 +253,11 @@ const ContentMiddle = forwardRef((props, ref) => {
 
               <Layout
                 direction="column"
-                style={{ minWidth: "305px", position: "absolute" }}
+                style={{
+                  minWidth: "305px",
+                  width: "100%",
+                  position: "absolute",
+                }}
                 className={`home__settings-modal--content ${
                   transform ? "slide-left2" : "slide-right2"
                 }`}
