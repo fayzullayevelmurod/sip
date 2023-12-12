@@ -499,7 +499,7 @@ export default function useTableData() {
             setItems={(items) =>
               setSwitchItems((prev) => ({ ...prev, switch1: items }))
             }
-            isOpen={activeSwitchContext === 1}
+            isOpen={activeSwitchContext === 1 && activeCell === "cell4"}
             setIsOpen={() => handleSwitchComponentClick(1)}
             isActive={activeCell === "cell4"}
             onClick={() => handleCellClick("cell4")}
@@ -732,7 +732,9 @@ export default function useTableData() {
                     setItems={(items) =>
                       setSwitchItems((prev) => ({ ...prev, switch2: items }))
                     }
-                    isOpen={activeSwitchContext === 2}
+                    isOpen={
+                      activeSwitchContext === 2 && activeCell === "cell12"
+                    }
                     setIsOpen={() => handleSwitchComponentClick(2)}
                     isActive={activeCell === "cell12"}
                     onClick={() => handleCellClick("cell12")}
@@ -931,7 +933,9 @@ export default function useTableData() {
                             switch3: items,
                           }))
                         }
-                        isOpen={activeSwitchContext === 3}
+                        isOpen={
+                          activeSwitchContext === 3 && activeCell === "cell19"
+                        }
                         setIsOpen={() => handleSwitchComponentClick(3)}
                         isActive={activeCell === "cell19"}
                         onClick={() => handleCellClick("cell19")}
@@ -1130,7 +1134,9 @@ export default function useTableData() {
                             switch4: items,
                           }))
                         }
-                        isOpen={activeSwitchContext === 4}
+                        isOpen={
+                          activeSwitchContext === 4 && activeCell === "cell26"
+                        }
                         setIsOpen={() => handleSwitchComponentClick(4)}
                         isActive={activeCell === "cell26"}
                         onClick={() => handleCellClick("cell26")}
