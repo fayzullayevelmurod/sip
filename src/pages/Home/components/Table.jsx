@@ -12,6 +12,7 @@ import { IconPanelBottom } from "@consta/icons/IconPanelBottom";
 import { IconArrowDown } from "@consta/icons/IconArrowDown";
 
 import useTableData from "../mock/useTableData";
+import { useState } from "react";
 
 export default function Table(props) {
   const {

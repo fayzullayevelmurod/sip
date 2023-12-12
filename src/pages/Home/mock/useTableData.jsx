@@ -1,5 +1,5 @@
 // Warning: Custom table design with inline styles and mock data
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { Button } from "@consta/uikit/Button";
 import { Layout } from "@consta/uikit/Layout";
@@ -110,9 +110,103 @@ export default function useTableData() {
     setActiveCell(cellId);
   };
 
-  const hideGroup = () => {};
+  const nestedColumns = {
+    group1: [
+      {
+        title: "Статус",
+        accessor: "status",
+        width: 200,
+        renderCell: (row) => <> {row.status}</>,
+      },
+      {
+        title: "Название, м",
+        accessor: "status2",
+        hide_group: true,
+        width: 100,
+      },
+      {
+        title: "Название, м",
+        accessor: "status3",
+        hide_group: true,
+        width: 100,
+      },
+    ],
+    group2: [
+      {
+        title: "Название, м",
+        accessor: "type",
+        width: 160,
+      },
+      {
+        title: "Название, м",
+        accessor: "type2",
+        hide_group: true,
+        width: 100,
+      },
+      {
+        title: "Название, м",
+        accessor: "type3",
+        hide_group: true,
+        width: 100,
+      },
+    ],
+    group3: [
+      {
+        title: "Название, м",
+        accessor: "type4",
+        width: 100,
+      },
+      {
+        title: "Название, м",
+        accessor: "type5",
+        hide_group: true,
+        width: 100,
+      },
+      {
+        title: "Название, м",
+        accessor: "type6",
+        hide_group: true,
+        width: 100,
+      },
+      {
+        title: "Название, м",
+        accessor: "type7",
+        hide_group: true,
+        width: 100,
+      },
+    ],
+    group4: [
+      {
+        title: "Название, м",
+        accessor: "group4.1",
+        width: 160,
+      },
+      {
+        title: "Название, м",
+        accessor: "group4.2",
+        hide_group: true,
+        width: 100,
+      },
+      {
+        title: "Название, м",
+        accessor: "group4.3",
+        hide_group: true,
+        width: 100,
+      },
+    ],
+  };
 
-  // const [tableData, setTableData] = useState()
+  const [group1Columns, setGroup1Column] = useState(nestedColumns.group1);
+  const [isGroup1Open, setIsGroup1Open] = useState(true);
+
+  const [group2Columns, setGroup2Column] = useState(nestedColumns.group2);
+  const [isGroup2Open, setIsGroup2Open] = useState(true);
+
+  const [group3Columns, setGroup3Column] = useState(nestedColumns.group3);
+  const [isGroup3Open, setIsGroup3Open] = useState(true);
+
+  const [group4Columns, setGroup4Column] = useState(nestedColumns.group4);
+  const [isGroup4Open, setIsGroup4Open] = useState(true);
 
   // All table data
   return {
@@ -153,124 +247,113 @@ export default function useTableData() {
         title: "Группа 1",
         accessor: "group1",
         width: 200,
-        control: () => (
-          <Button
-            size="xs"
-            iconSize="s"
-            view="clear"
-            onlyIcon
-            iconLeft={IconArrowRight}
-          />
-        ),
-        columns: [
-          {
-            title: "Статус",
-            accessor: "status",
-            width: 200,
-            renderCell: (row) => <> {row.status}</>,
-          },
-        ],
+        control: function () {
+          return (
+            <Button
+              size="xs"
+              iconSize="s"
+              view="clear"
+              onlyIcon
+              iconLeft={isGroup1Open ? IconArrowLeft : IconArrowRight}
+              onClick={() => this.toggleGroup1()}
+            />
+          );
+        },
+        columns: group1Columns,
+        toggleGroup1() {
+          if (isGroup1Open) {
+            setGroup1Column(
+              nestedColumns.group1.filter((item) => !item.hide_group)
+            );
+          } else {
+            setGroup1Column(nestedColumns.group1);
+          }
+          setIsGroup1Open((prev) => !prev);
+        },
       },
       {
         title: "Группа 2",
         accessor: "group2",
         width: 360,
-        control: () => (
-          <Button
-            size="xs"
-            iconSize="s"
-            view="clear"
-            onlyIcon
-            iconLeft={IconArrowLeft}
-            onClick={() => hideGroup(2)}
-          />
-        ),
-        columns: [
-          {
-            title: "Название, м",
-            accessor: "type",
-            width: 160,
-          },
-          {
-            title: "Название, м",
-            accessor: "type2",
-            hide_group: 2,
-            width: 100,
-          },
-          {
-            title: "Название, м",
-            accessor: "type3",
-            hide_group: 2,
-            width: 100,
-          },
-        ],
+        control: function () {
+          return (
+            <Button
+              size="xs"
+              iconSize="s"
+              view="clear"
+              onlyIcon
+              iconLeft={isGroup2Open ? IconArrowLeft : IconArrowRight}
+              onClick={() => this.toggleGroup2()}
+            />
+          );
+        },
+        columns: group2Columns,
+        toggleGroup2() {
+          if (isGroup2Open) {
+            setGroup2Column(
+              nestedColumns.group2.filter((item) => !item.hide_group)
+            );
+          } else {
+            setGroup2Column(nestedColumns.group2);
+          }
+          setIsGroup2Open((prev) => !prev);
+        },
       },
       {
         title: "Группа 3",
         accessor: "group3",
         width: 400,
-        control: () => (
-          <Button
-            size="xs"
-            iconSize="s"
-            view="clear"
-            onlyIcon
-            iconLeft={IconArrowLeft}
-          />
-        ),
-        columns: [
-          {
-            title: "Название, м",
-            accessor: "type4",
-            width: 100,
-          },
-          {
-            title: "Название, м",
-            accessor: "type5",
-            width: 100,
-          },
-          {
-            title: "Название, м",
-            accessor: "type6",
-            width: 100,
-          },
-          {
-            title: "Название, м",
-            accessor: "type7",
-            width: 100,
-          },
-        ],
+        control: function () {
+          return (
+            <Button
+              size="xs"
+              iconSize="s"
+              view="clear"
+              onlyIcon
+              iconLeft={isGroup3Open ? IconArrowLeft : IconArrowRight}
+              onClick={() => this.toggleGroup3()}
+            />
+          );
+        },
+        columns: group3Columns,
+        toggleGroup3() {
+          if (isGroup3Open) {
+            setGroup3Column(
+              nestedColumns.group3.filter((item) => !item.hide_group)
+            );
+          } else {
+            setGroup3Column(nestedColumns.group3);
+          }
+          setIsGroup3Open((prev) => !prev);
+        },
       },
       {
         title: "Группа 4",
         accessor: "group4",
         width: 360,
-        control: () => (
-          <Button
-            size="xs"
-            iconSize="s"
-            view="clear"
-            onlyIcon
-            iconLeft={IconArrowLeft}
-          />
-        ),
-        columns: [
-          {
-            title: "Название, м",
-            accessor: "group4.1",
-            width: 160,
-          },
-          {
-            title: "Название, м",
-            accessor: "group4.2",
-            width: 100,
-          },
-          {
-            title: "Название, м",
-            accessor: "group4.3",
-            width: 100,
-          },
-        ],
+        control: function () {
+          return (
+            <Button
+              size="xs"
+              iconSize="s"
+              view="clear"
+              onlyIcon
+              iconLeft={isGroup4Open ? IconArrowLeft : IconArrowRight}
+              onClick={() => this.toggleGroup4()}
+            />
+          );
+        },
+        columns: group4Columns,
+        toggleGroup4() {
+          if (isGroup4Open) {
+            setGroup4Column(
+              nestedColumns.group4.filter((item) => !item.hide_group)
+            );
+          } else {
+            setGroup4Column(nestedColumns.group4);
+          }
+          setIsGroup4Open((prev) => !prev);
+        },
       },
     ],
     rows: [
@@ -295,6 +378,44 @@ export default function useTableData() {
               label="Черновик"
             />
             <Button iconLeft={IconPlay} onlyIcon size="xs" view="ghost" />
+          </Layout>
+        ),
+        status2: (
+          <Layout
+            style={{
+              justifyContent: "end",
+              height: "100%",
+            }}
+            className="active-cell"
+          >
+            <Input
+              type="text"
+              value={inputValue.input1}
+              onChange={(e) =>
+                setInputValue((prev) => ({ ...prev, input1: e.target.value }))
+              }
+              isActive={activeCell === "cell1"}
+              onClick={() => handleCellClick("cell1")}
+            />
+          </Layout>
+        ),
+        status3: (
+          <Layout
+            style={{
+              justifyContent: "end",
+              height: "100%",
+            }}
+            className="active-cell"
+          >
+            <Input
+              type="text"
+              value={inputValue.input2}
+              onChange={(e) =>
+                setInputValue((prev) => ({ ...prev, input2: e.target.value }))
+              }
+              isActive={activeCell === "cell2"}
+              onClick={() => handleCellClick("cell2")}
+            />
           </Layout>
         ),
         type: (
@@ -556,7 +677,7 @@ export default function useTableData() {
                         }))
                       }
                       isActive={activeCell === "cell8"}
-                      onClick={() => handleCellClick("cell")}
+                      onClick={() => handleCellClick("cell8")}
                     />
                   </Layout>
                 ),

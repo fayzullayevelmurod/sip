@@ -20,7 +20,7 @@ export default function Input(props) {
       onDoubleClick={() => setIsEditable(true)}
       style={{
         width: "100%",
-        border: isEditable ? "2px solid #0078d2" : "none",
+        border: isEditable ? "2px solid #0078d2" : "1px solid transparent",
         borderRadius: "5px",
         outline: "none",
         textAlign: "right",

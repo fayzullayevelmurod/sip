@@ -58,6 +58,7 @@ export default function SwitchComponent({
         gap: "2px",
         height: "100%",
         padding: "4px 4px",
+        border: "1px solid transparent",
       }}
       ref={switchContextRef1}
       onClick={() => {
