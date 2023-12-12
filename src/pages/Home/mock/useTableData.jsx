@@ -110,6 +110,10 @@ export default function useTableData() {
     setActiveCell(cellId);
   };
 
+  const hideGroup = () => {};
+
+  // const [tableData, setTableData] = useState()
+
   // All table data
   return {
     cols: [
@@ -178,6 +182,7 @@ export default function useTableData() {
             view="clear"
             onlyIcon
             iconLeft={IconArrowLeft}
+            onClick={() => hideGroup(2)}
           />
         ),
         columns: [
@@ -189,11 +194,13 @@ export default function useTableData() {
           {
             title: "Название, м",
             accessor: "type2",
+            hide_group: 2,
             width: 100,
           },
           {
             title: "Название, м",
             accessor: "type3",
+            hide_group: 2,
             width: 100,
           },
         ],
@@ -549,7 +556,7 @@ export default function useTableData() {
                         }))
                       }
                       isActive={activeCell === "cell8"}
-                      onClick={() => handleCellClick("cell9")}
+                      onClick={() => handleCellClick("cell")}
                     />
                   </Layout>
                 ),
