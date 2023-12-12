@@ -1,5 +1,5 @@
 // Warning: Custom table design with inline styles and mock data
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 import { Button } from "@consta/uikit/Button";
 import { Layout } from "@consta/uikit/Layout";
@@ -47,15 +47,13 @@ const switchContextItems = [
 ];
 
 export default function useTableData() {
-  // table left side
-  const [isContextOpen_1, setIsContextOpen_1] = useState(false);
-  const [isContextOpen_2, setIsContextOpen_2] = useState(false);
-  const [isContextOpen_3, setIsContextOpen_3] = useState(false);
-  const [isContextOpen_4, setIsContextOpen_4] = useState(false);
-  const [isContextOpen_5, setIsContextOpen_5] = useState(false);
-  const [isContextOpen_6, setIsContextOpen_6] = useState(false);
-  const [isContextOpen_7, setIsContextOpen_7] = useState(false);
-  const [isContextOpen_8, setIsContextOpen_8] = useState(false);
+  const [activeSettingsContext, setActiveSettingsContext] = useState(null);
+
+  const handleSettingsContextClick = (contextNumber) => {
+    setActiveSettingsContext((prev) =>
+      prev === contextNumber ? null : contextNumber
+    );
+  };
 
   // table left side
   const contextRef1 = useRef(null);
@@ -68,10 +66,13 @@ export default function useTableData() {
   const contextRef8 = useRef(null);
 
   // switch context
-  const [isSwitchContextOpen_1, setIsSwitchContextOpen_1] = useState(false);
-  const [isSwitchContextOpen_2, setIsSwitchContextOpen_2] = useState(false);
-  const [isSwitchContextOpen_3, setIsSwitchContextOpen_3] = useState(false);
-  const [isSwitchContextOpen_4, setIsSwitchContextOpen_4] = useState(false);
+  const [activeSwitchContext, setActiveSwitchContext] = useState(null);
+
+  const handleSwitchComponentClick = (contextNumber) => {
+    setActiveSwitchContext((prev) =>
+      prev === contextNumber ? null : contextNumber
+    );
+  };
 
   const [switchItems, setSwitchItems] = useState({
     switch1: switchContextItems,
@@ -498,8 +499,8 @@ export default function useTableData() {
             setItems={(items) =>
               setSwitchItems((prev) => ({ ...prev, switch1: items }))
             }
-            isOpen={isSwitchContextOpen_1}
-            setIsOpen={setIsSwitchContextOpen_1}
+            isOpen={activeSwitchContext === 1}
+            setIsOpen={() => handleSwitchComponentClick(1)}
             isActive={activeCell === "cell4"}
             onClick={() => handleCellClick("cell4")}
           />
@@ -578,11 +579,11 @@ export default function useTableData() {
                   view="clear"
                   onlyIcon
                   iconLeft={IconKebab}
-                  onClick={() => setIsContextOpen_1((p) => !p)}
+                  onClick={() => handleSettingsContextClick(1)}
                 />
                 <ContextMenu
                   size="xs"
-                  isOpen={isContextOpen_1}
+                  isOpen={activeSettingsContext === 1}
                   items={contextItems}
                   anchorRef={contextRef1}
                   direction="downStartRight"
@@ -606,11 +607,11 @@ export default function useTableData() {
                       view="clear"
                       onlyIcon
                       iconLeft={IconKebab}
-                      onClick={() => setIsContextOpen_2((p) => !p)}
+                      onClick={() => handleSettingsContextClick(2)}
                     />
                     <ContextMenu
                       size="xs"
-                      isOpen={isContextOpen_2}
+                      isOpen={activeSettingsContext === 2}
                       items={contextItems}
                       anchorRef={contextRef2}
                       direction="downStartRight"
@@ -731,8 +732,8 @@ export default function useTableData() {
                     setItems={(items) =>
                       setSwitchItems((prev) => ({ ...prev, switch2: items }))
                     }
-                    isOpen={isSwitchContextOpen_2}
-                    setIsOpen={setIsSwitchContextOpen_2}
+                    isOpen={activeSwitchContext === 2}
+                    setIsOpen={() => handleSwitchComponentClick(2)}
                     isActive={activeCell === "cell12"}
                     onClick={() => handleCellClick("cell12")}
                   />
@@ -802,11 +803,11 @@ export default function useTableData() {
                           view="clear"
                           onlyIcon
                           iconLeft={IconKebab}
-                          onClick={() => setIsContextOpen_3((p) => !p)}
+                          onClick={() => handleSettingsContextClick(3)}
                         />
                         <ContextMenu
                           size="xs"
-                          isOpen={isContextOpen_3}
+                          isOpen={activeSettingsContext === 3}
                           items={contextItems}
                           anchorRef={contextRef3}
                           direction="downStartRight"
@@ -930,8 +931,8 @@ export default function useTableData() {
                             switch3: items,
                           }))
                         }
-                        isOpen={isSwitchContextOpen_3}
-                        setIsOpen={setIsSwitchContextOpen_3}
+                        isOpen={activeSwitchContext === 3}
+                        setIsOpen={() => handleSwitchComponentClick(3)}
                         isActive={activeCell === "cell19"}
                         onClick={() => handleCellClick("cell19")}
                       />
@@ -1001,11 +1002,11 @@ export default function useTableData() {
                           view="clear"
                           onlyIcon
                           iconLeft={IconKebab}
-                          onClick={() => setIsContextOpen_4((p) => !p)}
+                          onClick={() => handleSettingsContextClick(4)}
                         />
                         <ContextMenu
                           size="xs"
-                          isOpen={isContextOpen_4}
+                          isOpen={activeSettingsContext === 4}
                           items={contextItems}
                           anchorRef={contextRef4}
                           direction="downStartRight"
@@ -1129,8 +1130,8 @@ export default function useTableData() {
                             switch4: items,
                           }))
                         }
-                        isOpen={isSwitchContextOpen_4}
-                        setIsOpen={setIsSwitchContextOpen_4}
+                        isOpen={activeSwitchContext === 4}
+                        setIsOpen={() => handleSwitchComponentClick(4)}
                         isActive={activeCell === "cell26"}
                         onClick={() => handleCellClick("cell26")}
                       />
@@ -1198,11 +1199,11 @@ export default function useTableData() {
                       view="clear"
                       onlyIcon
                       iconLeft={IconKebab}
-                      onClick={() => setIsContextOpen_5((p) => !p)}
+                      onClick={() => handleSettingsContextClick(5)}
                     />
                     <ContextMenu
                       size="xs"
-                      isOpen={isContextOpen_5}
+                      isOpen={activeSettingsContext === 5}
                       items={contextItems}
                       anchorRef={contextRef5}
                       direction="downStartRight"
@@ -1255,11 +1256,11 @@ export default function useTableData() {
                           view="clear"
                           onlyIcon
                           iconLeft={IconKebab}
-                          onClick={() => setIsContextOpen_6((p) => !p)}
+                          onClick={() => handleSettingsContextClick(7)}
                         />
                         <ContextMenu
                           size="xs"
-                          isOpen={isContextOpen_6}
+                          isOpen={activeSettingsContext === 7}
                           items={contextItems}
                           anchorRef={contextRef6}
                           direction="downStartRight"
@@ -1326,11 +1327,11 @@ export default function useTableData() {
                               view="clear"
                               onlyIcon
                               iconLeft={IconKebab}
-                              onClick={() => setIsContextOpen_7((p) => !p)}
+                              onClick={() => handleSettingsContextClick(8)}
                             />
                             <ContextMenu
                               size="xs"
-                              isOpen={isContextOpen_7}
+                              isOpen={activeSettingsContext === 8}
                               items={contextItems}
                               anchorRef={contextRef7}
                               direction="downStartRight"
@@ -1407,11 +1408,11 @@ export default function useTableData() {
                               view="clear"
                               onlyIcon
                               iconLeft={IconKebab}
-                              onClick={() => setIsContextOpen_8((p) => !p)}
+                              onClick={() => handleSettingsContextClick(9)}
                             />
                             <ContextMenu
                               size="xs"
-                              isOpen={isContextOpen_8}
+                              isOpen={activeSettingsContext === 9}
                               items={contextItems}
                               anchorRef={contextRef8}
                               direction="downStartRight"

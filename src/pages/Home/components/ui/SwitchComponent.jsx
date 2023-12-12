@@ -62,7 +62,7 @@ export default function SwitchComponent({
       }}
       ref={switchContextRef1}
       onClick={() => {
-        setIsOpen((prev) => !prev);
+        setIsOpen();
         {
           onClick();
         }
