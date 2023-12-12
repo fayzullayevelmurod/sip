@@ -500,7 +500,9 @@ export default function useTableData() {
               setSwitchItems((prev) => ({ ...prev, switch1: items }))
             }
             isOpen={activeSwitchContext === 1 && activeCell === "cell4"}
-            setIsOpen={() => handleSwitchComponentClick(1)}
+            setIsOpen={() => {
+              handleSwitchComponentClick(1);
+            }}
             isActive={activeCell === "cell4"}
             onClick={() => handleCellClick("cell4")}
           />

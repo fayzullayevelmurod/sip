@@ -48,36 +48,36 @@ export default function SwitchComponent({
   };
 
   return (
-    <Layout
-      className={`active-cell ${isOpen ? "focus-cell" : ""} ${
-        isActive ? "cell-is-active" : ""
-      }`}
-      style={{
-        justifyContent: "space-between",
-        alignItems: "center",
-        gap: "2px",
-        height: "100%",
-        padding: "4px 4px",
-        border: "1px solid transparent",
-      }}
-      ref={switchContextRef1}
-      onClick={() => {
-        setIsOpen();
-        {
+    <>
+      <Layout
+        className={`active-cell ${isOpen ? "focus-cell" : ""} ${
+          isActive ? "cell-is-active" : ""
+        }`}
+        style={{
+          justifyContent: "space-between",
+          alignItems: "center",
+          gap: "2px",
+          height: "100%",
+          padding: "4px 4px",
+          border: "1px solid transparent",
+        }}
+        ref={switchContextRef1}
+        onClick={() => {
+          setIsOpen();
           onClick();
-        }
-      }}
-    >
-      {items.map(
-        (item) =>
-          item.switch && (
-            <Layout key={item.label}>
-              <Tag size="xs" mode="check" label={item.label} />
-            </Layout>
-          )
-      )}
-      {!items.some((item) => item.switch) && <span>-</span>}
-      <IconSelect size="xs" />
+        }}
+      >
+        {items.map(
+          (item) =>
+            item.switch && (
+              <Layout key={item.label}>
+                <Tag size="xs" mode="check" label={item.label} />
+              </Layout>
+            )
+        )}
+        {!items.some((item) => item.switch) && <span>-</span>}
+        <IconSelect size="xs" />
+      </Layout>
       <ContextMenu
         size="xs"
         isOpen={isOpen}
@@ -87,6 +87,6 @@ export default function SwitchComponent({
         direction="downStartLeft"
         style={{ width: "100px" }}
       />
-    </Layout>
+    </>
   );
 }
