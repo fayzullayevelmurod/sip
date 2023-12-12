@@ -24,9 +24,11 @@ export default function Table(props) {
     windowHeight,
     windowWidth,
     tableHeight,
+    table50,
+    tableFullHeight,
   } = props;
 
-  const tableData = useTableData();
+  const tableData = useTableData(table50, tableFullHeight);
 
   return (
     <Layout

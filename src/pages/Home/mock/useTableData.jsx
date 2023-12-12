@@ -1,5 +1,5 @@
 // Warning: Custom table design with inline styles and mock data
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { Button } from "@consta/uikit/Button";
 import { Layout } from "@consta/uikit/Layout";
@@ -46,7 +46,7 @@ const switchContextItems = [
   },
 ];
 
-export default function useTableData() {
+export default function useTableData(table50, tableFullHeight) {
   const [activeSettingsContext, setActiveSettingsContext] = useState(null);
 
   const handleSettingsContextClick = (contextNumber) => {
@@ -103,6 +103,8 @@ export default function useTableData() {
     input18: "2",
     input19: "-",
     input20: "1",
+    input21: "-",
+    input22: "1",
   });
 
   const [activeCell, setActiveCell] = useState(null);
@@ -208,6 +210,11 @@ export default function useTableData() {
 
   const [group4Columns, setGroup4Column] = useState(nestedColumns.group4);
   const [isGroup4Open, setIsGroup4Open] = useState(true);
+
+  useEffect(() => {
+    setActiveSwitchContext(null);
+    setActiveSettingsContext(null);
+  }, [table50, tableFullHeight]);
 
   // All table data
   return {
@@ -391,12 +398,12 @@ export default function useTableData() {
           >
             <Input
               type="text"
-              value={inputValue.input1}
+              value={inputValue.input21}
               onChange={(e) =>
-                setInputValue((prev) => ({ ...prev, input1: e.target.value }))
+                setInputValue((prev) => ({ ...prev, input21: e.target.value }))
               }
-              isActive={activeCell === "cell1"}
-              onClick={() => handleCellClick("cell1")}
+              isActive={activeCell === "cell21"}
+              onClick={() => handleCellClick("cell21")}
             />
           </Layout>
         ),
@@ -410,12 +417,12 @@ export default function useTableData() {
           >
             <Input
               type="text"
-              value={inputValue.input2}
+              value={inputValue.input22}
               onChange={(e) =>
-                setInputValue((prev) => ({ ...prev, input2: e.target.value }))
+                setInputValue((prev) => ({ ...prev, input22: e.target.value }))
               }
-              isActive={activeCell === "cell2"}
-              onClick={() => handleCellClick("cell2")}
+              isActive={activeCell === "cell22"}
+              onClick={() => handleCellClick("cell22")}
             />
           </Layout>
         ),
