@@ -15,6 +15,7 @@
     position: absolute;
     top: 0;
     left: 0;
+    pointer-events: none;
   }
 
   &__header {
@@ -31,6 +32,7 @@
 
   &__header-left {
     gap: 4px;
+    pointer-events: all;
 
     .truncate-btn {
       width: 200px;
@@ -48,6 +50,7 @@
   &__header-center {
     gap: 4px;
     margin-right: 50px;
+    pointer-events: all;
 
     @include responsive(tablet) {
       margin: 0 0 0 40px;
@@ -57,6 +60,7 @@
   &__header-right {
     gap: 4px;
     align-items: center;
+    pointer-events: all;
 
     &--border {
       width: 1px;
@@ -170,6 +174,7 @@
     width: 100%;
 
     &--tag {
+      pointer-events: all;
       position: absolute;
       left: 13px;
       bottom: 0;
@@ -198,6 +203,7 @@
     }
 
     &--table-tag {
+      pointer-events: all;
       position: absolute;
       user-select: none;
       bottom: 0;
@@ -210,6 +216,7 @@
     }
 
     &--map-layer {
+      pointer-events: all;
       -webkit-tap-highlight-color: transparent;
       position: absolute;
       right: 12px;
